@@ -1,0 +1,69 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="SystemMain.master.cs" Inherits="SystemMain" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            
+        }
+        header{
+            width:1000px;
+            height:100px;
+            margin:0 auto;
+            background:#f0f;
+        }
+        #main{
+            width:1000px;
+            margin:0 auto;
+        }
+        aside{
+            width:30%;
+            height:700px;
+            float:left;
+            background:#ff0;
+        }
+        section{
+            width:69%;
+            height:700px;
+            float:right;
+            background:#f00;
+        }
+        footer{
+            height:100px;
+            width:1000px;
+            margin:0 auto;
+            clear:both;
+            background:#0ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+
+    </header>
+    <form id="form1" runat="server">
+    <div id="main">
+        <aside>
+            <asp:TreeView ID="TreeView1" runat="server" Height="189px">
+            </asp:TreeView>
+        </aside>
+        <section>正文</section>
+    </div>
+    <footer></footer>
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+
+</body>
+</html>
