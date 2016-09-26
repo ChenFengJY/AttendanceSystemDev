@@ -1,0 +1,5 @@
+E:\Office\LocalCode\asp.net\SdbiAttendance\Model\bin\Debug\Model.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\Model\bin\Debug\Model.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\Office\LocalCode\asp.net\SdbiAttendance\Model\obj\Debug\Model.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\Model\obj\Debug\Model.pdb

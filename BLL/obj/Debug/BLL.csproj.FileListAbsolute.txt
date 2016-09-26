@@ -1,0 +1,9 @@
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\BLL.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\BLL.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\DAL.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\Model.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\DAL.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\bin\Debug\Model.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\obj\Debug\BLL.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\BLL\obj\Debug\BLL.pdb

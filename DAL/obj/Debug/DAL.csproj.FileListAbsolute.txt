@@ -1,0 +1,7 @@
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\bin\Debug\DAL.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\bin\Debug\DAL.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\bin\Debug\Model.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\bin\Debug\Model.pdb
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\obj\Debug\DAL.csprojResolveAssemblyReference.cache
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\obj\Debug\DAL.dll
+E:\Office\LocalCode\asp.net\SdbiAttendance\DAL\obj\Debug\DAL.pdb

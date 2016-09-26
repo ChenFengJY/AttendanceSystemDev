@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <style type="text/css">
+        #main {
+            width: auto;
+            height: auto;
+            background-color: #aaa;
+        }
+
+        #top {
+            width: 100%;
+            height: 100px;
+            background-color: #D6DBE9;
+        }
+
+        #content {
+            width: 100%;
+            height: 500px;
+        }
+
+        #left {
+            width: 150px;
+            height: 100%;
+            background-color: #0fc;
+            float: left;
+        }
+
+        #right {
+            width: 650px;
+            height: 100%;
+            float: left;
+            background-color:;
+        }
+
+        #foot {
+            width: 100%;
+            height: 100px;
+            background-color: #C1C1E5;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div id="main">
+            <div id="top"></div>
+            <div id="content">
+                <div id="left">
+
+                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1">
+                        <Nodes>
+                            <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
+                        </Nodes>
+                    </asp:TreeView>
+
+                </div>
+                <div id="right">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+                <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SdbiAttentionSystemConnectionString %>" SelectCommand="SELECT * FROM [AdminMenu]"></asp:SqlDataSource>
+
+            </div>
+            <div id="foot">
+            </div>
+        </div>
+    </form>
+</body>
+</html>
