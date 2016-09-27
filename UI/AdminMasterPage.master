@@ -7,16 +7,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <style type="text/css">
-        #main {
-            width: auto;
-            height: auto;
-            background-color: #aaa;
-        }
-
         #top {
             width: 100%;
             height: 100px;
             background-color: #D6DBE9;
+        }
+
+        #main {
+            width: auto;
+            height: auto;
+            background-color: #aaa;
         }
 
         #content {
