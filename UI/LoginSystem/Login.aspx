@@ -17,10 +17,10 @@
             box-shadow:0 0 10px #0CC;
         }
         #header{
-            height:200px;
+            height:100px;
         }
         #section{
-            height:300px;
+            height:400px;
         }
         #main{
             margin:0 auto;
