@@ -1,30 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data;
+using System.Configuration;
+using System.Data.SqlClient;
 
-namespace Model
+namespace DAL
 {
     public class ConnHelper
     {
         public static DataTable getDT(string strSQL)
         {
-            string connString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
+            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
 
             SqlDataAdapter da = new SqlDataAdapter(strSQL, conn);
             DataTable dt = new DataTable();
-            da.Fill(dt); 
+            da.Fill(dt);
             conn.Close();
             return dt;
         }
 
-    
         /// <summary>
         /// 查询指定的表中的指定字段
         /// </summary>
@@ -54,14 +53,86 @@ namespace Model
             return dt;
         }
 
+        /// <summary>
+        /// 获取dataset集合
+        /// 读取配置文件连接数据库
+        /// </summary>
+        /// <param name="strSQL">SQL查询语句</param>
+        /// <returns>DT数据集</returns>
         public static DataSet GetDataSet(string strSQL)
         {
-            return null;
+            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connString);
+            conn.Open();
+
+            SqlDataAdapter da = new SqlDataAdapter(strSQL, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+            return ds;
         }
 
+        /// <summary>
+        /// 获取记录的计数
+        /// 执行查询SQL命令，并返回第一行第一列，忽略其他行和列
+        /// 用于判断有无符合条件的条目
+        /// </summary>
+        /// <param name="strSQL">SQL查询语句</param>
+        /// <returns>如果有---第一行第一列，如果没有---返回“0”</returns>
+        public static int GetRecordCount(string strSQL)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(strSQL, conn);
+            string count = cmd.ExecuteScalar().ToString().Trim();
+            if (count == "")
+            {
+                count = "0";
+            }
+            conn.Close();
+            return Convert.ToInt32(count);
+        }
+
+        /// <summary>
+        /// 执行增删改SQL命令,返回是否成功
+        /// </summary>
+        /// <param name="strSQL">SQL命令</param>
+        /// <returns>是否成功(异常)</returns>
+        public static bool ExecuteNoneQueryOperation(string strSQL)
+        {
+            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            SqlConnection conn = new SqlConnection(connString);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand(strSQL, conn);
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        /// <summary>
+        /// 获取一个DT
+        /// </summary>
+        /// <param name="strSQL">查询SQL的语句</param>
+        /// <returns>返回一个DT</returns>
         public static DataTable GetDataTable(string strSQL)
         {
-            return null;
+            DataSet ds = GetDataSet(strSQL);
+            //字符串比较不区分大小写
+            ds.CaseSensitive = false;
+            return ds.Tables[0];
         }
     }
 }
