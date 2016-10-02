@@ -49,7 +49,7 @@ namespace DAL
         /// <returns>DT数据集</returns>
         public static DataSet GetDataSet(string strSQL)
         {
-            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            string connString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
 
@@ -69,7 +69,7 @@ namespace DAL
         /// <returns>如果有---第一行第一列，如果没有---返回“0”</returns>
         public static int GetRecordCount(string strSQL)
         {
-            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            string connString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
 
@@ -90,7 +90,7 @@ namespace DAL
         /// <returns>是否成功(异常)</returns>
         public static bool ExecuteNoneQueryOperation(string strSQL)
         {
-            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
+            string connString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
             SqlConnection conn = new SqlConnection(connString);
             conn.Open();
 
