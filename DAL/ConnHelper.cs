@@ -11,18 +11,6 @@ namespace DAL
 {
     public class ConnHelper
     {
-        public static DataTable getDT(string strSQL)
-        {
-            string connString = ConfigurationManager.ConnectionStrings["AttendanceSystemConnString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(connString);
-            conn.Open();
-
-            SqlDataAdapter da = new SqlDataAdapter(strSQL, conn);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            conn.Close();
-            return dt;
-        }
 
         /// <summary>
         /// 查询指定的表中的指定字段
@@ -73,7 +61,7 @@ namespace DAL
         }
 
         /// <summary>
-        /// 获取记录的计数
+        /// 查询结果计数
         /// 执行查询SQL命令，并返回第一行第一列，忽略其他行和列
         /// 用于判断有无符合条件的条目
         /// </summary>
