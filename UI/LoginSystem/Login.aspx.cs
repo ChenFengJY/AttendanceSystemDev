@@ -24,7 +24,6 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             {
                 TextBox3.Text = "登录成功";
             }
-            
         }
     }
 }

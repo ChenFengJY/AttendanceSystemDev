@@ -25,6 +25,7 @@
     width: 150px;
     height: 100%;
     background-color: #EEEEEE;
+    border:solid 1px blue;
     float: left;
 }
 

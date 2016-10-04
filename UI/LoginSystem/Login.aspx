@@ -62,8 +62,6 @@
             transform:rotate(-8deg);
         }
 
-
-
         #main{
             width:40%;
             height:100%;
@@ -137,7 +135,7 @@
                         <div id="logna">
                             <div class="leftfloat"></div>
                             <div class="rightfloat">
-                            <asp:TextBox ID="TextBox1" runat="server"  Height="30px" Width="268px" Wrap="False" BorderStyle="None" EnableTheming="True" ToolTip="登录"></asp:TextBox></div>
+                            <asp:TextBox ID="TextBox1" runat="server"  Height="30px" Width="268px" Wrap="False" BorderStyle="None" EnableTheming="True" ToolTip="登录" OnTextChanged="TextBox1_TextChanged"></asp:TextBox></div>
                             </div>
                         <div id="pwdna">
                             <div class="leftfloat"></div>
