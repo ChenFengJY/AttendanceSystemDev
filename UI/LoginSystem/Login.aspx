@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="LoginSystem_Login" %>
+﻿<%@ Page Language="C#" Debug="true" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="LoginSystem_Login" %>
 
 <!DOCTYPE html>
 
@@ -73,16 +73,26 @@
         }
         #logna{
             width:322px;
-            height:42px;
+            height:37px;
             margin:0 auto;
+            padding-top:5px;
             position:relative;
             background:url(../images/logtext.png) no-repeat;
             top:50px;/*更改上下位置*/
         }
+        .leftfloat{
+            width:43px;
+            height:40px;
+            float:left;
+        }
+        .rightfloat{
+            float:left;
+        }
         #pwdna{
             width:322px;
-            height:42px;
+            height:37px;
             margin:0 auto;
+            padding-top:5px;
             position:relative;
             background:url(../images/logtext.png) no-repeat;
             background-position:0 -42px;
@@ -96,6 +106,11 @@
             background:url(../images/logtext.png) no-repeat;
             background-position:0 -84px;
             top:110px;/*更改上下位置*/
+        }
+        #btnna{
+            margin:0 auto;
+            position:relative;
+            top:140px;/*更改上下位置*/
         }
         #footer{
             height:60px;
@@ -119,9 +134,25 @@
             <div id="main">
                 <form id="form1" runat="server">
                     <div>
-                        <div id="logna"></div>
-                        <div id="pwdna"></div>
+                        <div id="logna">
+                            <div class="leftfloat"></div>
+                            <div class="rightfloat">
+                            <asp:TextBox ID="TextBox1" runat="server"  Height="30px" Width="268px" Wrap="False" BorderStyle="None" EnableTheming="True" ToolTip="登录"></asp:TextBox></div>
+                            </div>
+                        <div id="pwdna">
+                            <div class="leftfloat"></div>
+                            <div class="rightfloat">
+                            <asp:TextBox ID="TextBox2" runat="server" Height="30px" Width="268px" Wrap="False" BorderStyle="None" EnableTheming="True"></asp:TextBox>
+                            </div>
+                        </div>
                         <div id="testna">
+
+                            <asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
+
+                        </div>
+                        <div id="btnna">
+
+                            <asp:Button ID="Button1" runat="server" OnClick="Button1_Click" Text="登录" />
 
                         </div>
                     </div>
@@ -130,6 +161,8 @@
         </div>
         <div id="footer"></div>
     </div>
-    
+    <script type="text/javascript">
+
+    </script>
 </body>
 </html>

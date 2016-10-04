@@ -16,3 +16,12 @@ E:\Office\LocalCode\asp.net\AttendanceSystemDev\BLL\bin\Debug\DAL.dll
 E:\Office\LocalCode\asp.net\AttendanceSystemDev\BLL\bin\Debug\Model.dll
 E:\Office\LocalCode\asp.net\AttendanceSystemDev\BLL\bin\Debug\DAL.pdb
 E:\Office\LocalCode\asp.net\AttendanceSystemDev\BLL\bin\Debug\Model.pdb
+E:\web\ASP_NET\BLL\bin\Debug\BLL.dll
+E:\web\ASP_NET\BLL\bin\Debug\BLL.pdb
+E:\web\ASP_NET\BLL\bin\Debug\DAL.dll
+E:\web\ASP_NET\BLL\bin\Debug\Model.dll
+E:\web\ASP_NET\BLL\bin\Debug\DAL.pdb
+E:\web\ASP_NET\BLL\bin\Debug\Model.pdb
+E:\web\ASP_NET\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\web\ASP_NET\BLL\obj\Debug\BLL.dll
+E:\web\ASP_NET\BLL\obj\Debug\BLL.pdb

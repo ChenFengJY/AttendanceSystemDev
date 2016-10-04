@@ -75,5 +75,11 @@ namespace BLL
                 }
             }
         }
+
+        public static DataTable SetData(string strSql)
+        {
+            
+            return ConnHelper.GetDistinceColoum(strSql);
+        }
     }
 }
