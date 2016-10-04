@@ -40,7 +40,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
 
     private void FillParentNode(TreeNode node)
     {
-
         string sqlQuery = "Select DISTINCT Parent_Node From Admin_Menu";
         DataTable dt = AddSQLStringToDAL.GetDtBySQL(sqlQuery);
 
