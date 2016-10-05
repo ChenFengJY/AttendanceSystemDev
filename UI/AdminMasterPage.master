@@ -15,7 +15,7 @@
             <div id="content">
                 <div id="left">
 
-                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
+                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue" OnSelectedNodeChanged="TreeView1_SelectedNodeChanged">
                         <Nodes>
                             <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
                         </Nodes>

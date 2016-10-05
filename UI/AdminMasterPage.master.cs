@@ -55,4 +55,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
             }
         }
     }
+
+    protected void TreeView1_SelectedNodeChanged(object sender, EventArgs e)
+    {
+
+    }
 }

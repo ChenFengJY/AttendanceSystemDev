@@ -81,5 +81,58 @@ namespace BLL
             
             return ConnHelper.GetDistinceColoum(strSql);
         }
+        public static DataTable GetDatatableBySQL(string str1,string str2,string str3)
+        {
+            string strTemp = BuidSQLSelectString(str1, str2, str3);
+            return ConnHelper.GetDataTable(strTemp);
+        }
+        public static DataTable GetDatatableBySQL(string TableName,string str1,string str1Limit,string str2,string str2Limt)
+        {
+            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt);
+            return ConnHelper.GetDataTable(strSQL);
+                }
+        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt,string str3,string str3Limt)
+        {
+            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt,str3,str3Limt);
+            return ConnHelper.GetDataTable(strSQL);
+        }
+        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt,string str4,string str4Limt,string str5,string str5Limt)
+        {
+            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt, str3, str3Limt,str4,str4Limt,str5,str5Limt);
+            return ConnHelper.GetDataTable(strSQL);
+        }
+        private static string BuidSQLSelectString(string strTableName)
+        {
+            return "select * from" + strTableName;
+        }
+        private static string BuidSQLSelectString(string strTableName,string strddl,string strtxt)
+        {
+            return "select * from" + strTableName+"where"+strddl+"="+strtxt+"";
+        }
+        private static string BuidSQLSelectString(string TableName,string str1,string str1Limt,string str2,string str2Limt )
+        {
+            return "select * from" + TableName + "where" + str1 + "=" + str1Limt + "and" + str2 + "=" + str2Limt + "order by 1";
+        }
+
+        private static string BuidSQLSelectString(string ableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt, string str4, string str4Limt, string str5, string str5Limt)
+        {
+            throw new NotImplementedException();
+        }
+
+        private static string BuidSQLSelectString(string tableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt)
+        {
+            return "select * from" + tableName + "where" + str1 + "=" + str1Limit + "and" + str2 + "=" + "and" + str3 + "=" + str3Limt + "order by 1";
+            throw new NotImplementedException();
+        }
+
+        //private static string BuidSQLSelectString(string tableName, string str1, string str1Limit, string str2, string str2Limt)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //private static string BuidSQLSelectString(string str1, string str2, string str3)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }
