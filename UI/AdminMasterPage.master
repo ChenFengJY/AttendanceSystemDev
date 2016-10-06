@@ -11,7 +11,9 @@
 <body>
     <form id="form1" runat="server">
         <div id="main">
-            <div id="top"></div>
+            <div id="top">
+                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+            </div>
             <div id="content">
                 <div id="left">
 
