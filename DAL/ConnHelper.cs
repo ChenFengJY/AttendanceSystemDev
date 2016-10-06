@@ -122,5 +122,19 @@ namespace DAL
             ds.CaseSensitive = false;
             return ds.Tables[0];
         }
+        //public static int GetRecordCount(string strSql)
+        //{
+        //    string ConnectionString = ConfigurationManager.ConnectionStrings[""].ConnectionString;
+        //    SqlConnection conn = new SqlConnection(ConnectionString);
+        //    conn.Open();
+        //    SqlCommand cmd = new SqlCommand();
+        //    string count = cmd.ExecuteScalar().ToString().Trim();
+        //    if(count==""){
+        //        count = "0";
+        //        conn.Close();
+        //        return Convert.ToInt32(count);
+
+        //    }
+        //}
     }
 }
