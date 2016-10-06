@@ -14,6 +14,10 @@ namespace BLL
     /// </summary>
     public class AddSQLStringToDAL
     {
+        //public static bool UpdataTable(string TableName,string UserPWD,string UserID)
+        //{
+
+        //}
         /// <summary>
         /// 执行DAL层查询语句，并返回dataTable
         /// </summary>
@@ -124,15 +128,16 @@ namespace BLL
             return "select * from" + tableName + "where" + str1 + "=" + str1Limit + "and" + str2 + "=" + "and" + str3 + "=" + str3Limt + "order by 1";
             throw new NotImplementedException();
         }
+        public static List<string> GetDistinctString(string strTable,string str1)
+        {
+            string strSQL = BuildSQLDistinctString(strTable, str1);
+            return ConnHelper.GetDistinceColoum(strSQL, str1);
 
-        //private static string BuidSQLSelectString(string tableName, string str1, string str1Limit, string str2, string str2Limt)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //private static string BuidSQLSelectString(string str1, string str2, string str3)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        }
+        private static string BuildSQLDistinctString(string strTableName,string str1)
+        {
+            return "select distinct"+str1+"from"+strTableName;
+        }
+        
     }
 }

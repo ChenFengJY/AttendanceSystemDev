@@ -24,6 +24,9 @@
     void Session_Start(object sender, EventArgs e)
     {
         // 在新会话启动时运行的代码
+        Session["UserName"]="";
+        Session["UserID"]="";
+        Session["Role"]= "";
         Application.Lock();
         Application["online"] = (int)Application["online"] + 1;
         Application.UnLock();
