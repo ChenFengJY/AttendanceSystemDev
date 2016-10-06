@@ -16,7 +16,7 @@ public partial class LoginSystem_Login : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
-        string strSQL = "select * from TabTeachers where UserID =" + userName.Text.Trim() + " and UserPWD=" + password.ToString() + "";
+        string strSQL = "select * from TabTeachers where UserID =" + userName.Text.Trim() + " and UserPWD=" + password.Text.ToString() + "";
         DataTable dt = AddSQLStringToDAL.GetDtBySQL(strSQL);
         if (dt.Rows.Count == 1)
         {
