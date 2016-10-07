@@ -76,20 +76,48 @@
                 vertical-align: middle;
             }
 
-            .login-box #code {
-                width: 120px;
-            }
+        .vercode {
+            width: 120px;
+            height: 42px;
+            margin-top: 25px;
+            padding: 0px 15px;
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 6px;
+            color: #fff;
+            letter-spacing: 2px;
+            font-size: 16px;
+            background: transparent;
+        }
 
-            .login-box .codeImg {
-                float: right;
-                margin-top: 26px;
-            }
+        .login-box .codeImg {
+            float: right;
+            margin-top: 26px;
+        }
 
-            .login-box img {
-                width: 148px;
-                height: 42px;
-                border: none;
-            }
+        .login-box img {
+            width: 148px;
+            height: 42px;
+            border: none;
+        }
+
+        .vCode {
+            background: url(images/vercode.jpg);
+            font-family: Arial;
+            font-style: italic;
+            color: blue;
+            font-size: 30px;
+            margin-top: 26px;
+            border: 0;
+            letter-spacing: 3px;
+            font-weight: bolder;
+            float: right;
+            cursor: pointer;
+            width: 148px;
+            height: 42px;
+            line-height: 42px;
+            text-align: center;
+            vertical-align: middle;
+        }
 
         .input {
             width: 270px;
@@ -202,7 +230,7 @@
                     text-decoration: underline;
                 }
     </style>
-
+    <script type="text/javascript" src="js/checkCode.js"></script>
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -228,7 +256,7 @@
                     change(index);
                 }
             }
-            t = setInterval(show, 10000);
+            t = setInterval(show, 6000);
             //根据窗口宽度生成图片宽度
             var width = $(window).width();
             $(".screenbg ul img").css("width", width + "px");
@@ -251,11 +279,11 @@
         <script src="js/app.js"></script>
         <ul>
             <li><a href="javascript:;">
-                <img src="images/bj1.png" /></a></li>
+                <img src="images/bj1.jpg" /></a></li>
             <li><a href="javascript:;">
-                <img src="images/1.jpg" /></a></li>
+                <img src="images/bj2.jpg" /></a></li>
             <li><a href="javascript:;">
-                <img src="images/2.jpg" /></a></li>
+                <img src="images/bj3.jpg" /></a></li>
         </ul>
     </div>
     <div class="login-box">
@@ -273,24 +301,22 @@
             </div>
             <div class="code">
                 <label>验证码：</label>
-                <asp:TextBox ID="Code" runat="server" CssClass="input" MaxLength="4"></asp:TextBox>
-                <div class="codeImg">
-                    <img src="images/captcha.jpeg.jpg" />
-                </div>
+                <asp:TextBox ID="Code" runat="server" CssClass="vercode" MaxLength="4"></asp:TextBox>
+                <div class="vCode" id="checkCode" onclick="createCode()"></div>
             </div>
             <div class="remember">
                 <input type="checkbox" id="remember" tabindex="4" />
                 <label>记住密码</label>
             </div>
             <div class="login">
-                <asp:Button ID="Button1" runat="server" Text="登录" CssClass="button" OnClick="Button1_Click" />
+                <asp:Button ID="Button1" OnClientClick="return validate()" runat="server" Text="登录" CssClass="button" OnClick="Button1_Click" ClientIDMode="Inherit" />
             </div>
         </form>
     </div>
 
     <div class="bottom">
-        ©2016 Leting <a href="javascript:;" target="_blank">关于</a> <span>IC
-        P证软03组ChenFengJY</span><img width="13" height="16" src="images/copy_rignt_24.png" />
+        ©2016 Leting 关于IC
+        P软一03组ChenFengJY<img width="13" height="16" src="images/copy_rignt_24.png" />
     </div>
 
 
