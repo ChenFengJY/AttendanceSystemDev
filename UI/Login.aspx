@@ -6,7 +6,6 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>系统登录</title>
-
     <style type="text/css">
         html {
             overflow-y: scroll;
@@ -229,7 +228,7 @@
                     change(index);
                 }
             }
-            t = setInterval(show, 8000);
+            t = setInterval(show, 10000);
             //根据窗口宽度生成图片宽度
             var width = $(window).width();
             $(".screenbg ul img").css("width", width + "px");
@@ -240,8 +239,29 @@
 
 <body>
 
+    <!-- scripts -->
+
+
+
+    <!-- stats.js -->
+    <div class="screenbg">
+        <div id="particles-js"></div>
+
+        <script src="js/particles.min.js"></script>
+        <script src="js/app.js"></script>
+        <ul>
+            <li><a href="javascript:;">
+                <img src="images/bj1.png" /></a></li>
+            <li><a href="javascript:;">
+                <img src="images/1.jpg" /></a></li>
+            <li><a href="javascript:;">
+                <img src="images/2.jpg" /></a></li>
+        </ul>
+    </div>
     <div class="login-box">
+
         <h1>山东商务职业学院考勤系统</h1>
+
         <form id="form1" runat="server">
             <div class="name">
                 <label>账  号：</label>
@@ -273,16 +293,6 @@
         P证软03组ChenFengJY</span><img width="13" height="16" src="images/copy_rignt_24.png" />
     </div>
 
-    <div class="screenbg">
-        <ul>
-            <li><a href="javascript:;">
-                <img src="images/0.jpg" /></a></li>
-            <li><a href="javascript:;">
-                <img src="images/1.jpg" /></a></li>
-            <li><a href="javascript:;">
-                <img src="images/2.jpg" /></a></li>
-        </ul>
-    </div>
 
 </body>
 
