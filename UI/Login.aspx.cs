@@ -9,6 +9,8 @@ using System.Data;
 
 public partial class LoginSystem_Login : System.Web.UI.Page
 {
+    public object TextBox1 { get; private set; }
+
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -25,6 +27,8 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             if (dt.Rows.Count == 1)
             {
                 string Role = dt.Rows[0]["Role"].ToString();
+                Session["UserID"] = dt.Rows[0]["UserID"].ToString();
+                Session["Role"] = dt.Rows[0]["Role"].ToString();
                 switch (Role)
                 {
                     case "1":
@@ -39,6 +43,8 @@ public partial class LoginSystem_Login : System.Web.UI.Page
                     case "4":
                         Response.Redirect("Admin\\.aspx");
                         break;
+                    default:
+                        break;
                 }
 
             }
@@ -48,7 +54,6 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             }
         }
         else Response.Write("<script type='text/javascript'>alert('请完善用户信息')</script>");
-
     }
 
 }

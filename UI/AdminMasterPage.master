@@ -13,10 +13,11 @@
         <div id="main">
             <div id="top">
                 <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
+                <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             </div>
             <div id="content">
                 <div id="left">
-                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue" >
+                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
                         <Nodes>
                             <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
                         </Nodes>
