@@ -35,13 +35,13 @@ public partial class LoginSystem_Login : System.Web.UI.Page
                         Response.Redirect("Admin\\AdminSubmitAttendance.aspx");
                         break;
                     case "2":
-                        Response.Redirect("Admin\\DepartmentEachCompare.aspx");
+                        Response.Redirect("Leader\\DepartmentEachCompare.aspx");
                         break;
                     case "3":
-                        Response.Redirect("Admin\\.aspx");
+                        Response.Redirect("Secretary\\TeacherSubmitAttendance.aspx");
                         break;
                     case "4":
-                        Response.Redirect("Admin\\.aspx");
+                        Response.Redirect("Teacher\\GetMessage.aspx");
                         break;
                     default:
                         break;
