@@ -12,6 +12,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void Page_Load(object sender, EventArgs e)
     {
         Label1.Text = "当前在线" + Application["online"].ToString() + "人";
+        Label2.Text = Session["UserID"].ToString() + "你好,你的权限为" + Session["Role"].ToString();
     }
 
     protected void TreeView1_TreeNodePopulate1(object sender, TreeNodeEventArgs e)
@@ -19,4 +20,9 @@ public partial class MasterPage : System.Web.UI.MasterPage
         AddSQLStringToDAL.FillTreeVMenu(e, "Admin_Menu");
     }
 
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }
