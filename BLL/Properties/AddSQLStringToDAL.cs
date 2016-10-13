@@ -27,27 +27,27 @@ namespace BLL
         {
             return ConnHelper.GetDataTable(strSQl);
         }
-
-        public static void FillTreeVMenu(TreeNodeEventArgs e)
+        
+        public static void FillTreeVMenu(TreeNodeEventArgs e, string menuName)
         {
             if (e.Node.ChildNodes.Count == 0)
             {
                 switch (e.Node.Depth)
                 {
                     case 0:
-                        FillParentNode(e.Node);
+                        FillParentNode(e.Node,menuName);
                         break;
                     case 1:
-                        FillChildNode(e.Node);
+                        FillChildNode(e.Node, menuName);
                         break;
                 }
             }
         }
 
-        public static void FillChildNode(TreeNode node)
+        public static void FillChildNode(TreeNode node, string menuName)
         {
 
-            string sqlQuery = "Select * From Admin_Menu " +
+            string sqlQuery = "Select * From " + menuName + "" +
             " Where Parent_Node = '" + node.Text + "'";
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sqlQuery);
             if (dt.Rows.Count > 0)
@@ -62,9 +62,9 @@ namespace BLL
             }
         }
 
-        private static void FillParentNode(TreeNode node)
+        private static void FillParentNode(TreeNode node, string menuName)
         {
-            string sqlQuery = "Select DISTINCT Parent_Node From Admin_Menu";
+            string sqlQuery = "Select DISTINCT Parent_Node From " + menuName + "";
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sqlQuery);
 
             if (dt.Rows.Count > 0)
@@ -82,7 +82,7 @@ namespace BLL
 
         public static DataTable SetData(string strSql)
         {
-            
+
             return ConnHelper.GetDistinceColoum(strSql);
         }
         public static DataTable GetDatatableBySQL(string str1,string str2,string str3)

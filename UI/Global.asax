@@ -18,7 +18,6 @@
     void Application_Error(object sender, EventArgs e)
     {
         // 在出现未处理的错误时运行的代码
-
     }
 
     void Session_Start(object sender, EventArgs e)
@@ -30,6 +29,9 @@
         Application.Lock();
         Application["online"] = (int)Application["online"] + 1;
         Application.UnLock();
+        Session["UserName"] = "";
+        Session["UserID"] = "";
+        Session["Role"] = "";
     }
 
     void Session_End(object sender, EventArgs e)

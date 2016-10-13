@@ -1,11 +1,11 @@
-﻿<%@ Master Language="C#" Debug="true" AutoEventWireup="true" CodeFile="AdminMasterPage.master.cs" Inherits="MasterPage" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="TeacherMasterPage.master.cs" Inherits="TeacherMasterPage" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+     <title></title>
     <link href="css/MasterSheet.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -13,13 +13,13 @@
         <div id="main">
             <div id="top">
                 <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
             </div>
             <div id="content">
                 <div id="left">
-                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
+
+                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue" >
                         <Nodes>
-                            <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
+                            <asp:TreeNode PopulateOnDemand="True" Text="管理面板" Value="管理面板"></asp:TreeNode>
                         </Nodes>
                         <HoverNodeStyle CssClass="hoverHodeClass" BackColor="#2980B9" ForeColor="White" />
                     </asp:TreeView>

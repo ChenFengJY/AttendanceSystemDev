@@ -9,6 +9,10 @@ E:\Office\LocalCode\asp.net\AttendanceSystemDev\Model\obj\Debug\Model.dll
 E:\Office\LocalCode\asp.net\AttendanceSystemDev\Model\obj\Debug\Model.pdb
 E:\web\ASP_NET\Model\bin\Debug\Model.dll
 E:\web\ASP_NET\Model\bin\Debug\Model.pdb
-E:\web\ASP_NET\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
 E:\web\ASP_NET\Model\obj\Debug\Model.dll
 E:\web\ASP_NET\Model\obj\Debug\Model.pdb
+E:\Office\LocalCode\asp.net\AttendanceSystemDev\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\bin\Debug\Model.dll
+E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\bin\Debug\Model.pdb
+E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\obj\Debug\Model.dll
+E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\obj\Debug\Model.pdb
