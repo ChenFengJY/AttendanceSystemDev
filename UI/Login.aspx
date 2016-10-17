@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="./css/slide-unlock.css" rel="stylesheet" />
     <title>系统登录</title>
     <style type="text/css">
         html {
@@ -57,21 +58,10 @@
                     margin-top: 25px;
                 }
 
-            .login-box .remember {
-                padding-left: 40px;
-            }
-
-                .login-box .remember label {
-                    display: inline-block;
-                    height: 42px;
-                    width: 70px;
-                    line-height: 34px;
-                    text-align: left;
-                }
 
             .login-box label {
                 display: inline-block;
-                width: 100px;
+                width: 70px;
                 text-align: right;
                 vertical-align: middle;
             }
@@ -88,11 +78,7 @@
             font-size: 16px;
             background: transparent;
         }
-
-        .login-box .codeImg {
-            float: right;
-            margin-top: 26px;
-        }
+ 
 
         .login-box img {
             width: 148px;
@@ -137,6 +123,7 @@
             width: 100%;
             height: 44px;
             padding: 0;
+            margin-top:26px;
             background: #ef4300;
             border: 1px solid #ff730e;
             border-radius: 6px;
@@ -230,6 +217,24 @@
                     text-decoration: underline;
                 }
     </style>
+    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="js/jquery.slideunlock.js"></script>
+    <script>
+        var flag = false;
+        $(function () {
+            var slider = new SliderUnlock("#slider", {
+                successLabelTip: "验证成功"
+            }, function () {
+                flag = true;
+            });
+            slider.init();
+        })
+        function checking() {
+            if (flag == false)
+                alert("请拖动滑块验证");
+            return flag;
+        }
+    </script>
     <script type="text/javascript" src="js/checkCode.js"></script>
     <script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
     <script type="text/javascript">
@@ -300,16 +305,13 @@
                 <asp:TextBox runat="server" MaxLength="16" ID="password" CssClass="input" TextMode="Password"></asp:TextBox>
             </div>
             <div class="code">
-                <label>验证码：</label>
-                <asp:TextBox ID="Code" runat="server" CssClass="vercode" MaxLength="4"></asp:TextBox>
-                <div class="vCode" id="checkCode" onclick="createCode()"></div>
-            </div>
-            <div class="remember">
-                <input type="checkbox" id="remember" tabindex="4" />
-                <label>记住密码</label>
+                <div id="slider">
+                    <div id="slider_bg"></div>
+                    <span id="label"></span><span id="labelTip">拖动滑块验证</span>
+                </div>
             </div>
             <div class="login">
-                <asp:Button ID="Button1" OnClientClick="return validate()" runat="server" Text="登录" CssClass="button" OnClick="Button1_Click" ClientIDMode="Inherit" />
+                <asp:Button ID="Button1" OnClientClick="return checking()" runat="server" Text="登录" CssClass="button" OnClick="Button1_Click" ClientIDMode="Inherit" />
             </div>
         </form>
     </div>
