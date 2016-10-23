@@ -281,7 +281,7 @@
         <div id="particles-js"></div>
 
         <script src="js/particles.min.js"></script>
-        <script src="js/app.js"></script>
+        <script src="js/lib/app.js"></script>
         <ul>
             <li><a href="javascript:;">
                 <img src="images/bj1.jpg" /></a></li>

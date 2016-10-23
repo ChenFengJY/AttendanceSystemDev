@@ -11,4 +11,11 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
     {
 
     }
+
+
+
+    protected void BulletedList1_Click(object sender, BulletedListEventArgs e)
+    {
+
+    }
 }

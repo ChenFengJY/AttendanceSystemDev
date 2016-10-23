@@ -7,17 +7,80 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
     <link href="css/MasterSheet.css" rel="stylesheet" type="text/css" />
+    <style>
+        .title{
+            position:relative;
+            z-index:1000;
+            top:-90px;
+            left:20px;
+        }
+        .title h1{
+            text-shadow:1px 1px 0 #00ffff;
+            color:firebrick;
+        }
+        .treeview1{
+            font-size:14px;
+            color:red;
+            line-height:10px;
+        }
+
+        *{margin:0;padding:0;list-style-type:none;}
+        a,img{border:0;}
+        body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";}
+
+        /* flexslider */
+        .flexslider{position:relative;height:100px;overflow:hidden;background:url(../images/loading.gif) 50% no-repeat;}
+        .slides{position:relative;z-index:1;}
+        .slides li{height:400px;}
+        .flex-control-nav{position:absolute;bottom:10px;z-index:2;width:100%;text-align:center;}
+        .flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
+        .flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(../images/dot.png) right 0 no-repeat;cursor:pointer;}
+        .flex-control-nav .flex-active{background-position:0 0;}
+
+        .flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
+        .flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
+        .flex-direction-nav li a.flex-prev{left:40px;background:url(../images/prev.png) center center no-repeat;display:none;}
+        .flex-direction-nav li a.flex-next{right:40px;background:url(../images/next.png) center center no-repeat;display:none;}
+
+        .slides li{
+            background-size:cover;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
         <div id="main">
             <div id="top">
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
-                <asp:Label ID="Label2" runat="server" Text="Label"></asp:Label>
+                <div class="flexslider">
+	                <ul class="slides">
+		                <li style="background:url(../images/img1.jpg) 50% 0 no-repeat;"></li>
+		                <li style="background:url(../images/img2.jpg) 50% 0 no-repeat;"></li>
+		                <li style="background:url(../images/img3.jpg) 50% 0 no-repeat;"></li>
+		                <li style="background:url(../images/img4.jpg) 50% 0 no-repeat;"></li>
+		                <li style="background:url(../images/img5.jpg) 50% 0 no-repeat;"></li>
+	                </ul>
+                </div>
+                <div class="title">
+                    <h1>山东商务考勤管理系统</h1>
+                    <asp:Label ID="Label1" runat="server" Text="用户名"></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text="在线人数"></asp:Label>
+                </div>
             </div>
+
+    <script type="text/javascript" src="../js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.flexslider-min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+	    $('.flexslider').flexslider({
+		    directionNav: true,
+		    pauseOnAction: false
+	    });
+    });
+    </script>
+
             <div id="content">
                 <div id="left">
-                    <asp:TreeView ID="TreeView1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
+                    <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
                         <Nodes>
                             <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
                         </Nodes>
@@ -27,6 +90,7 @@
                 </div>
                 <div id="right">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        
                     </asp:ContentPlaceHolder>
                 </div>
 
