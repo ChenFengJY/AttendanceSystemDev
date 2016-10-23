@@ -63,10 +63,10 @@
             &nbsp;&nbsp;&nbsp; <asp:Label ID="Label7" runat="server" Text="导入本学期校历" ForeColor="White"></asp:Label>
         </div>
         <div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <asp:Label ID="Label8" runat="server" Text="请选择导入的文件"></asp:Label>
-            <asp:FileUpload ID="FileUpload3" runat="server" Width="384px" />
             &nbsp;&nbsp;
+            <asp:Label ID="Label8" runat="server" Text="请要选择导入的文件"></asp:Label>
+            <asp:FileUpload ID="FileUpload3" runat="server" Width="378px" />
+            &nbsp;
             <asp:Button ID="Button3" runat="server" Text="导入" Width="67px" />
         </div>
         <div>
