@@ -46,7 +46,7 @@ public partial class LoadExcelToDataBase : System.Web.UI.Page
         }
         else
         {
-            lblMessage1.Text="请选择导入的数据是"本地教师"或"外聘教师"";
+            lblMessage1.Text = "请选择导入的数据是"本地教师"或"外聘教师"";
         }
     }
     private void BtnImportCourse_Click(object sender, EventArgs e)
