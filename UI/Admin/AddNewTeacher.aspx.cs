@@ -35,9 +35,29 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
         {
             
             
+            
         }
         
     }
+
+
+  
+
+  
+    protected void btnOK_Click1(object sender, EventArgs e)
+    {
+        string teacherType = "";
+        string teacherRole = "";
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Clear();
         
     }
+    private void Clear()
+    {
+        
+    }
+}
 

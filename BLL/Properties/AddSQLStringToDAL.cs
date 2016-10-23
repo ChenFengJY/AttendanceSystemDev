@@ -14,10 +14,15 @@ namespace BLL
     /// </summary>
     public class AddSQLStringToDAL
     {
-        //public static bool UpdataTable(string TableName,string UserPWD,string UserID)
-        //{
+        public static bool UpdataTable(string TableName, string UserPWD, string UserID)
+        {
+          
 
-        //}
+        }
+        private static string BuildSQLUpdateString(string strTableName,string UserPWD,string UserID)
+        {
+           // return "update" + strTableName + "setUserPWD" = "" + UserPWD + '"where UserID="' + UserID + "'";
+        }
         /// <summary>
         /// 执行DAL层查询语句，并返回dataTable
         /// </summary>
