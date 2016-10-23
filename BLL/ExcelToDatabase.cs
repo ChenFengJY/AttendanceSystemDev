@@ -39,24 +39,21 @@ namespace BLL
             catch (Exception ex)
             { throw ex; }
         }
-        public static string ToSQLSever(string fileName,string identity)
+        public static string ToSQLSever(string fileName, string identity)
         {
-            if(identity=="TabTeachers"|identity=="TabOtherTeachers")
+            if (identity == "TabTeachers" | identity == "TabOtherTeachers")
             {
-                return DAL.ExcelToSQLSever.ReadCalendarExcel(fileName, identity);
+                return DAL.ExcelToSQLServer.ReadCalendarExcel(fileName, identity);
             }
-            else if(identity=="TabCalendar")
+            else if (identity == "TabCalendar")
             {
-                return DAL.ExcelToSQLSever.ReadCalendarExcel(fileName, identity);
+                return DAL.ExcelToSQLServer.ReadCalendarExcel(fileName, identity);
 
             }
             else
             {
-                return DAL.ExcelToSQLSever.ReadCalendarExcel(fileName, identity);
+                return DAL.ExcelToSQLServer.ReadCalendarExcel(fileName, identity);
             }
-
-           
-        }
         }
     }
-
+}

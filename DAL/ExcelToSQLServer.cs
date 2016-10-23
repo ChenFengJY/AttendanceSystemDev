@@ -284,7 +284,7 @@ namespace DAL
                 strconn.Remove(0, strconn.Length);
             }
             conn.Close();
-            conn.Dispose();z
+            conn.Dispose();
         }
     }
 }
