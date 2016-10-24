@@ -21,9 +21,9 @@
             &nbsp;&nbsp;&nbsp; <asp:Label ID="Label1" runat="server" Text="导入教师基本信息" ForeColor="White"></asp:Label>
         </div>
          <div style="margin-left: 160px">
-             <asp:RadioButton ID="RadioButton1" runat="server" Text="本校教师" />
+             <asp:RadioButton ID="rdoTeacher" runat="server" Text="本校教师" />
 &nbsp;&nbsp;&nbsp;
-             <asp:RadioButton ID="RadioButton2" runat="server" Text="外聘教师" />
+             <asp:RadioButton ID="rdoOther" runat="server" Text="外聘教师" />
         </div>
          <div>
         &nbsp;&nbsp;
@@ -33,7 +33,7 @@
              <asp:Button ID="Button1" runat="server" Text="导入" Width="61px" />
         </div>
         <div>
-            <asp:Label ID="Label3" runat="server" Text="[lblMessage1]"></asp:Label>
+            <asp:Label ID="lblmessage1" runat="server" Text="[lblMessage1]"></asp:Label>
         </div>
     </div>
 
@@ -54,7 +54,7 @@
             <asp:Button ID="Button2" runat="server" Text="导入" Width="63px" />
         </div>
         <div>
-            <asp:Label ID="Label6" runat="server" Text="[lblMessage2]"></asp:Label>
+            <asp:Label ID="lblMessage2" runat="server" Text="[lblMessage2]"></asp:Label>
         </div>
     </div>
      
@@ -119,7 +119,7 @@
         </div>
           <div>
         &nbsp;
-              <asp:Button ID="Button6" runat="server" Text="清空入库数据" />
+              <asp:Button ID="btnClearPreData" runat="server" Text="清空入库数据" />
 &nbsp;&nbsp;&nbsp;
               <asp:Label ID="Label21" runat="server" Text="[lblMessage4]"></asp:Label>
         </div>
