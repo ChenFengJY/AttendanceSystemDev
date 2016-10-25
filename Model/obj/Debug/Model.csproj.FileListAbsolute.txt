@@ -16,3 +16,4 @@ E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\bin\Deb
 E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\obj\Debug\Model.dll
 E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\obj\Debug\Model.pdb
 E:\GitHub\git\考勤系统\AttendanceSystemDev\AttendanceSystemDev\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\web\ASP_NET\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
