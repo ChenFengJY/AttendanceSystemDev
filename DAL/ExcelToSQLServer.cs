@@ -286,5 +286,73 @@ namespace DAL
             conn.Close();
             conn.Dispose();
         }
+        /// <summary>
+        /// 将dt导入数据库
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string DataTableToSQLServer(DataTable dt)
+        {
+            
+            string connectionString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
+            using (SqlConnection destinationConnection = new SqlConnection(connectionString))
+            {
+                destinationConnection.Open();
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destinationConnection))
+                {
+                    try
+                    {
+                        bulkCopy.DestinationTableName = "AllTable";//要插入的表的表名
+                        bulkCopy.BatchSize = 100;//每次传输的行数 
+                        bulkCopy.NotifyAfter = 100;//进度提示的行数 
+                        //bulkCopy.ColumnMappings.Add("承担单位", "TercherDepartment");//映射字段名 DataTable列名 ,数据库 对应的列名  
+                        //bulkCopy.ColumnMappings.Add("任课教师", "TeacherIDName");
+                        //bulkCopy.ColumnMappings.Add("上课时间/地点", "LessonNameAddress");
+                        //bulkCopy.ColumnMappings.Add("课程", "LessonMessage");
+                        //bulkCopy.ColumnMappings.Add("所属部门", "LessonDepartment");
+                        //bulkCopy.ColumnMappings.Add("学分", "Credit");
+                        //bulkCopy.ColumnMappings.Add("总学时", "AllCredit");
+                        //bulkCopy.ColumnMappings.Add("上课班级名称", "ClassName");
+                        //bulkCopy.ColumnMappings.Add("院(系)/部", "ClassDepartment");
+                        //bulkCopy.ColumnMappings.Add("学号", "StudentId");
+                        //bulkCopy.ColumnMappings.Add("姓名", "StudentName");
+                        //bulkCopy.ColumnMappings.Add("行政班级", "StudentClass");
+                        //bulkCopy.ColumnMappings.Add("性别", "StudentSex");
+                        //bulkCopy.ColumnMappings.Add("课程类别1", "ClassClassOne");
+                        //bulkCopy.ColumnMappings.Add("课程类别2", "ClassClassTwo");
+
+                        bulkCopy.ColumnMappings.Add(0, 0);//映射字段名 DataTable列名 ,数据库 对应的列名  
+                        bulkCopy.ColumnMappings.Add(1, 1);
+                        bulkCopy.ColumnMappings.Add(2, 2);
+                        bulkCopy.ColumnMappings.Add(3, 3);
+                        bulkCopy.ColumnMappings.Add(4, 4);
+                        bulkCopy.ColumnMappings.Add(5, 5);
+                        bulkCopy.ColumnMappings.Add(6, 6);
+                        bulkCopy.ColumnMappings.Add(7, 7);
+                        bulkCopy.ColumnMappings.Add(8, 8);
+                        bulkCopy.ColumnMappings.Add(9, 9);
+                        bulkCopy.ColumnMappings.Add(10, 10);
+                        bulkCopy.ColumnMappings.Add(11, 11);
+                        bulkCopy.ColumnMappings.Add(12, 12);
+                        bulkCopy.ColumnMappings.Add(13, 13);
+                        bulkCopy.ColumnMappings.Add(14, 14);
+
+                        bulkCopy.WriteToServer(dt);
+                        return true.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                        return ex.Message; 
+
+                    }
+                    finally
+                    {
+                        
+                    }
+                }
+            }
+
+        }
     }
 }

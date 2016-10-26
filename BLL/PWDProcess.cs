@@ -5,15 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Security.Cryptography;
+using BLL;
 
 namespace BLL
 {
     public class PWDProcess
     {
-        public static string MD5Encrypt(string p ToEncrypt,string Key)
+        public static string MD5Encrypt(string pToEncrypt, string Key)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();
-            byte[] inputByteArray = Encoding.Default.GetBytes(p ToEncrypt);
+            byte[] inputByteArray = Encoding.Default.GetBytes(pToEncrypt);
             des.Key = ASCIIEncoding.ASCII.GetBytes(Key);
 
             des.IV = ASCIIEncoding.ASCII.GetBytes(Key);
@@ -22,7 +23,7 @@ namespace BLL
             cs.Write(inputByteArray, 0, inputByteArray.Length);
             cs.FlushFinalBlock();
             StringBuilder ret = new StringBuilder();
-            foreach( byte b in ms.ToArray())
+            foreach (byte b in ms.ToArray())
             {
                 ret.AppendFormat("{0:x2},b");
 
@@ -36,9 +37,9 @@ namespace BLL
         {
             StringBuilder sb = new StringBuilder();
             string str = "GOP57AMTT5";
-            if(CheckStringIsNumString(inputStr)&&inputStr.Length>=9) 
-                {
-                for(int i = 1; i <= 8; i++)
+            if (CheckStringIsNumSting(inputStr) && inputStr.Length >= 9)
+            {
+                for (int i = 1; i <= 8; i++)
                 {
                     sb.Append(str[Convert.ToInt32(inputStr[i].ToString())]);
 
@@ -51,14 +52,16 @@ namespace BLL
                 return "9TCXL2DB";
             }
         }
-    }
-    public static bool CheckStringIsNumSting(string str)
-    {
-        for(int i=0;i<str.Length;i++)
+
+        public static bool CheckStringIsNumSting(string str)
         {
-            if(str[i]<'0'||str[i]>'9')
+            for (int i = 0; i < str.Length; i++)
             {
-                return false;
+                if (str[i] < '0' || str[i] > '9')
+                {
+                    return false;
+                }
+                
             }
             return true;
         }
