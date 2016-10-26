@@ -36,7 +36,7 @@
             <asp:Label ID="lblmessage1" runat="server" Text="[lblMessage1]"></asp:Label>
         </div>
     </div>
-
+         
     <div>
         <div id="bgfg">
         &nbsp;&nbsp;&nbsp; <asp:Label ID="Label4" runat="server" Text="分系部导入授课信息" ForeColor="White"></asp:Label>
