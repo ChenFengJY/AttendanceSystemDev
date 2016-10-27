@@ -16,6 +16,10 @@ public partial class LoadExcelToDataBase : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+
+    }
+/*    protected void Page_Load(object sender, EventArgs e)
+    {
         if (!IsPostBack)
         {
             if (Session["uesrID"].ToString() == "")
@@ -218,5 +222,5 @@ protected void btnClearCalendar_Click(object sender, EventArgs e)
                 label6.Text = "各系人数设置完毕";
             }
         }
-    }
+    }*/
 }
