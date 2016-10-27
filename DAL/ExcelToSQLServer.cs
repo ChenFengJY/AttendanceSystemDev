@@ -10,9 +10,17 @@ using System.Data.SqlClient;
 
 namespace DAL
 {
+    /// <summary>
+    /// 将Excel表读取到sql
+    /// 根据文件路径（服务器端）读取Excel表存到容器中（DataSet）,然后遍历容器，分别将数据插入到Sql中
+    /// </summary>
     public class ExcelToSQLServer
     {
         public static DataSet ds;
+        /// <summary>
+        /// 检查教师Excel表的列名是否规范
+        /// </summary>
+        /// <returns></returns>
         private static bool CheckExcelTableTeachers()
         {
             try
@@ -46,6 +54,10 @@ namespace DAL
             }
 
         }
+        /// <summary>
+        /// 检查课程表列名是否符合规范
+        /// </summary>
+        /// <returns></returns>
         private static bool CheckExcelTableCourses()
         {
             try
@@ -62,6 +74,11 @@ namespace DAL
                 return false;
             }
         }
+        /// <summary>
+        /// 从本地读取Excel
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="strSQL"></param>
         private static void ExcelToDatabaseByDataReader(string fileName, string strSQL)
         {
             System.GC.Collect();
@@ -99,7 +116,11 @@ namespace DAL
             oleDr.Close();
             oleConn.Close();
         }
-
+        /// <summary>
+        /// 获取Excel表Sheet名
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
         private static List<string> GetSheetName(string fileName)
         {
             string str1 = @"Privider = Microsoft.Jet.OLEDB.4.0;Data Source = " + fileName + ";Extended Properties=Excel8.0";
@@ -118,6 +139,11 @@ namespace DAL
             conn.Dispose();
             return SheetNameList;
         }
+        /// <summary>
+        /// 从本地读取Excel到DataSet并分别指定里面的DataTable名为ExcelInfo
+        /// </summary>
+        /// <param name="fileName">服务器端Excel文件路径</param>
+        /// <param name="strSQL"></param>
         public static void ReadExcelToDataSet(string fileName, string strSQL)
         {
             string str1 = @"Privider = Microsoft.Jet.OLEDB.4.0;Data Source = " + fileName + ";Extended Properties=Excel8.0";
@@ -131,6 +157,12 @@ namespace DAL
             conn.Close();
             conn.Dispose();
         }
+        /// <summary>
+        /// 读取课程Excel并保存到SQL
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         public static string ReadCoursesExcel(string fileName, string identity)
         {
             List<string> SheetName = new List<string>();
@@ -150,6 +182,13 @@ namespace DAL
             else
                 return "选择的Excel文件中的内容与数据库要求不匹配。请确认！";
         }
+
+        /// <summary>
+        /// 读取校历Excel并保存到SQL
+        /// </summary>
+        /// <param name="fileName">服务器端Excel文件路径</param>
+        /// <param name="identity">sql表名</param>
+        /// <returns></returns>
         public static string ReadCalendarExcel(string fileName, string identity)
         {
             List<string> SheetName = new List<string>();
@@ -172,6 +211,12 @@ namespace DAL
                 return "选择的Excel文件中的内容与数据与数据库中的要求不匹配，请确认！";
             }
         }
+        /// <summary>
+        /// 读取教师信息xcel并保存到SQL
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         public static string ReadTeachersExcel(string fileName, string identity)
         {
             List<string> SheetName = new List<string>();
@@ -180,7 +225,7 @@ namespace DAL
 
             if (SheetName[0] != "Sheet1$")
             {
-                return "指定的Excel文件的工作表名不为“Sheet1”,当前的表明为"+SheetName[0];
+                return "指定的Excel文件的工作表名不为“Sheet1”,当前的表名为"+SheetName[0];
             }
             strSQL = "select * from [Sheet1$]";
             ReadExcelToDataSet(fileName, strSQL);
@@ -195,6 +240,10 @@ namespace DAL
                 return "选择的Excel文件中的内容与数据与数据库中的要求不匹配，请确认！";
             }
         }
+        /// <summary>
+        /// 将课程表Dataset上传到Sqlserver
+        /// </summary>
+        /// <param name="identity">数据库表名</param>
         public static void CoursesTOSQLServer(string identity)
         {
             string str1 = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
@@ -226,6 +275,11 @@ namespace DAL
             conn.Close();
             conn.Dispose();
         }
+        /// <summary>
+        /// 根据[]拆分教师Excel第二列教师ID和教师名
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private static List<string> SplitTeacherIDAndTeacherName(string str)
         {
             List<string> strSplit = new List<string>();

@@ -36,7 +36,7 @@ namespace BLL
         {
             StringBuilder sb = new StringBuilder();
             string str = "GOP57AMTT5";
-            if (CheckStringIsNumSting(inputStr) && inputStr.Length >= 9)
+            if (CheckStringIsNumString(inputStr) && inputStr.Length >= 9)
             {
                 for (int i = 1; i <= 8; i++)
                 {
@@ -52,7 +52,7 @@ namespace BLL
             }
         }
 
-        public static bool CheckStringIsNumSting(string str)
+        public static bool CheckStringIsNumString(string str)
         {
             for (int i = 0; i < str.Length; i++)
             {
@@ -60,7 +60,6 @@ namespace BLL
                 {
                     return false;
                 }
-
             }
             return true;
         }
