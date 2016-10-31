@@ -16,7 +16,7 @@ namespace DAL
     /// </summary>
     public class ExcelToSQLServer
     {
-        public static DataSet ds;
+        private static DataSet ds;
         /// <summary>
         /// 检查教师Excel表的列名是否规范
         /// </summary>
@@ -33,7 +33,8 @@ namespace DAL
                 }
                 return true;
             }
-            catch {
+            catch
+            {
                 return false;
             }
         }
@@ -49,7 +50,8 @@ namespace DAL
                 }
                 return true;
             }
-            catch {
+            catch
+            {
                 return false;
             }
 
@@ -70,7 +72,8 @@ namespace DAL
                 }
                 return true;
             }
-            catch {
+            catch
+            {
                 return false;
             }
         }
@@ -99,7 +102,7 @@ namespace DAL
             while (oleDr.Read())
             {
                 str = SplitTeacherIDAndTeacherName(oleDr[1].ToString());
-                strconn.Append("insert into TabAllCourses(TeacherDapartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
+                strconn.Append("insert into TabAllCourses(TeacherDepartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
                 strconn.Append("'" + oleDr[0].ToString() + "','" + str[0] + "','" + str[1] + "'");
                 for (int j = 2; j <= 14; j++)
                 {
@@ -123,16 +126,16 @@ namespace DAL
         /// <returns></returns>
         private static List<string> GetSheetName(string fileName)
         {
-            string str1 = @"Privider = Microsoft.Jet.OLEDB.4.0;Data Source = " + fileName + ";Extended Properties=Excel8.0";
+            string str1 = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + fileName  + ";Extended Properties=Excel 8.0;";
             OleDbConnection conn = new OleDbConnection(str1);
             conn.Open();
 
             List<string> SheetNameList = new List<string>();
-            DataTable dtExcelSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null,"TABLE"});
+            DataTable dtExcelSchema = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "TABLE" });
             string SheetName = "";
             for (int i = 0; i < dtExcelSchema.Rows.Count; i++)
             {
-                SheetName = dtExcelSchema.Rows[i]["TANLE_NAME"].ToString();
+                SheetName = dtExcelSchema.Rows[i]["TABLE_NAME"].ToString();
                 SheetNameList.Add(SheetName);
             }
             conn.Close();
@@ -146,14 +149,14 @@ namespace DAL
         /// <param name="strSQL"></param>
         public static void ReadExcelToDataSet(string fileName, string strSQL)
         {
-            string str1 = @"Privider = Microsoft.Jet.OLEDB.4.0;Data Source = " + fileName + ";Extended Properties=Excel8.0";
+            string str1 = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties=Excel 8.0;";
             OleDbConnection conn = new OleDbConnection(str1);
             conn.Open();
             OleDbDataAdapter da = new OleDbDataAdapter(strSQL, conn);
             da.SelectCommand.CommandTimeout = 600;
 
             ds = new DataSet();
-            da.Fill(ds, "ExcellInfo");
+            da.Fill(ds, "ExcelInfo");
             conn.Close();
             conn.Dispose();
         }
@@ -170,13 +173,13 @@ namespace DAL
             string strSQL = "";
             if (SheetName[0] != identity + "$")
             {
-                return"指定的Excel文件的工作表名不为"+identity+",当前的表名为"+SheetName[0];
+                return "指定的Excel文件的工作表名不为" + identity + ",当前的表名为" + SheetName[0];
             }
             strSQL = "select * from [" + SheetName[0] + "]";
             ReadExcelToDataSet(fileName, strSQL);
             if (CheckExcelTableCourses())
             {
-                CoursesTOSQLServer(identity);
+                //CoursesTOSQLServer(identity);
                 return "文件导入成功";
             }
             else
@@ -207,12 +210,13 @@ namespace DAL
                 CalenderToSQLServer(identity);
                 return "文件导入成功";
             }
-            else {
+            else
+            {
                 return "选择的Excel文件中的内容与数据与数据库中的要求不匹配，请确认！";
             }
         }
         /// <summary>
-        /// 读取教师信息xcel并保存到SQL
+        /// 读取教师信息Excel并保存到SQL
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="identity"></param>
@@ -225,14 +229,14 @@ namespace DAL
 
             if (SheetName[0] != "Sheet1$")
             {
-                return "指定的Excel文件的工作表名不为“Sheet1”,当前的表名为"+SheetName[0];
+                return "指定的Excel文件的工作表名不为“Sheet1”,当前的表名为" + SheetName[0];
             }
             strSQL = "select * from [Sheet1$]";
             ReadExcelToDataSet(fileName, strSQL);
 
             if (CheckExcelTableTeachers())
             {
-                TeachersToSQLServer(identity);
+              //  TeachersToSQLServer(identity);
                 return "文件导入成功";
             }
             else
@@ -258,11 +262,11 @@ namespace DAL
             for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
             {
                 str = SplitTeacherIDAndTeacherName(ds.Tables["ExcelInfo"].Rows[i].ItemArray[1].ToString());
-                strconn.Append("insert into TabAllCourses(TeacherDapartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
-                strconn.Append("'"+ds.Tables["ExcelInfo"].Rows[i].ItemArray[0].ToString() + "','" + str[0] + "','" + str[1] + "'");
+                strconn.Append("insert into TabAllCourses(TeacherDepartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
+                strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[0].ToString() + "','" + str[0] + "','" + str[1] + "'");
                 for (int j = 2; j <= 14; j++)
                 {
-                    strconn.Append(",'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() +"'");
+                    strconn.Append(",'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "'");
                 }
                 strconn.Append(")");
                 string str2 = strconn.ToString();
@@ -302,12 +306,12 @@ namespace DAL
             StringBuilder strconn = new StringBuilder();
             for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
             {
-                strconn.Append("insert into"+identity+"(WeekNumber,StartWeek,EndWeek)values(");
+                strconn.Append("insert into" + identity + "(WeekNumber,StartWeek,EndWeek)values(");
                 for (int j = 0; j <= 1; j++)
                 {
                     strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "',");
                 }
-                strconn.Append("'"+ds.Tables["ExcelInfo"].Rows[i].ItemArray[2]+"')");
+                strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[2] + "')");
                 string str2 = strconn.ToString();
                 cmd.CommandText = str2;
                 cmd.ExecuteNonQuery();
@@ -326,8 +330,8 @@ namespace DAL
             StringBuilder strconn = new StringBuilder();
             for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
             {
-                strconn.Append("insert into"+identity+"(Department,UserID,UserPWD,Sex,Role)values(");
-                for (int j = 0; j <=4; j++)
+                strconn.Append("insert into " + identity + "(Department,UserID,UserPWD,UserName,Sex,Role)values(");
+                for (int j = 0; j <= 4; j++)
                 {
                     strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "',");
                 }
@@ -339,6 +343,70 @@ namespace DAL
             }
             conn.Close();
             conn.Dispose();
+        }
+        /// <summary>
+        /// 将dt导入数据库
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        public static string DataTableToSQLServer(DataTable dt)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
+            using (SqlConnection destinationConnection = new SqlConnection(connectionString))
+            {
+                destinationConnection.Open();
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destinationConnection))
+                {
+                    try
+                    {
+                        bulkCopy.DestinationTableName = "AllTable";//要插入的表的表名
+                        bulkCopy.BatchSize = 100;//每次传输的行数 
+                        bulkCopy.NotifyAfter = 100;//进度提示的行数 
+                        //bulkCopy.ColumnMappings.Add("承担单位", "TercherDepartment");//映射字段名 DataTable列名 ,数据库 对应的列名  
+                        //bulkCopy.ColumnMappings.Add("任课教师", "TeacherIDName");
+                        //bulkCopy.ColumnMappings.Add("上课时间/地点", "LessonNameAddress");
+                        //bulkCopy.ColumnMappings.Add("课程", "LessonMessage");
+                        //bulkCopy.ColumnMappings.Add("所属部门", "LessonDepartment");
+                        //bulkCopy.ColumnMappings.Add("学分", "Credit");
+                        //bulkCopy.ColumnMappings.Add("总学时", "AllCredit");
+                        //bulkCopy.ColumnMappings.Add("上课班级名称", "ClassName");
+                        //bulkCopy.ColumnMappings.Add("院(系)/部", "ClassDepartment");
+                        //bulkCopy.ColumnMappings.Add("学号", "StudentId");
+                        //bulkCopy.ColumnMappings.Add("姓名", "StudentName");
+                        //bulkCopy.ColumnMappings.Add("行政班级", "StudentClass");
+                        //bulkCopy.ColumnMappings.Add("性别", "StudentSex");
+                        //bulkCopy.ColumnMappings.Add("课程类别1", "ClassClassOne");
+                        //bulkCopy.ColumnMappings.Add("课程类别2", "ClassClassTwo");
+
+                        bulkCopy.ColumnMappings.Add(0, 0);//映射字段名 DataTable列名 ,数据库 对应的列名  
+                        bulkCopy.ColumnMappings.Add(1, 1);
+                        bulkCopy.ColumnMappings.Add(2, 2);
+                        bulkCopy.ColumnMappings.Add(3, 3);
+                        bulkCopy.ColumnMappings.Add(4, 4);
+                        bulkCopy.ColumnMappings.Add(5, 5);
+                        bulkCopy.ColumnMappings.Add(6, 6);
+                        bulkCopy.ColumnMappings.Add(7, 7);
+                        bulkCopy.ColumnMappings.Add(8, 8);
+                        bulkCopy.ColumnMappings.Add(9, 9);
+                        bulkCopy.ColumnMappings.Add(10, 10);
+                        bulkCopy.ColumnMappings.Add(11, 11);
+                        bulkCopy.ColumnMappings.Add(12, 12);
+                        bulkCopy.ColumnMappings.Add(13, 13);
+                        bulkCopy.ColumnMappings.Add(14, 14);
+                        bulkCopy.WriteToServer(dt);
+                        return true.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.Message;
+                    }
+                    finally
+                    {
+
+                    }
+                }
+            }
+
         }
     }
 }

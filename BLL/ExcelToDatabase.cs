@@ -30,7 +30,7 @@ namespace BLL
                         return "导入的Excel文件大小为0，请检查是否正确！";
 
                     }
-                    fileextend = fileName.Substring(fileName.LastIndexOf("." + 1));
+                    fileextend = fileName.Substring(fileName.LastIndexOf(".") + 1);
                     if (fileextend != "xls")
                     {
                         return "选择的文件格式不正确，只能导入Excel文件！";
