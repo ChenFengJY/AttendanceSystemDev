@@ -125,7 +125,7 @@ namespace DAL
         /// <returns></returns>
         private static List<string> GetSheetName(string fileName)
         {
-            string str1 = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + fileName  + ";Extended Properties=Excel 8.0;";
+            string str1 = @"Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + fileName + ";Extended Properties=Excel 8.0;";
             OleDbConnection conn = new OleDbConnection(str1);
             conn.Open();
 
@@ -213,6 +213,7 @@ namespace DAL
             {
                 return "选择的Excel文件中的内容与数据与数据库中的要求不匹配，请确认！";
             }
+
         }
         /// <summary>
         /// 读取教师信息Excel并保存到SQL
@@ -235,7 +236,7 @@ namespace DAL
 
             if (CheckExcelTableTeachers())
             {
-              //  TeachersToSQLServer(identity);
+                //  TeachersToSQLServer(identity);
                 return "文件导入成功";
             }
             else
@@ -405,7 +406,6 @@ namespace DAL
                     }
                 }
             }
-
         }
     }
 }

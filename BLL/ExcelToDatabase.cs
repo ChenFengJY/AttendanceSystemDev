@@ -45,6 +45,7 @@ namespace BLL
             catch (Exception ex)
             { throw ex; }
         }
+
         /// <summary>
         /// 中转作用，将Excel导入到SqlServer并返回导入的结果，另带检查，只有表名符合规范才能导入
         /// </summary>
@@ -65,6 +66,46 @@ namespace BLL
             {
                 return DAL.ExcelToSQLServer.ReadCoursesExcel(fileName, identity);
             }
+            int filesize = 0;
+            string fileextend = "";
+            try
+            {
+                if (fileName != string.Empty)
+                {
+                    filesize = fileName.Length;
+                    if (filesize == 0)
+                    {
+                        //throw new Exception("导入的Excel的文件大小为0，请检查是否正确! ");
+                        return "导入的Excel文件大小为0，请检查是否正确！";
+                    }
+                    fileextend = fileName.Substring(fileName.LastIndexOf(".") + 1);
+                    if (fileextend != "xls")
+                    {
+                        ////throw new Exception("你的选择的文件格式不正确，只能导入Excel文件！ ");
+                        return "选择的文件格式不争取，只能导入Excel文件！";
+                    }
+                    return ToSQLServer(fileName, identity);
+                }
+                else
+                    return "文件为空,请重新选择！";
+            }
+            catch (Exception ex)
+            { throw ex; }
+
+        }
+        public static string ToSQLServer(string fileName, string identity)
+        {
+            if (identity == "TabTeachers" | identity == "TabOtherTeachers")
+                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
+            else if (identity == "TabCalendar")
+                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
+            else
+                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
+        }
+
+        public static string CheckFile(object p, string v)
+        {
+            throw new NotImplementedException();
         }
     }
 }
