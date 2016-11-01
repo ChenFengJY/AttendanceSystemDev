@@ -54,7 +54,6 @@ namespace DAL
             {
                 return false;
             }
-
         }
         /// <summary>
         /// 检查课程表列名是否符合规范

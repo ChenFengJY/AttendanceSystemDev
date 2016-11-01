@@ -23,7 +23,7 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("~//Login.aspx");
+                //Response.Redirect("~//Login.aspx");
             }
         }
     }

@@ -24,7 +24,7 @@ namespace BLL
             {
                 if (fileName != string.Empty)
                 {
-                    filesize = fileName.Length;
+                    filesize = fileName.Length;//判断文件路径长度就能判断文件大小为0吗？？？？？？？？？？？
                     if (filesize == 0)
                     {
                         return "导入的Excel文件大小为0，请检查是否正确！";

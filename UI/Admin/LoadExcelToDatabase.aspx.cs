@@ -26,6 +26,7 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         //        //btnTeacherAttendance.Attributes.Add("onclick", "return confirm('本操作覆盖原有数据，确定要执行这个操作吗?')");
         //    }
         //}
+        Clear();
     }
 
     private bool UpLoad(FileUpload fileUpload)
@@ -73,6 +74,7 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
                OleDbDataAdapter ada = new OleDbDataAdapter(sql, connstring);
                DataSet set = new DataSet();
                ada.Fill(set);
+               conn.Close()
                return set.Tables[0];
 
            }
@@ -118,5 +120,34 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         lblMessage4.Text = "";
         lblMessage5.Text = "";
         lblMessage7.Text = "";
+    }
+
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        string fileExtention = "";//后缀
+        string fileName = "";
+        if (FileUpload3.HasFile)
+        {
+            fileName = FileUpload3.FileName;
+            fileExtention = System.IO.Path.GetExtension(fileName);
+            if (fileExtention == ".xls" || fileExtention == ".xlsx")
+            {
+                try
+                {
+                    this.currFilePath = Server.MapPath("../") + "TempFile\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtention;//服务器路径
+                    FileUpload3.SaveAs(this.currFilePath);//上传
+                    Response.Write("<script>alert('上传成功')</script>");
+                    lblMessage5.Text = "上传成功";
+                }
+                catch (Exception ex)
+                {
+                    Response.Write("<script>alert('发生错误：'" + ex.Message.ToString() + ")</script>");
+                }
+            }
+            else
+            {
+                Response.Write("<script>alert('只允许导入xls、xlsx文件！')</script>");
+            }
+        }
     }
 }
