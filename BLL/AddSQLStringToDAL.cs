@@ -33,7 +33,8 @@ namespace BLL
         {
             return ConnHelper.GetDataTable(strSQl);
         }
-        
+
+
         public static void FillTreeVMenu(TreeNodeEventArgs e, string menuName)
         {
             if (e.Node.ChildNodes.Count == 0)
@@ -41,7 +42,7 @@ namespace BLL
                 switch (e.Node.Depth)
                 {
                     case 0:
-                        FillParentNode(e.Node,menuName);
+                        FillParentNode(e.Node, menuName);
                         break;
                     case 1:
                         FillChildNode(e.Node, menuName);
@@ -49,6 +50,7 @@ namespace BLL
                 }
             }
         }
+
 
         public static void FillChildNode(TreeNode node, string menuName)
         {
@@ -88,38 +90,65 @@ namespace BLL
 
         public static DataTable SetData(string strSql)
         {
-
             return ConnHelper.GetDistinceColoum(strSql);
         }
-        public static DataTable GetDatatableBySQL(string str1,string str2,string str3)
+        /// <summary>
+        /// 根据一个条件查询指定的表
+        /// </summary>
+        /// <param name="str1">查询的表名</param>
+        /// <param name="str2">列名</param>
+        /// <param name="str3">条件--值</param>
+        /// <returns></returns>
+        public static DataTable GetDatatableBySQL(string str1, string str2, string str3)
         {
             string strTemp = BuidSQLSelectString(str1, str2, str3);
             return ConnHelper.GetDataTable(strTemp);
         }
-        public static DataTable GetDatatableBySQL(string TableName,string str1,string str1Limit,string str2,string str2Limt)
+        /// <summary>
+        /// 根据两个条件查询指定的表
+        /// </summary>
+        /// <param name="TableName">表名</param>
+        /// <param name="str1">数据库列名1</param>
+        /// <param name="str1Limit">满足的条件1</param>
+        /// <param name="str2">数据库列名2</param>
+        /// <param name="str2Limt"></param>
+        /// <returns></returns>
+        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt)
         {
             string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt);
             return ConnHelper.GetDataTable(strSQL);
-                }
-        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt,string str3,string str3Limt)
+        }
+
+        /// <summary>
+        /// 根据三个条件查询指定的表
+        /// </summary>
+        /// <param name="TableName"></param>
+        /// <param name="str1"></param>
+        /// <param name="str1Limit"></param>
+        /// <param name="str2"></param>
+        /// <param name="str2Limt"></param>
+        /// <param name="str3"></param>
+        /// <param name="str3Limt"></param>
+        /// <returns></returns>
+        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt)
         {
-            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt,str3,str3Limt);
+            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt, str3, str3Limt);
             return ConnHelper.GetDataTable(strSQL);
         }
-        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt,string str4,string str4Limt,string str5,string str5Limt)
+        public static DataTable GetDatatableBySQL(string TableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt, string str4, string str4Limt, string str5, string str5Limt)
         {
-            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt, str3, str3Limt,str4,str4Limt,str5,str5Limt);
+            string strSQL = BuidSQLSelectString(TableName, str1, str1Limit, str2, str2Limt, str3, str3Limt, str4, str4Limt, str5, str5Limt);
             return ConnHelper.GetDataTable(strSQL);
         }
         private static string BuidSQLSelectString(string strTableName)
         {
             return "select * from" + strTableName;
         }
-        private static string BuidSQLSelectString(string strTableName,string strddl,string strtxt)
+        private static string BuidSQLSelectString(string strTableName, string strddl, string strtxt)
         {
-            return "select * from" + strTableName+"where"+strddl+"="+strtxt+"";
+            return "select * from" + strTableName + "where" + strddl + "=" + strtxt + "";
         }
-        private static string BuidSQLSelectString(string TableName,string str1,string str1Limt,string str2,string str2Limt )
+        private static string BuidSQLSelectString(string TableName, string str1, string str1Limt, string str2, string str2Limt)
         {
             return "select * from" + TableName + "where" + str1 + "=" + str1Limt + "and" + str2 + "=" + str2Limt + "order by 1";
         }
@@ -128,22 +157,32 @@ namespace BLL
         {
             throw new NotImplementedException();
         }
-
+        /// <summary>
+        /// 构建三个查询条件的SQL语句
+        /// </summary>
+        /// <param name="tableName"></param>表名
+        /// <param name="str1">str=str1Limit</param>
+        /// <param name="str1Limit"> str=str1Limit</param>
+        /// <param name="str2"></param>
+        /// <param name="str2Limt"></param>
+        /// <param name="str3"></param>
+        /// <param name="str3Limt"></param>
+        /// <returns>返回构建的字符串</returns>
         private static string BuidSQLSelectString(string tableName, string str1, string str1Limit, string str2, string str2Limt, string str3, string str3Limt)
         {
             return "select * from" + tableName + "where" + str1 + "=" + str1Limit + "and" + str2 + "=" + "and" + str3 + "=" + str3Limt + "order by 1";
             throw new NotImplementedException();
         }
-        public static List<string> GetDistinctString(string strTable,string str1)
+        public static List<string> GetDistinctString(string strTable, string str1)
         {
             string strSQL = BuildSQLDistinctString(strTable, str1);
             return ConnHelper.GetDistinceColoum(strSQL, str1);
 
         }
-        private static string BuildSQLDistinctString(string strTableName,string str1)
+        private static string BuildSQLDistinctString(string strTableName, string str1)
         {
-            return "select distinct"+str1+"from"+strTableName;
+            return "select distinct" + str1 + "from" + strTableName;
         }
-        
+
     }
 }
