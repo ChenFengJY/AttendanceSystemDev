@@ -132,6 +132,12 @@
                     <asp:ListItem Selected="True">教务处</asp:ListItem>
                     <asp:ListItem>信息工程系</asp:ListItem>
                     <asp:ListItem>会计系</asp:ListItem>
+                    <asp:ListItem>机械工程系</asp:ListItem>
+                    <asp:ListItem>建筑工程系</asp:ListItem>
+                    <asp:ListItem>基础教学部</asp:ListItem>
+                    <asp:ListItem>经济管理系</asp:ListItem>
+                    <asp:ListItem>商务外语系</asp:ListItem>
+                    <asp:ListItem>食品工程系</asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div class="tea_btm">
