@@ -119,4 +119,11 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         lblMessage5.Text = "";
         lblMessage7.Text = "";
     }
+
+    protected void BtnImportCalebdar_Click(object sender, EventArgs e)
+    {
+        AddSQLStringToDAL.DeleteTabTeachers("TabCalendar");
+        object file1 = null;
+        Label15.Text = ExcelToDatabase.CheckFile(file1.Value.ToString(), "TabCalendar");
+    }
 }
