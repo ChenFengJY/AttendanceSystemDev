@@ -152,7 +152,7 @@
                     <h4>请要选择导入的文件</h4>
                     <asp:FileUpload ID="FileUpload3" runat="server" />
                     &nbsp;
-                <asp:Button ID="Button3" runat="server" Text="导入" Width="67px" />
+                <asp:Button ID="Button3" runat="server" Text="导入" Width="67px" OnClick="Button3_Click" />
                     <asp:Label ID="lblMessage5" runat="server" Text="lblMessage5"></asp:Label>
                 </div>
             </div>

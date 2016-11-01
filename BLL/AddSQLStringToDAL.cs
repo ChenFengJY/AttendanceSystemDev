@@ -119,6 +119,11 @@ namespace BLL
             return ConnHelper.GetDataTable(strSQL);
         }
 
+        public static void DeleteTabTeachers(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 根据三个条件查询指定的表
         /// </summary>
