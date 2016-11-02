@@ -2,6 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <style>
+        .backToContent{
+            width:auto;
+            height:100%;
+            background:url(https://img1.doubanio.com/view/photo/large/public/p2178029027.jpg) left bottom;
+            background-size:cover;
+        }
         .height{
             height:50px;
         }
@@ -49,7 +55,7 @@
             height:26px;
         }
     </style>
-    <div>
+    <div class="backToContent">
         <div class="height"></div>
         <div class="table">
             <h2 class="totitle">新增教师</h2>
@@ -78,6 +84,7 @@
                 <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="取消" />
             </div>
         </div>
+        <div style="clear:both;"></div>
     </div>
     
     
