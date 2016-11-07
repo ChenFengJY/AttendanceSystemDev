@@ -100,7 +100,7 @@ namespace DAL
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }

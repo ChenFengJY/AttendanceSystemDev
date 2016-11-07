@@ -110,8 +110,6 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
             lblMessage2.Text = ExcelToDatabase.CheckFile(currFilePath, department);
     }
 
-
-
     private void Clear()
     {
         lblMessage1.Text = "";
@@ -122,32 +120,45 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         lblMessage7.Text = "";
     }
 
-    protected void Button3_Click(object sender, EventArgs e)
+    //导入校历
+    protected void BtnImportCalendar_Click(object sender, EventArgs e)
     {
-        string fileExtention = "";//后缀
-        string fileName = "";
-        if (FileUpload3.HasFile)
+        Clear();
+        // AddSQLStringToDAL.DelectTabTeachers("TabCalendar");
+        if (UpLoad(FileUploadCalendar))
+            lblMessage5.Text = ExcelToDatabase.CheckFile(currFilePath, "TabCalendar");
+    }
+
+    protected void BtnDepartmentCount_Click(object sender, EventArgs e)
+    {
+        string[] str = { "会计系", "信息工程系", "经济管理系", "食品工程系", "机械工程系", "商务外语系", "建筑工程系" };
+        int[] sum = new int[str.Length];
+        if (txtKJ.Text != "" && txtXX.Text != "" && txtJG.Text != "" && txtSP.Text != "")
+        // && txtJX.Text != "" && txtWY.Text != "" && txtJZ.Text != ""
         {
-            fileName = FileUpload3.FileName;
-            fileExtention = System.IO.Path.GetExtension(fileName);
-            if (fileExtention == ".xls" || fileExtention == ".xlsx")
+            sum[0] = Convert.ToInt32(txtKJ.Text.Trim());
+            sum[1] = Convert.ToInt32(txtXX.Text.Trim());
+            sum[2] = Convert.ToInt32(txtJG.Text.Trim());
+            sum[3] = Convert.ToInt32(txtSP.Text.Trim());
+            //sum[4] = Convert.ToInt32(txtJX.Text.Trim());
+            //sum[5] = Convert.ToInt32(txtWY.Text.Trim());
+            //sum[6] = Convert.ToInt32(txtJZ.Text.Trim());
+        }
+        if (AddSQLStringToDAL.DeleteTabTeachers("TabDepartment"))
+        {
+            for (int i = 0; i < str.Length; i++)
             {
-                try
+                string strSql = "INSERT INTO TabDepartment VALUES('" + str[i] + "','" + sum[i] + "')";
+                if (AddSQLStringToDAL.InsertData(strSql))
                 {
-                    this.currFilePath = Server.MapPath("../") + "TempFile\\" + DateTime.Now.ToString("yyyyMMddhhmmss") + fileExtention;//服务器路径
-                    FileUpload3.SaveAs(this.currFilePath);//上传
-                    Response.Write("<script>alert('上传成功')</script>");
-                    lblMessage5.Text = "上传成功";
+                    Label16.Text = "各系人数设置完毕";
                 }
-                catch (Exception ex)
+                else
                 {
-                    Response.Write("<script>alert('发生错误：'" + ex.Message.ToString() + ")</script>");
+                    Label16.Text = "设置失败";
                 }
-            }
-            else
-            {
-                Response.Write("<script>alert('只允许导入xls、xlsx文件！')</script>");
             }
         }
+
     }
 }

@@ -112,7 +112,7 @@
         .peo_cen{
             width:200px;
             height:auto;
-            margin-left:20px;
+            margin-left:60px;
             margin-top:10px;
         }
         .peo_left{
@@ -176,6 +176,12 @@
                         <asp:ListItem Selected="True">教务处</asp:ListItem>
                         <asp:ListItem>信息工程系</asp:ListItem>
                         <asp:ListItem>会计系</asp:ListItem>
+                        <asp:ListItem>机械工程系</asp:ListItem>
+                        <asp:ListItem>基础教学部</asp:ListItem>
+                        <asp:ListItem>经济管理系</asp:ListItem>
+                        <asp:ListItem>商务外语系</asp:ListItem>
+                        <asp:ListItem>食品工程系</asp:ListItem>
+                        <asp:ListItem>建筑工程系</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="tea_btm">
@@ -195,9 +201,9 @@
                 </div>
                 <div class="scl_cen">
                     <h4>请要选择导入的文件</h4>
-                    <asp:FileUpload ID="FileUpload3" runat="server" />
+                    <asp:FileUpload ID="FileUploadCalendar" runat="server" />
                     &nbsp;
-                <asp:Button ID="Button3" runat="server" Text="导入" Width="67px" OnClick="Button3_Click" />
+                <asp:Button ID="Button3" runat="server" Text="导入" Width="67px" OnClick="BtnImportCalendar_Click" />
                     <asp:Label ID="lblMessage5" runat="server" Text=""></asp:Label>
                 </div>
             </div>
@@ -209,22 +215,21 @@
                 </div>
                 <div class="peo_cen">
                     <asp:Label ID="Label11" runat="server" Text="会计系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="TextBox1" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:TextBox ID="txtKJ" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
                     <asp:Label ID="Label12" runat="server" Text="信息工程系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="TextBox2" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:TextBox ID="txtXX" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
                     <asp:Label ID="Label13" runat="server" Text="经济管理系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="TextBox3" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:TextBox ID="txtJG" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
                     <asp:Label ID="Label14" runat="server" Text="食品工程系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="TextBox4" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:TextBox ID="txtSP" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
                     <asp:Label ID="Label15" runat="server" Text="机械工程系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="TextBox5" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:TextBox ID="txtJx" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
                 </div>
-                <asp:Button ID="提交" runat="server" Text="Button" CssClass="btn_peo" />
             </div>
         </div>
 
@@ -253,6 +258,8 @@
                 </div>
             </div>
         </div>
+        <asp:Button ID="Button6" runat="server" OnClick="BtnDepartmentCount_Click" Text="Button" />
+        <asp:Label ID="Label16" runat="server" Text="Label"></asp:Label>
     </div>
 </asp:Content>
 

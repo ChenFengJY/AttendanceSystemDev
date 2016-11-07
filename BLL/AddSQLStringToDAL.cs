@@ -51,7 +51,6 @@ namespace BLL
             }
         }
 
-
         public static void FillChildNode(TreeNode node, string menuName)
         {
 
@@ -119,11 +118,21 @@ namespace BLL
             return ConnHelper.GetDataTable(strSQL);
         }
 
-        public static void DeleteTabTeachers(string v)
+        public static bool DeleteTabTeachers(string tableName)
         {
-            throw new NotImplementedException();
+            string strSql = "DELETE FROM " + tableName + " WHERE 1=1";
+            return ConnHelper.ExecuteNoneQueryOperation(strSql);
         }
 
+        /// <summary>
+        /// 执行插入命令
+        /// </summary>
+        /// <param name="strSql">insert into 语句</param>
+        /// <returns></returns>
+        public static bool InsertData(string strSql)
+        {
+            return ConnHelper.ExecuteNoneQueryOperation(strSql);
+        }
         /// <summary>
         /// 根据三个条件查询指定的表
         /// </summary>

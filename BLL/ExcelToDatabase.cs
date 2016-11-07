@@ -66,10 +66,11 @@ namespace BLL
             {
                 return DAL.ExcelToSQLServer.ReadCoursesExcel(fileName, identity);
             }
-            int filesize = 0;
-            string fileextend = "";
+
             try
             {
+                string fileextend = "";
+                int filesize = 0;
                 if (fileName != string.Empty)
                 {
                     filesize = fileName.Length;
@@ -84,7 +85,7 @@ namespace BLL
                         ////throw new Exception("你的选择的文件格式不正确，只能导入Excel文件！ ");
                         return "选择的文件格式不争取，只能导入Excel文件！";
                     }
-                    return ToSQLServer(fileName, identity);
+                    return ToSQLSever(fileName, identity);
                 }
                 else
                     return "文件为空,请重新选择！";
@@ -92,20 +93,6 @@ namespace BLL
             catch (Exception ex)
             { throw ex; }
 
-        }
-        public static string ToSQLServer(string fileName, string identity)
-        {
-            if (identity == "TabTeachers" | identity == "TabOtherTeachers")
-                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
-            else if (identity == "TabCalendar")
-                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
-            else
-                return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
-        }
-
-        public static string CheckFile(object p, string v)
-        {
-            throw new NotImplementedException();
         }
     }
 }

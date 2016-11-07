@@ -76,48 +76,7 @@ namespace DAL
                 return false;
             }
         }
-        /// <summary>
-        /// 从本地读取Excel
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="strSQL"></param>
-        private static void ExcelToDatabaseByDataReader(string fileName, string strSQL)
-        {
-            System.GC.Collect();
-            string oleStr1 = @"Privider = Microsoft.Jet.OLEDB.4.0;Data Source = " + fileName + ";Extended Properties=Excel8.0";
-            OleDbConnection oleConn = new OleDbConnection(oleStr1);
-            oleConn.Open();
 
-            OleDbCommand oleCmd = new OleDbCommand(strSQL, oleConn);
-            OleDbDataReader oleDr = oleCmd.ExecuteReader();
-
-            string sqlStr1 = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
-            SqlConnection sqlConn = new SqlConnection(sqlStr1);
-            sqlConn.Open();
-            SqlCommand sqlCmd = new SqlCommand();
-            sqlCmd.Connection = sqlConn;
-            StringBuilder strconn = new StringBuilder();
-            List<string> str = new List<string>();
-            while (oleDr.Read())
-            {
-                str = SplitTeacherIDAndTeacherName(oleDr[1].ToString());
-                strconn.Append("insert into TabAllCourses(TeacherDepartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
-                strconn.Append("'" + oleDr[0].ToString() + "','" + str[0] + "','" + str[1] + "'");
-                for (int j = 2; j <= 14; j++)
-                {
-                    strconn.Append(",'" + oleDr[j].ToString() + "'");
-                }
-                strconn.Append(")");
-                sqlCmd.CommandText = strconn.ToString();
-                sqlCmd.ExecuteNonQuery();
-                strconn.Remove(0, strconn.Length);
-            }
-
-
-            sqlConn.Close();
-            oleDr.Close();
-            oleConn.Close();
-        }
         /// <summary>
         /// 获取Excel表Sheet名
         /// </summary>
@@ -176,10 +135,23 @@ namespace DAL
             }
             strSQL = "select * from [" + SheetName[0] + "]";
             ReadExcelToDataSet(fileName, strSQL);
+
             if (CheckExcelTableCourses())
             {
                 //CoursesTOSQLServer(identity);
-                return "文件导入成功";
+                //在原表的基础上添加两列数据并指定添加的位置，使得与数据库目标表结构相同
+                DataTable dt = ds.Tables["ExcelInfo"];
+                dt.Columns.Add("TeacherID");
+                dt.Columns["TeacherID"].SetOrdinal(1);
+                dt.Columns.Add("TeacherName");
+                dt.Columns["TeacherName"].SetOrdinal(2);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    SplitTeacherIDAndTeacherName(dt.Rows[i]);
+                }
+                //移除已经拆分完毕的列--任课教师
+                dt.Columns.Remove(dt.Columns[3]);
+                return DataTableToSQLServer("TabAllCourses", 16) ? "导入成功" : "导入失败";
             }
             else
                 return "选择的Excel文件中的内容与数据库要求不匹配。请确认！";
@@ -206,8 +178,8 @@ namespace DAL
 
             if (CheckExcelTableCalendar())
             {
-                CalenderToSQLServer(identity);
-                return "文件导入成功";
+                // CalenderToSQLServer(identity);
+                return DataTableToSQLServer(identity, 2) ? "导入成功" : "导入失败";
             }
             else
             {
@@ -215,6 +187,7 @@ namespace DAL
             }
 
         }
+
         /// <summary>
         /// 读取教师信息Excel并保存到SQL
         /// </summary>
@@ -237,119 +210,20 @@ namespace DAL
             if (CheckExcelTableTeachers())
             {
                 //  TeachersToSQLServer(identity);
-                return "文件导入成功";
+                return DataTableToSQLServer(identity, 6) ? "导入成功" : "导入失败";
             }
             else
             {
                 return "选择的Excel文件中的内容与数据与数据库中的要求不匹配，请确认！";
             }
         }
-        /// <summary>
-        /// 将课程表Dataset上传到Sqlserver
-        /// </summary>
-        /// <param name="identity">数据库表名</param>
-        public static void CoursesTOSQLServer(string identity)
-        {
-            string str1 = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(str1);
-            conn.Open();
 
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            StringBuilder strconn = new StringBuilder();
-            List<string> str = new List<string>();
-
-            for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
-            {
-                str = SplitTeacherIDAndTeacherName(ds.Tables["ExcelInfo"].Rows[i].ItemArray[1].ToString());
-                strconn.Append("insert into TabAllCourses(TeacherDepartment,TeacherID,TeacherName,TimeAndArea,Course,t1,t2,t3,Class,StudentDepartment,StudentID,StudentName,t4,t5,t6,t7)values(");
-                strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[0].ToString() + "','" + str[0] + "','" + str[1] + "'");
-                for (int j = 2; j <= 14; j++)
-                {
-                    strconn.Append(",'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "'");
-                }
-                strconn.Append(")");
-                string str2 = strconn.ToString();
-                cmd.CommandText = str2;
-                str2 = string.Empty;
-                cmd.ExecuteNonQuery();
-                strconn.Remove(0, strconn.Length);
-                System.GC.Collect();
-            }
-            conn.Close();
-            conn.Dispose();
-        }
-        /// <summary>
-        /// 根据[]拆分教师Excel第二列教师ID和教师名
-        /// </summary>
-        /// <param name="str"></param>
-        /// <returns></returns>
-        private static List<string> SplitTeacherIDAndTeacherName(string str)
-        {
-            List<string> strSplit = new List<string>();
-            string[] newStr = str.Split(new char[]
-                { '[',']'}, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < newStr.Length; i++)
-            {
-                strSplit.Add(newStr[i]);
-            }
-            return strSplit;
-        }
-        public static void CalenderToSQLServer(string identity)
-        {
-            string str1 = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(str1);
-            conn.Open();
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            StringBuilder strconn = new StringBuilder();
-            for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
-            {
-                strconn.Append("insert into" + identity + "(WeekNumber,StartWeek,EndWeek)values(");
-                for (int j = 0; j <= 1; j++)
-                {
-                    strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "',");
-                }
-                strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[2] + "')");
-                string str2 = strconn.ToString();
-                cmd.CommandText = str2;
-                cmd.ExecuteNonQuery();
-                strconn.Remove(0, strconn.Length);
-            }
-            conn.Close();
-            conn.Dispose();
-        }
-        public static void TeachersToSQLServer(string identity)
-        {
-            string str1 = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
-            SqlConnection conn = new SqlConnection(str1);
-            conn.Open();
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-            StringBuilder strconn = new StringBuilder();
-            for (int i = 0; i < ds.Tables["ExcelInfo"].Rows.Count; i++)
-            {
-                strconn.Append("insert into " + identity + "(Department,UserID,UserPWD,UserName,Sex,Role)values(");
-                for (int j = 0; j <= 4; j++)
-                {
-                    strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[j].ToString() + "',");
-                }
-                strconn.Append("'" + ds.Tables["ExcelInfo"].Rows[i].ItemArray[5] + "')");
-                string str2 = strconn.ToString();
-                cmd.CommandText = str2;
-                cmd.ExecuteNonQuery();
-                strconn.Remove(0, strconn.Length);
-            }
-            conn.Close();
-            conn.Dispose();
-        }
         /// <summary>
         /// 将dt导入数据库
         /// </summary>
-        /// <param name="dt"></param>
+        /// <param name="dt">要插入表的表名</param>
         /// <returns></returns>
-        public static string DataTableToSQLServer(DataTable dt)
+        public static bool DataTableToSQLServer(string insertTableName, int columnCount)
         {
             string connectionString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
             using (SqlConnection destinationConnection = new SqlConnection(connectionString))
@@ -359,9 +233,10 @@ namespace DAL
                 {
                     try
                     {
-                        bulkCopy.DestinationTableName = "AllTable";//要插入的表的表名
-                        bulkCopy.BatchSize = 100;//每次传输的行数 
-                        bulkCopy.NotifyAfter = 100;//进度提示的行数 
+                        bulkCopy.DestinationTableName = insertTableName;//要插入的表的表名
+
+                        //bulkCopy.BatchSize = 100;//每次传输的行数 
+                        //bulkCopy.NotifyAfter = 100;//进度提示的行数 
                         //bulkCopy.ColumnMappings.Add("承担单位", "TercherDepartment");//映射字段名 DataTable列名 ,数据库 对应的列名  
                         //bulkCopy.ColumnMappings.Add("任课教师", "TeacherIDName");
                         //bulkCopy.ColumnMappings.Add("上课时间/地点", "LessonNameAddress");
@@ -378,34 +253,41 @@ namespace DAL
                         //bulkCopy.ColumnMappings.Add("课程类别1", "ClassClassOne");
                         //bulkCopy.ColumnMappings.Add("课程类别2", "ClassClassTwo");
 
-                        bulkCopy.ColumnMappings.Add(0, 0);//映射字段名 DataTable列名 ,数据库 对应的列名  
-                        bulkCopy.ColumnMappings.Add(1, 1);
-                        bulkCopy.ColumnMappings.Add(2, 2);
-                        bulkCopy.ColumnMappings.Add(3, 3);
-                        bulkCopy.ColumnMappings.Add(4, 4);
-                        bulkCopy.ColumnMappings.Add(5, 5);
-                        bulkCopy.ColumnMappings.Add(6, 6);
-                        bulkCopy.ColumnMappings.Add(7, 7);
-                        bulkCopy.ColumnMappings.Add(8, 8);
-                        bulkCopy.ColumnMappings.Add(9, 9);
-                        bulkCopy.ColumnMappings.Add(10, 10);
-                        bulkCopy.ColumnMappings.Add(11, 11);
-                        bulkCopy.ColumnMappings.Add(12, 12);
-                        bulkCopy.ColumnMappings.Add(13, 13);
-                        bulkCopy.ColumnMappings.Add(14, 14);
-                        bulkCopy.WriteToServer(dt);
-                        return true.ToString();
+                        //bulkCopy.ColumnMappings.Add(0, 0);//映射字段名 DataTable列名 ,数据库 对应的列名，可以用数字代替
+                        //bulkCopy.ColumnMappings.Add(1, 1);
+                        for (int i = 0; i < columnCount; i++)
+                        {
+                            bulkCopy.ColumnMappings.Add(i, i);
+                        }
+                        bulkCopy.WriteToServer(ds.Tables["ExcelInfo"]);
+                        return true;
                     }
                     catch (Exception ex)
                     {
-                        return ex.Message;
-                    }
-                    finally
-                    {
-
+                        return false;
                     }
                 }
             }
         }
+
+        /// <summary>
+        /// 根据[]拆分教师Excel第二列教师ID和教师名，并添加到yuanbiao
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        private static DataTable SplitTeacherIDAndTeacherName(DataRow dr)
+        {
+            //   ds.Tables["ExcelInfo"].Rows[i][1];
+            string[] newStr = dr[3].ToString().Split(new char[]
+                { '[',']'}, StringSplitOptions.RemoveEmptyEntries);
+            dr.BeginEdit();
+            for (int i = 0; i < newStr.Length; i++)
+            {
+                dr[i + 1] = newStr[i];
+            }
+            dr.EndEdit();
+            return null;
+        }
+
     }
 }
