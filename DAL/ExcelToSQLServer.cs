@@ -145,7 +145,7 @@ namespace DAL
                 dt.Columns["TeacherID"].SetOrdinal(1);
                 dt.Columns.Add("TeacherName");
                 dt.Columns["TeacherName"].SetOrdinal(2);
-                for (int i = 0; i < dt.Rows.Count; i++)
+                for (int i = 0; i < dt.Rows.Count; i++  )
                 {
                     SplitTeacherIDAndTeacherName(dt.Rows[i]);
                 }

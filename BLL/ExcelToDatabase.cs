@@ -36,7 +36,10 @@ namespace BLL
                         return "选择的文件格式不正确，只能导入Excel文件！";
 
                     }
-                    return ToSQLSever(fileName, identity);
+                    else
+                    {
+                        return ToSQLSever(fileName, identity);
+                    }
 
                 }
                 else
@@ -47,13 +50,14 @@ namespace BLL
         }
 
         /// <summary>
-        /// 中转作用，将Excel导入到SqlServer并返回导入的结果，另带检查，只有表名符合规范才能导入
+        /// 中转作用，将Excel导入到SqlServer并返回导入的结果，
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="identity"></param>
         /// <returns>导入的结果</returns>
         public static string ToSQLSever(string fileName, string identity)
         {
+            string[] str = { "会计系", "信息工程系", "经济管理系", "食品工程系", "机械工程系", "商务外语系", "建筑工程系","教务处","基础教学部" };
             if (identity == "TabTeachers" | identity == "TabOtherTeachers")
             {
                 return DAL.ExcelToSQLServer.ReadTeachersExcel(fileName, identity);
@@ -62,36 +66,14 @@ namespace BLL
             {
                 return DAL.ExcelToSQLServer.ReadCalendarExcel(fileName, identity);
             }
-            else
-            {
+            else if(Array.IndexOf<string>(str,identity)!=-1)
+           {
                 return DAL.ExcelToSQLServer.ReadCoursesExcel(fileName, identity);
             }
-
-            try
+            else
             {
-                string fileextend = "";
-                int filesize = 0;
-                if (fileName != string.Empty)
-                {
-                    filesize = fileName.Length;
-                    if (filesize == 0)
-                    {
-                        //throw new Exception("导入的Excel的文件大小为0，请检查是否正确! ");
-                        return "导入的Excel文件大小为0，请检查是否正确！";
-                    }
-                    fileextend = fileName.Substring(fileName.LastIndexOf(".") + 1);
-                    if (fileextend != "xls")
-                    {
-                        ////throw new Exception("你的选择的文件格式不正确，只能导入Excel文件！ ");
-                        return "选择的文件格式不争取，只能导入Excel文件！";
-                    }
-                    return ToSQLSever(fileName, identity);
-                }
-                else
-                    return "文件为空,请重新选择！";
+                return "选择的表名不符合规范";
             }
-            catch (Exception ex)
-            { throw ex; }
 
         }
     }
