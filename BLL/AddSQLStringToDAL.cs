@@ -19,6 +19,12 @@ namespace BLL
             return true;
 
         }
+
+        public static DataTable GetDatatableBySQL(string v)
+        {
+            throw new NotImplementedException();
+        }
+
         //private static string BuildSQLUpdateString(string strTableName,string UserPWD,string UserID)
         //{
         //    //return "update" + strTableName + "setUserPWD" = "" + UserPWD + '"where UserID="' + UserID + "'";

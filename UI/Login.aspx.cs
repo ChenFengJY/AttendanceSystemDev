@@ -4,16 +4,48 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
 using BLL;
 using System.Data;
 
 public partial class LoginSystem_Login : System.Web.UI.Page
 {
     public object TextBox1 { get; private set; }
-
+    
     protected void Page_Load(object sender, EventArgs e)
     {
+        Session["UserName"]="";
+        Session["UserID"]="";
+        Session["CurrentWeek"]="";
+        Session["CurrentCourse"]="";
+        Session["Week"]="";
+        Session["Time"]= "";
+        Session["WeekRange"]= "";
+        Session["Role"]= "";
+        CurrentWeek();
+    }
+    private void CurrentWeek()
+    {
+        DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabCalendar");
+        foreach(DataRow row in dt.Rows)
+        {
+            if(Convert.ToDateTime(row["StartWeek"])< DateTime.Now&&Convert.ToDateTime(row["EndWeek"])> DateTime.Now)
+            {
+                string strWeekNumber = row["WeekNumber"].ToString();
+                if (strWeekNumber.Length==1)
+                {
+                    strWeekNumber = "0" + strWeekNumber;
+                    Session["CurrentWeek"]=strWeekNumber;
 
+                }
+                else
+                {
+                    Session["CurrentWeek"]="0";//不满足所有周次，显示为0
+
+                }
+            }
+        }
     }
 
     protected void Button1_Click(object sender, EventArgs e)

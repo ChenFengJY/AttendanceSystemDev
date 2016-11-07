@@ -179,15 +179,17 @@
             }
 
             .screenbg a img {
-                vertical-align: middle;
+                border-style: none;
+            border-color: inherit;
+            border-width: medium;
+            vertical-align: middle;
                 display: inline;
-                border: none;
                 display: block;
                 list-style: none;
                 position: fixed;
                 overflow: hidden;
                 top: 0;
-                left: 0;
+                left: -2px;
                 width: 100%;
                 height: 100%;
                 z-index: -1000;
