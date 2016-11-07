@@ -173,15 +173,15 @@
                 </div>
                 <div class="tea_cen">
                     <asp:DropDownList ID="ddlDepartmentName" runat="server">
-                        <asp:ListItem Selected="True">教务处</asp:ListItem>
-                        <asp:ListItem>信息工程系</asp:ListItem>
-                        <asp:ListItem>会计系</asp:ListItem>
-                        <asp:ListItem>机械工程系</asp:ListItem>
+                        <asp:ListItem Selected="True">会计系</asp:ListItem>
                         <asp:ListItem>基础教学部</asp:ListItem>
                         <asp:ListItem>经济管理系</asp:ListItem>
+                        <asp:ListItem>机械工程系</asp:ListItem>
+                        <asp:ListItem>教务处</asp:ListItem>
+                        <asp:ListItem>建筑工程系</asp:ListItem>
                         <asp:ListItem>商务外语系</asp:ListItem>
                         <asp:ListItem>食品工程系</asp:ListItem>
-                        <asp:ListItem>建筑工程系</asp:ListItem>
+                        <asp:ListItem>信息工程系</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="tea_btm">
@@ -214,21 +214,36 @@
                     <h3>导入各系部总人数</h3>
                 </div>
                 <div class="peo_cen">
-                    <asp:Label ID="Label11" runat="server" Text="会计系" CssClass="peo_left"></asp:Label>
+                    <asp:Label ID="LabelKJ" runat="server" Text="会计系" CssClass="peo_left"></asp:Label>
                     <asp:TextBox ID="txtKJ" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
-                    <asp:Label ID="Label12" runat="server" Text="信息工程系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="txtXX" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    <asp:Label ID="LabelJC" runat="server" Text="基础教学部" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtJC" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
-                    <asp:Label ID="Label13" runat="server" Text="经济管理系" CssClass="peo_left"></asp:Label>
+                    <asp:Label ID="LabelJG" runat="server" Text="经济管理系" CssClass="peo_left"></asp:Label>
                     <asp:TextBox ID="txtJG" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
-                    <asp:Label ID="Label14" runat="server" Text="食品工程系" CssClass="peo_left"></asp:Label>
+                    <asp:Label ID="LabelJX" runat="server" Text="机械工程系" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtJX" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    
+                    <asp:Label ID="LabelJW" runat="server" Text="教务处" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtJW" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                    
+                    <asp:Label ID="LabelJZ" runat="server" Text="建筑工程系" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtJZ" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+
+                    <asp:Label ID="LabelSW" runat="server" Text="商务外语系" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtSW" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+
+                    <asp:Label ID="LabelSP" runat="server" Text="食品工程系" CssClass="peo_left"></asp:Label>
                     <asp:TextBox ID="txtSP" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                     
-                    <asp:Label ID="Label15" runat="server" Text="机械工程系" CssClass="peo_left"></asp:Label>
-                    <asp:TextBox ID="txtJx" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
-                    
+                    <asp:Label ID="LabelXX" runat="server" Text="信息工程系" CssClass="peo_left"></asp:Label>
+                    <asp:TextBox ID="txtXX" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
+                </div>
+                <div>
+                    <asp:Button ID="Button6" runat="server" OnClick="BtnDepartmentCount_Click" Text="Button" />
+                    <asp:Label ID="Label16" runat="server" Text="Label"></asp:Label>
                 </div>
             </div>
         </div>
@@ -256,10 +271,10 @@
                     &nbsp;&nbsp;&nbsp;
                   <asp:Label ID="lblMessage4" runat="server" Text="[lblMessage4]"></asp:Label>
                 </div>
+                <asp:Button ID="btnClear" runat="server" Text="清空导入数据库" OnClick="btnClear_Click" />
             </div>
         </div>
-        <asp:Button ID="Button6" runat="server" OnClick="BtnDepartmentCount_Click" Text="Button" />
-        <asp:Label ID="Label16" runat="server" Text="Label"></asp:Label>
+        
     </div>
 </asp:Content>
 

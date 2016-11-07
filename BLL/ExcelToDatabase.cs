@@ -76,5 +76,21 @@ namespace BLL
             }
 
         }
+        /// <summary>
+        /// 清空第一次导入数据库数据
+        /// </summary>
+        /// <returns></returns>
+        public static bool ClearExcel()
+        {
+            bool clearTabTeachers, clearTabOtherTeachers, clearTabCalendar, clearTabAllCourses;//记录删除成果
+            clearTabTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabAllCourses");
+            clearTabOtherTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeachers");
+            clearTabCalendar = ConnHelper.ExecuteNoneQueryOperation("truncate table TabCalendar");
+            clearTabAllCourses = ConnHelper.ExecuteNoneQueryOperation("truncate table TabOtherTeachers");
+
+            ConnHelper.ExecuteNoneQueryOperation("delete from TabAllCourses");//可找回但速度慢
+            return clearTabTeachers && clearTabOtherTeachers && clearTabCalendar && clearTabAllCourses;
+            
+        }
     }
 }

@@ -234,7 +234,7 @@ namespace DAL
                     try
                     {
                         bulkCopy.DestinationTableName = insertTableName;//要插入的表的表名
-
+                        //bulkCopy.BulkCopyTimeout = 60;
                         //bulkCopy.BatchSize = 100;//每次传输的行数 
                         //bulkCopy.NotifyAfter = 100;//进度提示的行数 
                         //bulkCopy.ColumnMappings.Add("承担单位", "TercherDepartment");//映射字段名 DataTable列名 ,数据库 对应的列名  

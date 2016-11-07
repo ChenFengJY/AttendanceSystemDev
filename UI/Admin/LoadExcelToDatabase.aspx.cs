@@ -161,4 +161,20 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         }
 
     }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        if (true)
+        {
+            
+            if (ExcelToDatabase.ClearExcel())
+            {
+                lblMessage4.Text = "清除完成";
+            }
+            else
+            {
+                lblMessage4.Text = "清除失败";
+            }
+        }
+    }
 }
