@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseToDatabase.cs" />
     <Compile Include="ExcelToDatabase.cs" />
     <Compile Include="AddSQLStringToDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

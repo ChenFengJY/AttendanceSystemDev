@@ -177,4 +177,14 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
             }
         }
     }
+    /// <summary>
+    /// 将入库数据按需提取，并拆分
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        //拆分课程信息，保存到TabTeacherAllCourse
+
+    }
 }
