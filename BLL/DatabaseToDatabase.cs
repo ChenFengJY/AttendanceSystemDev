@@ -75,8 +75,6 @@ namespace BLL
                 dr[i + 3] = firstSplit[i];
             }
             dr[3] = SplitTimeAndArea3(dr[3].ToString());
-
-
         }
         private static string SplitTimeAndArea3(string str)
         {
