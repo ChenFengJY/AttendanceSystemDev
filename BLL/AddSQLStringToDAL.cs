@@ -75,6 +75,26 @@ namespace BLL
             }
         }
 
+        public static bool InsertTabTeachers(string teacherType, object replace, object sensitive, object p1, object p2, string v1, object p3, string v2, string teacherRole)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool InsertTabTeachers(string teacherType, object replaceSensitive)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool InsertTabTeachers(string teacherType, object disinfectionOperation)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool InsertTabTeachers()
+        {
+            throw new NotImplementedException();
+        }
+
         private static void FillParentNode(TreeNode node, string menuName)
         {
             string sqlQuery = "Select DISTINCT Parent_Node From " + menuName + "";
