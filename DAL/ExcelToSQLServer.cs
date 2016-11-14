@@ -145,13 +145,19 @@ namespace DAL
                 dt.Columns["TeacherID"].SetOrdinal(1);
                 dt.Columns.Add("TeacherName");
                 dt.Columns["TeacherName"].SetOrdinal(2);
+
+                dt.Columns.Add("CourseID");
+                dt.Columns.Add("CourseName");
+                dt.Columns["CourseID"].SetOrdinal(5);
+                dt.Columns["CourseName"].SetOrdinal(6);
                 for (int i = 0; i < dt.Rows.Count; i++  )
                 {
                     SplitTeacherIDAndTeacherName(dt.Rows[i]);
                 }
                 //移除已经拆分完毕的列--任课教师
                 dt.Columns.Remove(dt.Columns[3]);
-                return DataTableToSQLServer("TabAllCourses", 16) ? "导入成功" : "导入失败";
+                dt.Columns.Remove(dt.Columns[6]);
+                return DataTableToSQLServer("TabAllCourses", 17) ? "导入成功" : "导入失败";
             }
             else
                 return "选择的Excel文件中的内容与数据库要求不匹配。请确认！";
@@ -222,6 +228,7 @@ namespace DAL
         /// 将dt导入数据库
         /// </summary>
         /// <param name="dt">要插入表的表名</param>
+        /// <param name="columnCount">数据表中列数</param>
         /// <returns></returns>
         public static bool DataTableToSQLServer(string insertTableName, int columnCount)
         {
@@ -271,20 +278,22 @@ namespace DAL
         }
 
         /// <summary>
-        /// 根据[]拆分教师Excel第二列教师ID和教师名，并添加到yuanbiao
+        /// 根据[]拆分教师Excel第二列教师ID和教师名，并添加到yuanbiao 拆分课程列
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
         private static DataTable SplitTeacherIDAndTeacherName(DataRow dr)
         {
             //   ds.Tables["ExcelInfo"].Rows[i][1];
-            string[] newStr = dr[3].ToString().Split(new char[]
-                { '[',']'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] newStr = dr[3].ToString().Split(new char[] { '[',']'}, StringSplitOptions.RemoveEmptyEntries);
+            string[] newStr2 = dr[7].ToString().Split(new char[] { '[', ']' }, StringSplitOptions.RemoveEmptyEntries);
             dr.BeginEdit();
             for (int i = 0; i < newStr.Length; i++)
             {
                 dr[i + 1] = newStr[i];
+                dr[i + 5] = newStr2[i];
             }
+            
             dr.EndEdit();
             return null;
         }
