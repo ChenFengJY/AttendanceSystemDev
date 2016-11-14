@@ -46,6 +46,7 @@
     <Compile Include="AddSQLStringToDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PWDProcess.cs" />
+    <Compile Include="SplitString.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

@@ -6,13 +6,20 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls.WebParts;
 using BLL;
 public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
         Label1.Text = "当前在线" + Application["online"].ToString() + "人";
-        Label2.Text = Session["UserID"].ToString() + "你好,你的权限为" + Session["Role"].ToString();
+        Label2.Text = Session["UserID"].ToString()
+            + "你好,你的权限为" + Session["Role"].ToString();
+        Label3.Text = Session["UserName"].ToString();
+        Label4.Text = Session["Role"].ToString();
+        Label5.Text = Session["CurrentWeek"].ToString() ;
+
     }
 
     protected void TreeView1_TreeNodePopulate1(object sender, TreeNodeEventArgs e)
