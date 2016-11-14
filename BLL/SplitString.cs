@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Text;
 
 namespace BLL
 {
     public class SplitString
     {
-        public static List<string>GetSplitCountAndDetails(string str)
+        public static List<string> GetSplitCountAndDetails(string str)
         {
             List<string> str1 = new List<string>();//按照@符号，第一次拆分TimeAndArea
             List<string> strResult = new List<string>();//元素0表示总次数+1，1至以后表示各个Details
-            str1 = SplitTimeAndAreaString(str);
+            str1 = SplitTimeAndAreaString(str); 
             //strResult.Add(str1.Count.ToString);
             for (int i=0;i<str1.Count;i++)
             {
@@ -26,7 +25,7 @@ namespace BLL
             }
             return strResult; 
         }
-        public static List<string>SplitTimAndAreaString(string str)
+        public static List<string> SplitTimeAndAreaString(string str)
         {
             List<string> strList = new List<string>();
             string[] strTemp = str.Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
@@ -37,7 +36,7 @@ namespace BLL
             }
             return strList;
         }
-        public static List<string>GetTimeAndAreaDetails(string str)
+        public static List<string> GetTimeAndAreaDetails(string str)
         {
             List<string> strList = new List<string>();
             if(str.IndexOf("CAD/CAM一体化室")!=-1)
@@ -91,7 +90,7 @@ namespace BLL
             }
             if (v == 1)
             {
-                string[] ss1 = sb.ToString().Split(new char[] { '' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] ss1 = sb.ToString().Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 sb.Remove(0,sb.Length);
                 for (int i=0;i<ss1.Length;i++)
                 {
