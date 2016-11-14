@@ -120,13 +120,13 @@
             width:47%;
             float:left;
             margin-left:1%;
-            border:1px solid #f00;
+            
         }
         
         .peo_left{
             float:left;
             margin-top:8px;
-            border:1px solid #f00;
+            
         }
         .peo_right{
             float:right;
@@ -290,10 +290,8 @@
                 </div>
                 <div>
                     &nbsp;
-                  <asp:Button ID="Button4" runat="server" Text="分析入库数据" />
                     &nbsp;&nbsp;&nbsp;
-                  <asp:Label ID="lblMessage3" runat="server" Text="[lblMessage3]"></asp:Label>
-                </div>
+                  </div>
                 <div>
                     &nbsp;
                   <asp:Button ID="Button5" runat="server" Text="处理入库数据" OnClick="Button5_Click" />
@@ -302,10 +300,8 @@
                 </div>
                 <div>
                     &nbsp;
-                  <asp:Button ID="btnClearPreData" runat="server" Text="清空入库数据" />
                     &nbsp;&nbsp;&nbsp;
-                  <asp:Label ID="lblMessage4" runat="server" Text="[lblMessage4]"></asp:Label>
-                </div>
+                  </div>
                 <asp:Button ID="btnClear" runat="server" Text="清空导入数据库" OnClick="btnClear_Click" />
                 
             </div>

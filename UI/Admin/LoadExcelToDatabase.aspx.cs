@@ -114,8 +114,6 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
     {
         lblMessage1.Text = "";
         lblMessage2.Text = "";
-        lblMessage3.Text = "";
-        lblMessage4.Text = "";
         lblMessage5.Text = "";
         lblMessage7.Text = "";
     }
@@ -169,11 +167,11 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
             
             if (ExcelToDatabase.ClearExcel())
             {
-                lblMessage4.Text = "清除完成";
+                lblMessage7.Text = "清除完成";
             }
             else
             {
-                lblMessage4.Text = "清除失败";
+                lblMessage7.Text = "清除失败";
             }
         }
     }
@@ -185,6 +183,8 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
     protected void Button5_Click(object sender, EventArgs e)
     {
         //拆分课程信息，保存到TabTeacherAllCourse
+        lblMessage7.Text = DatabaseToDatabase.TabTeacherAllCourse();
+
 
     }
 }
