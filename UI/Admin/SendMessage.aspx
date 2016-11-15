@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="SendMessage.aspx.cs" Inherits="Admin_SendMessage" %>
+﻿ <%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="SendMessage.aspx.cs" Inherits="Admin_SendMessage" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
     <div>
@@ -15,12 +15,13 @@
 &nbsp;&nbsp;&nbsp;
             <asp:ListBox ID="ListBox1" runat="server" Height="98px" Width="670px"></asp:ListBox>
             <br />
-            <asp:Button ID="Button1" runat="server" Height="23px" Text="发布" Width="69px" />
+            <asp:Button ID="Button1" runat="server" Height="23px" Text="发布" Width="69px" OnClick="Button1_Click" />
 
             
 
         </div>
         发布通知&nbsp;&nbsp;
+        <asp:Label ID="Label3" runat="server" Text="Label"></asp:Label>
     </div>
     
 </asp:Content>
