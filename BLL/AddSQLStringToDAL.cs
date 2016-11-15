@@ -167,11 +167,11 @@ namespace BLL
         }
         private static string BuidSQLSelectString(string strTableName)
         {
-            return "select * from" + strTableName;
+            return "select * from  " + strTableName+"";
         }
         private static string BuidSQLSelectString(string strTableName, string strddl, string strtxt)
         {
-            return "select * from" + strTableName + "where" + strddl + "=" + strtxt + "";
+            return "select * from " + strTableName + "where" + strddl + "=" + strtxt + "";
         }
         private static string BuidSQLSelectString(string TableName, string str1, string str1Limt, string str2, string str2Limt)
         {
