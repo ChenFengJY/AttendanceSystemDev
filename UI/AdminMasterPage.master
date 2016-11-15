@@ -67,8 +67,6 @@
                     <h1>山东商务考勤管理系统</h1>
                     <asp:Label ID="Label1" runat="server" Text="用户名"></asp:Label>
                     <asp:Label ID="Label2" runat="server" Text="在线人数"></asp:Label>
-                    <asp:Label ID="Label3" runat="server" Text="当前登录用户"></asp:Label>
-                    <asp:Label ID="Label4" runat="server" Text="用户角色"></asp:Label>
                     <asp:Label ID="Label5" runat="server" Text="当前周次"></asp:Label>
                 </div>
             </div>

@@ -181,7 +181,7 @@
                     <h3>分系部导入授课信息</h3>
                 </div>
                 <div class="tea_cen">
-                    <asp:DropDownList ID="ddlDepartmentName" runat="server" OnSelectedIndexChanged="ddlDepartmentName_SelectedIndexChanged">
+                    <asp:DropDownList ID="ddlDepartmentName" runat="server">
                         <asp:ListItem Selected="True">会计系</asp:ListItem>
                         <asp:ListItem>基础教学部</asp:ListItem>
                         <asp:ListItem>经济管理系</asp:ListItem>
@@ -224,7 +224,7 @@
                 </div>
                 <div class="peo_cen">
                     <div class="peo_cen_left">
-                        <div style="border:1px solid #f00;">
+                        <div>
                             <asp:Label ID="LabelKJ" runat="server" Text="会计系" CssClass="peo_left"></asp:Label>
                             <asp:TextBox ID="txtKJ" runat="server" Width="108px" CssClass="peo_right"></asp:TextBox>
                             <div class="clear"></div>

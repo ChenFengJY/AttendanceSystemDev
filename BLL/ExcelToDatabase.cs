@@ -82,11 +82,11 @@ namespace BLL
         /// <returns></returns>
         public static bool ClearExcel()
         {
-            bool clearTabTeachers, clearTabOtherTeachers, clearTabCalendar, clearTabAllCourses, clearTabTeacherAllCourse;//记录删除成果
-            clearTabTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabAllCourses");
-            clearTabOtherTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeachers");
+            bool clearTabTeachers=true, clearTabOtherTeachers, clearTabCalendar, clearTabAllCourses, clearTabTeacherAllCourse;//记录删除成果
+            clearTabAllCourses = ConnHelper.ExecuteNoneQueryOperation("truncate table TabAllCourses");
+            //clearTabTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeachers");
             clearTabCalendar = ConnHelper.ExecuteNoneQueryOperation("truncate table TabCalendar");
-            clearTabAllCourses = ConnHelper.ExecuteNoneQueryOperation("truncate table TabOtherTeachers");
+            clearTabOtherTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabOtherTeachers");
             clearTabTeacherAllCourse = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeacherAllCourse");
 
             ConnHelper.ExecuteNoneQueryOperation("delete from TabAllCourses");//可找回但速度慢

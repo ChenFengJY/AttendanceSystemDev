@@ -60,6 +60,7 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             {
                 string Role = dt.Rows[0]["Role"].ToString();
                 Session["UserID"] = dt.Rows[0]["UserID"].ToString();
+                Session["UserName"] = dt.Rows[0]["UserName"].ToString();
                 Session["Role"] = dt.Rows[0]["Role"].ToString();
                 switch (Role)
                 {

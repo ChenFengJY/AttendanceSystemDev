@@ -52,9 +52,9 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabMessage", "System.DataTime.Now.ToString()", "txtMessage.Text", "strSum[i].ToString()", "false", "", ""))
-                {
-                }
+                //if (AddSQLStringToDAL.InsertTabTeachers("TabMessage", "System.DataTime.Now.ToString()", "txtMessage.Text", "strSum[i].ToString()", "false", "", ""))
+                //{
+                //}
             }
             Label3.Text = "信息发送成功";
             
