@@ -20,10 +20,15 @@ namespace BLL
 
         }
 
-        public static DataTable GetDatatableBySQL(string v)
-        {
-            throw new NotImplementedException();
-        }
+        //public static DataTable GetDatatableBySQL(string v)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //public static DataTable GetDatatableBySQL(string v)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         //private static string BuildSQLUpdateString(string strTableName,string UserPWD,string UserID)
         //{
@@ -124,9 +129,9 @@ namespace BLL
         /// <param name="str2">列名</param>
         /// <param name="str3">条件--值</param>
         /// <returns></returns>
-        public static DataTable GetDatatableBySQL(string str1, string str2, string str3)
+        public static DataTable GetDatatableBySQL(string str1)
         {
-            string strTemp = BuidSQLSelectString(str1, str2, str3);
+            string strTemp = BuidSQLSelectString(str1);
             return ConnHelper.GetDataTable(strTemp);
         }
         /// <summary>
@@ -182,11 +187,11 @@ namespace BLL
         }
         private static string BuidSQLSelectString(string strTableName)
         {
-            return "select * from" + strTableName;
+            return "select * from  " + strTableName+"";
         }
         private static string BuidSQLSelectString(string strTableName, string strddl, string strtxt)
         {
-            return "select * from" + strTableName + "where" + strddl + "=" + strtxt + "";
+            return "select * from " + strTableName + "where" + strddl + "=" + strtxt + "";
         }
         private static string BuidSQLSelectString(string TableName, string str1, string str1Limt, string str2, string str2Limt)
         {

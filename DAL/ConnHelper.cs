@@ -122,6 +122,42 @@ namespace DAL
             ds.CaseSensitive = false;
             return ds.Tables[0];
         }
+        /// <summary>
+        /// DataTable快速导入数据库
+        /// </summary>
+        /// <param name="insertTableName">将数据导入的数据库表名</param>
+        /// <param name="dt">DataTable</param>
+        /// <returns></returns>
+        public static string DataTableToSQLServer(string insertTableName, DataTable dt)
+        {
+            string connectionString = ConfigurationManager.ConnectionStrings["SdbiAttentionSystemConnectionString"].ConnectionString;
+            using (SqlConnection destinationConnection = new SqlConnection(connectionString))
+            {
+                destinationConnection.Open();
+                using (SqlBulkCopy bulkCopy = new SqlBulkCopy(destinationConnection))
+                {
+                    try
+                    {
+                        bulkCopy.DestinationTableName = insertTableName;//要插入的表的表名
+                        //bulkCopy.BulkCopyTimeout = 60;
+                        //bulkCopy.BatchSize = 100;//每次传输的行数 
+                        //bulkCopy.NotifyAfter = 100;//进度提示的行数 
+                       
+                        for (int i = 0; i < 14; i++)
+                        {
+                            bulkCopy.ColumnMappings.Add(i, i);
+                        }
+                        bulkCopy.WriteToServer(dt);
+                        return true.ToString();
+                    }
+                    catch (Exception ex)
+                    {
+                        return ex.ToString();
+                    }
+                }
+            }
+        }
+
         //public static int GetRecordCount(string strSql)
         //{
         //    string ConnectionString = ConfigurationManager.ConnectionStrings[""].ConnectionString;
@@ -136,5 +172,6 @@ namespace DAL
 
         //    }
         //}
+
     }
 }

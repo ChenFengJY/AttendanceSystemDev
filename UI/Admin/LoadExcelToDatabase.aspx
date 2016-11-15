@@ -120,13 +120,13 @@
             width:47%;
             float:left;
             margin-left:1%;
-            border:1px solid #f00;
+            
         }
         
         .peo_left{
             float:left;
             margin-top:8px;
-            border:1px solid #f00;
+            
         }
         .peo_right{
             float:right;
@@ -181,7 +181,7 @@
                     <h3>分系部导入授课信息</h3>
                 </div>
                 <div class="tea_cen">
-                    <asp:DropDownList ID="ddlDepartmentName" runat="server">
+                    <asp:DropDownList ID="ddlDepartmentName" runat="server" OnSelectedIndexChanged="ddlDepartmentName_SelectedIndexChanged">
                         <asp:ListItem Selected="True">会计系</asp:ListItem>
                         <asp:ListItem>基础教学部</asp:ListItem>
                         <asp:ListItem>经济管理系</asp:ListItem>
@@ -290,10 +290,8 @@
                 </div>
                 <div>
                     &nbsp;
-                  <asp:Button ID="Button4" runat="server" Text="分析入库数据" />
                     &nbsp;&nbsp;&nbsp;
-                  <asp:Label ID="lblMessage3" runat="server" Text="[lblMessage3]"></asp:Label>
-                </div>
+                  </div>
                 <div>
                     &nbsp;
                   <asp:Button ID="Button5" runat="server" Text="处理入库数据" OnClick="Button5_Click" />
@@ -302,10 +300,8 @@
                 </div>
                 <div>
                     &nbsp;
-                  <asp:Button ID="btnClearPreData" runat="server" Text="清空入库数据" />
                     &nbsp;&nbsp;&nbsp;
-                  <asp:Label ID="lblMessage4" runat="server" Text="[lblMessage4]"></asp:Label>
-                </div>
+                  </div>
                 <asp:Button ID="btnClear" runat="server" Text="清空导入数据库" OnClick="btnClear_Click" />
                 
             </div>
