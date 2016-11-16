@@ -20,13 +20,13 @@ namespace BLL
             DataTable dt = ConnHelper.GetDistinceColoum(strSql);
             //DataTable TabCourseSimple = new DataTable();//中转作用，保存拆分
 
-            dt.Columns.Add("SplitTimeAndArea");
+            dt.Columns.Add("SplitTimeAndArea");//单节课信息
             dt.Columns["SplitTimeAndArea"].SetOrdinal(4);
             TabCourseSimple = dt.Clone();//中转作用，保存拆分
             TabCourseSimple.Clear();
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                SplitTimeAndArea(dt.Rows[i]);
+                SplitTimeAndArea(dt.Rows[i],0,TabCourseSimple,4, new char[] { '@' });
             }
             TabCourseSimple.Columns.RemoveAt(0);
             //表列结构[TeacherDepartment],[TeacherID],[TeacherName],[SplitTimeAndArea],[TimeAndArea]
@@ -38,28 +38,39 @@ namespace BLL
             TabCourseSimple.Columns["CourseWeek"].SetOrdinal(4);
             TabCourseSimple.Columns["CourseTime"].SetOrdinal(5);
             TabCourseSimple.Columns["CourseAddress"].SetOrdinal(6);
-            for(int i = 0; i < TabCourseSimple.Rows.Count; i++)
+
+            DataTable TabTeacherCourseWeek = TabCourseSimple.Clone();//分周次课程
+
+            for (int i = 0; i < TabCourseSimple.Rows.Count; i++)
             {
                 SplitTimeAndArea2(TabCourseSimple.Rows[i]);
+
+                SplitTimeAndArea(TabCourseSimple.Rows[i], 3, TabTeacherCourseWeek, 3, new char[] { ',' });
             }
-
             TabCourseSimple.Columns.RemoveAt(7);
+            TabTeacherCourseWeek.Columns.RemoveAt(7);
 
-            return ConnHelper.DataTableToSQLServer("TabTeacherAllCourse", TabCourseSimple);
+            ConnHelper.DataTableToSQLServer("TabTeacherAllCourse", TabCourseSimple);
+
+            //表列结构[TeacherDepartment],[TeacherID],[TeacherName],CourseAllWeek,CourseWeek,CourseTime,CourseAddress,[TimeAndArea]
+
+            return ConnHelper.DataTableToSQLServer("TabTeacherCourseWeek", TabTeacherCourseWeek);
         }
         /// <summary>
-        /// 多课程拆分为单课程，分配到多行
+        /// 字符串多段拆分，按行插入到目标表
         /// </summary>
-        /// <param name="dr"></param>
-        private static void SplitTimeAndArea(DataRow dr)
+        /// <param name="dr">需要拆分的行</param>
+        /// <param name="dt">导入目标表</param>
+        /// <param name="ar">拆分字符集</param>
+        private static void SplitTimeAndArea(DataRow dr,int excrete,DataTable dt,int columnss,char[] ar)
         {
-            string[] firseSplit =  dr[0].ToString().Split(new char[] { '@' }, StringSplitOptions.RemoveEmptyEntries);
+            string[] firseSplit =  dr[excrete].ToString().Split(ar, StringSplitOptions.RemoveEmptyEntries);
             for(int i = 0; i < firseSplit.Length; i++)
             {
-                dr[4] = firseSplit[i];
+                dr[columnss] = firseSplit[i];
 
                 DataRow drow = dr;
-                TabCourseSimple.Rows.Add(drow.ItemArray);
+                dt.Rows.Add(drow.ItemArray);
             }
             
         }
@@ -93,14 +104,14 @@ namespace BLL
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
                             if(j%2!=0)
-                                sbl.Append(j + " ");
+                                sbl.Append(j + ",");
 
                         }
                     }
                     else
                     {
                         if(Convert.ToInt32(weekSplit[i]) % 2!=0)
-                            sbl.Append(weekSplit[i] + ' ');
+                            sbl.Append(weekSplit[i] + ',');
                     }
                 }
                 return sbl.ToString();
@@ -117,13 +128,13 @@ namespace BLL
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
                             if(j%2==0)
-                                sbl.Append(j + " ");
+                                sbl.Append(j + ",");
                         }
                     }
                     else
                     {
                         if(Convert.ToInt32(textIn[i])%2==0)
-                            sbl.Append(textIn[i] + ' ');
+                            sbl.Append(textIn[i] + ',');
                     }
                 }
                 return sbl.ToString();
@@ -139,12 +150,12 @@ namespace BLL
                         string[] textIn2 = textIn[i].Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
-                            sbl.Append(j + " ");
+                            sbl.Append(j + ",");
                         }
                     }
                     else
                     {
-                        sbl.Append(textIn[i] + ' ');
+                        sbl.Append(textIn[i] + ',');
                     }
                 }
                 return sbl.ToString();

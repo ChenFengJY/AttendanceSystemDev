@@ -244,24 +244,7 @@ namespace DAL
                         //bulkCopy.BulkCopyTimeout = 60;
                         //bulkCopy.BatchSize = 100;//每次传输的行数 
                         //bulkCopy.NotifyAfter = 100;//进度提示的行数 
-                        //bulkCopy.ColumnMappings.Add("承担单位", "TercherDepartment");//映射字段名 DataTable列名 ,数据库 对应的列名  
-                        //bulkCopy.ColumnMappings.Add("任课教师", "TeacherIDName");
-                        //bulkCopy.ColumnMappings.Add("上课时间/地点", "LessonNameAddress");
-                        //bulkCopy.ColumnMappings.Add("课程", "LessonMessage");
-                        //bulkCopy.ColumnMappings.Add("所属部门", "LessonDepartment");
-                        //bulkCopy.ColumnMappings.Add("学分", "Credit");
-                        //bulkCopy.ColumnMappings.Add("总学时", "AllCredit");
-                        //bulkCopy.ColumnMappings.Add("上课班级名称", "ClassName");
-                        //bulkCopy.ColumnMappings.Add("院(系)/部", "ClassDepartment");
-                        //bulkCopy.ColumnMappings.Add("学号", "StudentId");
-                        //bulkCopy.ColumnMappings.Add("姓名", "StudentName");
-                        //bulkCopy.ColumnMappings.Add("行政班级", "StudentClass");
-                        //bulkCopy.ColumnMappings.Add("性别", "StudentSex");
-                        //bulkCopy.ColumnMappings.Add("课程类别1", "ClassClassOne");
-                        //bulkCopy.ColumnMappings.Add("课程类别2", "ClassClassTwo");
 
-                        //bulkCopy.ColumnMappings.Add(0, 0);//映射字段名 DataTable列名 ,数据库 对应的列名，可以用数字代替
-                        //bulkCopy.ColumnMappings.Add(1, 1);
                         for (int i = 0; i < columnCount; i++)
                         {
                             bulkCopy.ColumnMappings.Add(i, i);

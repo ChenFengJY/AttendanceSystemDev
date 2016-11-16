@@ -62,25 +62,6 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         return false;
     }
 
-    /*   private DataTable ReadExcelToTable(string filePath)
-       {
-           string connstring = "Provider=Microsoft.JET.OLEDB.4.0;Data Source=" + filePath + ";Extended Properties=Excel 8.0;";
-           using(OleDbConnection conn = new OleDbConnection(connstring))
-           {
-               conn.Open();
-               DataTable sheetsName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, new object[] { null, null, null, "Table" });
-               string firstSheetName = sheetsName.Rows[0][2].ToString();
-               string sql = string.Format("select * from [{0}]", firstSheetName);
-               OleDbDataAdapter ada = new OleDbDataAdapter(sql, connstring);
-               DataSet set = new DataSet();
-               ada.Fill(set);
-               conn.Close()
-               return set.Tables[0];
-
-           }
-       }*/
-
-
     protected void BtnImportTeachers_Click(object sender, EventArgs e)
     {
         //  Clear();
@@ -96,7 +77,6 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         }
         else
         {
-            // lblMessage1.Text = "请选择导入的数据是本地教师或外聘教师";
             Response.Write("<script>alert('请选择导入的数据是本地教师或外聘教师！')</script>");
         }
     }

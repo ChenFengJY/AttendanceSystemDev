@@ -82,9 +82,9 @@ namespace BLL
         /// <returns></returns>
         public static bool ClearExcel()
         {
-            bool clearTabTeachers=true, clearTabOtherTeachers, clearTabCalendar, clearTabAllCourses, clearTabTeacherAllCourse;//记录删除成果
+            bool clearTabTeachers, clearTabOtherTeachers, clearTabCalendar, clearTabAllCourses, clearTabTeacherAllCourse;//记录删除成果
             clearTabAllCourses = ConnHelper.ExecuteNoneQueryOperation("truncate table TabAllCourses");
-            //clearTabTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeachers");
+            clearTabTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeachers");
             clearTabCalendar = ConnHelper.ExecuteNoneQueryOperation("truncate table TabCalendar");
             clearTabOtherTeachers = ConnHelper.ExecuteNoneQueryOperation("truncate table TabOtherTeachers");
             clearTabTeacherAllCourse = ConnHelper.ExecuteNoneQueryOperation("truncate table TabTeacherAllCourse");

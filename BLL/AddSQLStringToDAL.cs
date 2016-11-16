@@ -90,11 +90,6 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public static bool InsertTabTeachers(string teacherType, object disinfectionOperation)
-        {
-            throw new NotImplementedException();
-        }
-
         public static bool InsertTabTeachers()
         {
             throw new NotImplementedException();

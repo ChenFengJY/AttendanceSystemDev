@@ -91,11 +91,11 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
         }
         try
         {
-            if (AddSQLStringToDAL.InsertTabTeachers(teacherType,DisinfectionOperation.ReplaceSensitiveStr(DropDownList1.SelectedItem.ToString()),DisinfectionOperation.ReplaceSensitiveStr(TextBox1.Text.Trim()),PWDProcess.MD5Encrypt(TextBox2.Text.Trim(),PWDProcess.CreatKey(TextBox3.Text.Trim())),DisinfectionOperation.ReplaceSensitiveStr(TextBox3.Text.Trim()),"",teacherRole))
-            {
-                Clear();
-                Label3.Text = "添加成功!";
-            }
+            //if (AddSQLStringToDAL.InsertTabTeachers(teacherType,DisinfectionOperation.ReplaceSensitiveStr(DropDownList1.SelectedItem.ToString()),DisinfectionOperation.ReplaceSensitiveStr(TextBox1.Text.Trim()),PWDProcess.MD5Encrypt(TextBox2.Text.Trim(),PWDProcess.CreatKey(TextBox3.Text.Trim())),DisinfectionOperation.ReplaceSensitiveStr(TextBox3.Text.Trim()),"",teacherRole))
+            //{
+            //    Clear();
+            //    Label3.Text = "添加成功!";
+            //}
         }
         catch
         {
