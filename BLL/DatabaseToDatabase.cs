@@ -12,6 +12,10 @@ namespace BLL
     public class DatabaseToDatabase
     {
         static DataTable TabCourseSimple;
+        /// <summary>
+        /// 数据表拆分主方法
+        /// </summary>
+        /// <returns></returns>
         public static string TabTeacherAllCourse()
         {
             
@@ -62,6 +66,7 @@ namespace BLL
         /// <param name="dr">需要拆分的行</param>
         /// <param name="dt">导入目标表</param>
         /// <param name="ar">拆分字符集</param>
+        /// <param name="columnss"></param>
         private static void SplitTimeAndArea(DataRow dr,int excrete,DataTable dt,int columnss,char[] ar)
         {
             string[] firseSplit =  dr[excrete].ToString().Split(ar, StringSplitOptions.RemoveEmptyEntries);
@@ -87,6 +92,11 @@ namespace BLL
             }
             dr[3] = SplitTimeAndArea3(dr[3].ToString());
         }
+        /// <summary>
+        /// 对周次单双周的拆分
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
         private static string SplitTimeAndArea3(string str)
         {
             //1-2,5-7,9-13,15-20单周
