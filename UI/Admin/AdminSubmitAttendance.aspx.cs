@@ -15,7 +15,6 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         {
             
             string sql = "select * from [TabTeacherCourseWeek] where [TeacherID]= " + Session["UserID"] + " and CourseAllWeek = 12";
-
             this.Repeater1.DataSource = DAL.ConnHelper.GetDataSet(sql).Tables[0];
             Repeater1.DataBind();
         }

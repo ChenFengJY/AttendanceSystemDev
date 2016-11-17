@@ -10,15 +10,18 @@
     <style>
         .title{
             position:relative;
-            z-index:1000;
             top:-90px;
             left:20px;
         }
         .title h1{
-            text-shadow:1px 1px 0 #00ffff;
+            text-shadow:1px 1px 0 #00ffff; 
+            font-family: 华文行楷;
+            font-size:35px;
             color:firebrick;
-            margin-bottom:40px;
+            margin-bottom:20px;
+            padding-top:20px;
         }
+        
         .treeview1{
             font-size:14px;
             color:red;
@@ -65,9 +68,11 @@
                 </div>
                 <div class="title">
                     <h1>山东商务考勤管理系统</h1>
-                    <asp:Label ID="Label1" runat="server" Text="用户名"></asp:Label>
-                    <asp:Label ID="Label2" runat="server" Text="在线人数"></asp:Label>
-                    <asp:Label ID="Label5" runat="server" Text="当前周次"></asp:Label>
+                    <div class="display_info">
+                        <asp:Label ID="Label1" runat="server" Text="用户名"></asp:Label>
+                        <asp:Label ID="Label2" runat="server" Text="在线人数"></asp:Label>
+                        <asp:Label ID="Label5" runat="server" Text="当前周次"></asp:Label>
+                    </div>
                 </div>
             </div>
 
