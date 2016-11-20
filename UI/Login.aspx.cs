@@ -23,7 +23,6 @@ public partial class LoginSystem_Login : System.Web.UI.Page
         Session["Time"]= "";
         Session["WeekRange"]= "";
         Session["Role"]= "";
-        CurrentWeek();
     }
     private void CurrentWeek()
     {
@@ -33,17 +32,13 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             if(Convert.ToDateTime(row["StartWeek"])< DateTime.Now&&Convert.ToDateTime(row["EndWeek"])> DateTime.Now)
             {
                 string strWeekNumber = row["WeekNumber"].ToString();
-                if (strWeekNumber.Length==1)
-                {
-                    strWeekNumber = "0" + strWeekNumber;
-                    Session["CurrentWeek"]=strWeekNumber;
+                Session["CurrentWeek"]=strWeekNumber;
 
-                }
-                else
-                {
-                    Session["CurrentWeek"]="0";//不满足所有周次，显示为0
+            }
+            else
+            {
+                Session["CurrentWeek"] = "0";//不满足所有周次，显示为0
 
-                }
             }
         }
     }
