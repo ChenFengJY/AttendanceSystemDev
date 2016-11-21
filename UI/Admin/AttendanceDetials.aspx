@@ -20,13 +20,13 @@
         <asp:Label ID="Label4" runat="server" Text="lblLeaveMessage"></asp:Label><br />
         <asp:Label ID="Label5" runat="server" Text="lblResultMessage"></asp:Label><br />
         <asp:Label ID="Label6" runat="server" Text="lblMessage"></asp:Label><br />
-        <asp:Button ID="btnClose" runat="server" OnClick="btnClose_Click" Text="返回主页面" />
+        <asp:Button ID="btnClose" runat="server" Text="返回主页面" />
         <asp:Button ID="btnAtten" runat="server" Text="上报考勤结果" />
         <asp:CheckBox ID="CheckBox1" runat="server" Text="教学异动" />
         <select id="Select1" name="D1">
             <option>因故调课</option>
         </select><asp:Button ID="Button2" runat="server" Text="确定" />
-        <asp:GridView ID="gvAttendanceDetails" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" DataSourceID="SqlDataSourceAttendatnceDetails" GridLines="Horizontal" OnRowDataBound="gvAttendanceDetails_RowDataBound" Font-Size="12px">
+        <asp:GridView ID="gvAttendanceDetails" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" DataSourceID="SqlDataSourceAttendatnceDetails" GridLines="Horizontal" Font-Size="12px">
             <RowStyle  BackColor="#E7E7FF" ForeColor="#4A3C8C" />
             <Columns>
                 <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部"  ItemStyle-Width="100px" SortExpression="StudentDeparment"/>
@@ -35,11 +35,11 @@
                 <asp:BoundField DataField="t4" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName"/>
                 <asp:TemplateField HeaderText="出勤情况">
                     <ItemTemplate>
-                        <asp:RadioButton ID="rdNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="true" OnCheckedChanged="rdo_CheckedChange" />
-                        <asp:RadioButton ID="rdoLate" runat="server" GroupName="g1" Text="迟到"  AutoPostBack="true" OnCheckedChanged="rdo_CheckedChange" />
-                        <asp:RadioButton ID="rodAbsence" runat="server" GroupName="g1" Text="旷课"  AutoPostBack="true" OnCheckedChanged="rdo_CheckedChange" />
-                         <asp:RadioButton ID="rdoEarly" runat="server" GroupName="g1" Text="早退"  AutoPostBack="true" OnCheckedChanged="rdo_CheckedChange" />
-                         <asp:RadioButton ID="rdoLeave" runat="server" GroupName="g1" Text="请假"  AutoPostBack="true" OnCheckedChanged="rdo_CheckedChange" />
+                        <asp:RadioButton ID="rdNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="true" />
+                        <asp:RadioButton ID="rdoLate" runat="server" GroupName="g1" Text="迟到"  AutoPostBack="true" />
+                        <asp:RadioButton ID="rodAbsence" runat="server" GroupName="g1" Text="旷课"  AutoPostBack="true" />
+                         <asp:RadioButton ID="rdoEarly" runat="server" GroupName="g1" Text="早退"  AutoPostBack="true"/>
+                         <asp:RadioButton ID="rdoLeave" runat="server" GroupName="g1" Text="请假"  AutoPostBack="true"/>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>

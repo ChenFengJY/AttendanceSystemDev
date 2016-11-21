@@ -49,7 +49,7 @@ namespace BLL
             {
                 SplitTimeAndArea2(TabCourseSimple.Rows[i]);
 
-                SplitTimeAndArea(TabCourseSimple.Rows[i], 3, TabTeacherCourseWeek, 3, new char[] { ',' });
+                SplitTimeAndArea(TabCourseSimple.Rows[i], 3, TabTeacherCourseWeek, 3, new char[] { ' ' });
             }
             TabCourseSimple.Columns.RemoveAt(7);
             TabTeacherCourseWeek.Columns.RemoveAt(7);
@@ -72,9 +72,8 @@ namespace BLL
             string[] firseSplit =  dr[excrete].ToString().Split(ar, StringSplitOptions.RemoveEmptyEntries);
             for(int i = 0; i < firseSplit.Length; i++)
             {
-                dr[columnss] = firseSplit[i];
-
                 DataRow drow = dr;
+                drow[columnss] = firseSplit[i];
                 dt.Rows.Add(drow.ItemArray);
             }
             
@@ -114,14 +113,14 @@ namespace BLL
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
                             if(j%2!=0)
-                                sbl.Append(j + ",");
+                                sbl.Append(j + " ");
 
                         }
                     }
                     else
                     {
                         if(Convert.ToInt32(weekSplit[i]) % 2!=0)
-                            sbl.Append(weekSplit[i] + ',');
+                            sbl.Append(weekSplit[i] + ' ');
                     }
                 }
                 return sbl.ToString();
@@ -138,13 +137,13 @@ namespace BLL
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
                             if(j%2==0)
-                                sbl.Append(j + ",");
+                                sbl.Append(j + " ");
                         }
                     }
                     else
                     {
                         if(Convert.ToInt32(textIn[i])%2==0)
-                            sbl.Append(textIn[i] + ',');
+                            sbl.Append(textIn[i] + ' ');
                     }
                 }
                 return sbl.ToString();
@@ -160,12 +159,12 @@ namespace BLL
                         string[] textIn2 = textIn[i].Split(new char[] { '-' }, StringSplitOptions.RemoveEmptyEntries);
                         for (int j = Convert.ToInt32(textIn2[0]); j <= Convert.ToInt32(textIn2[1]); j++)
                         {
-                            sbl.Append(j + ",");
+                            sbl.Append(j + " ");
                         }
                     }
                     else
                     {
-                        sbl.Append(textIn[i] + ',');
+                        sbl.Append(textIn[i] + ' ');
                     }
                 }
                 return sbl.ToString();
