@@ -30,21 +30,5 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
 
     }
-    private void CurrentWeek() {
-        DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabCalendar");
-        foreach (DataRow row in dt.Rows)
-        {
-            if (Convert.ToDateTime(row["StartWeek"]) < DateTime.Now && Convert.ToDateTime(row["EndWeeek"]) > DateTime.Now)
-            {
-                string strWeekNumber = row["WeekNumber"].ToString();
-                if (strWeekNumber.Length == 1)
-                {
-                    Session["CurrentWeek"] = strWeekNumber;
-                }
-            }
-            else {
-                Session["CurrentWeek"] = "0";//不满足所有周次，显示为0；
-            }
-        }
-    }
+   
 }
