@@ -14,7 +14,7 @@ namespace BLL
     /// </summary>
     public class AddSQLStringToDAL
     {
-        public static bool UpdataTable(string TableName, string UserPWD, string UserID)
+        public static bool UpdataTabTeachers(string TableName, string UserPWD, string UserID,string UserRole)
         {
             return true;
 
@@ -45,6 +45,10 @@ namespace BLL
             return ConnHelper.GetDataTable(strSQl);
         }
 
+        public static DataTable GetDatatableBySQL(string v1, object p, string v2)
+        {
+            throw new NotImplementedException();
+        }
 
         public static void FillTreeVMenu(TreeNodeEventArgs e, string menuName)
         {
@@ -80,7 +84,17 @@ namespace BLL
             }
         }
 
+        public static bool DeleteTabTeachers(string TabTeachers, string UserID, string v3)
+        {
+            return false;
+        }
+
         public static bool InsertTabTeachers(string teacherType, object replace, object sensitive, object p1, object p2, string v1, object p3, string v2, string teacherRole)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static bool UpdataTabTeachers(string v1, string v2, string strUserRole, string v3, string strUserID)
         {
             throw new NotImplementedException();
         }
@@ -90,7 +104,7 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public static bool InsertTabTeachers()
+        public static void InsertTabTeachers()
         {
             throw new NotImplementedException();
         }

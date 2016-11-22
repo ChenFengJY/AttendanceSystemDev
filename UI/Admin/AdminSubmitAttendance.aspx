@@ -45,9 +45,11 @@
             <div class="thisweek">
                 <h2>本周考勤情况</h2>
                 <div class="weekInfo">
-                    <asp:Repeater ID="Repeater1" runat="server">
+                    <asp:Repeater ID="rptCourse" runat="server" OnItemCommand="rptCourse_ItemCommand">
+
                         <HeaderTemplate>
-                            <table>
+                            <table >
+                                
                         </HeaderTemplate>
                         <ItemTemplate>
                             

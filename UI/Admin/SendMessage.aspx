@@ -13,7 +13,7 @@
             <br />
             <br />
 &nbsp;&nbsp;&nbsp;
-            <asp:ListBox ID="ListBox1" runat="server" Height="98px" Width="670px"></asp:ListBox>
+            <asp:ListBox ID="txtMessage" runat="server" Height="98px" Width="670px"></asp:ListBox>
             <br />
             <asp:Button ID="Button1" runat="server" Height="23px" Text="发布" Width="69px" OnClick="Button1_Click" />
 
