@@ -32,8 +32,8 @@
         Session["UserName"] = "";
         Session["UserID"] = "";
         Session["Role"] = "";
-        Session["CurrentWeek"] = "";
-        
+        Session["CurrentWeek"] ="";
+
     }
 
     void Session_End(object sender, EventArgs e)

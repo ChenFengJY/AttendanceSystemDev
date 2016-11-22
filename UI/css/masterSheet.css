@@ -4,22 +4,61 @@
     font-family: "微软雅黑","Verdana","宋体","Lucida Grande","Lucida Sans Unicode",Tahoma,sans-serif;
 }
 
-#top {
-    width: 100%;
-    height: 100px;
-    background-color: #3FA1D4;
-    background-size:contain;
-}
+body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";
+   }
 
 #main {
     width: auto;
     height: auto;
     background-color: #aaa;
 }
-
-#content {
+header{
     width: 100%;
-    height: 580px;
+    height: 80px;
+    margin:0 auto;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#b2e1ff+0,66b6fc+100;Blue+3D+%236 */
+    background: rgb(178,225,255); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(178,225,255,1) 0%, rgba(102,182,252,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2e1ff', endColorstr='#66b6fc',GradientType=0 ); /* IE6-9 */
+
+    position: fixed;
+    text-align: center;
+    top:0;
+    left: 0;
+}
+.logo{
+    width:80px;
+    height:80px;
+    float:left;
+}
+ .title{
+    width:400px;
+    height:70px;
+    line-height:80px;
+    float:left;
+}
+.title h1{
+    text-shadow:1px 1px 0 #00ffff; 
+    font-family: 华文行楷;
+    font-size:35px;
+    color:firebrick;
+}
+.sysInfo{
+    width:250px;
+    height:60px;
+    line-height:20px;
+    margin-top:15px;
+    float:right;
+}
+
+section{
+    width: 100%;
+    height: auto;
+    margin:0 auto;
+    margin-top:80px;
+    margin-bottom:60px;
 }
 
 #left {
@@ -36,8 +75,35 @@
     background-color: #F2F9FC;
 }
 
-#foot {
+footer{
     width: 100%;
-    height: 100px;
-    background-color: #C1C1E5;
+    height:60px;
+    position: fixed;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    margin:0 auto;
+
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#606c88+0,3f4c6b+100;Grey+3D+%232 */
+    background: rgb(96,108,136); /* Old browsers */
+    background: -moz-linear-gradient(top,  rgba(96,108,136,1) 0%, rgba(63,76,107,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom,  rgba(96,108,136,1) 0%,rgba(63,76,107,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#606c88', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+
+}
+
+.bottom {
+    margin: 8px auto 0 auto;
+    overflow: hidden;
+    padding-bottom: 8px;
+    color: #ccc;
+    word-spacing: 3px;
+    zoom: 1;
+}
+
+.treeview1{
+    font-size:14px;
+    color:red;
+    line-height:10px;
 }
