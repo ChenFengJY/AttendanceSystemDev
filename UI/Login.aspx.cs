@@ -23,22 +23,21 @@ public partial class LoginSystem_Login : System.Web.UI.Page
         Session["Time"]= "";
         Session["WeekRange"]= "";
         Session["Role"]= "";
+        Session["CurrentWeek"]="0";
     }
     private void CurrentWeek()
     {
         DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabCalendar");
-        foreach(DataRow row in dt.Rows)
+        foreach (DataRow row in dt.Rows)
         {
-            if(Convert.ToDateTime(row["StartWeek"])< DateTime.Now&&Convert.ToDateTime(row["EndWeek"])> DateTime.Now)
+            if (Convert.ToDateTime(row["StartWeek"]) < DateTime.Now && Convert.ToDateTime(row["EndWeeek"]) > DateTime.Now)
             {
                 string strWeekNumber = row["WeekNumber"].ToString();
-                Session["CurrentWeek"]=strWeekNumber;
-
+                Session["CurrentWeek"] = strWeekNumber;
             }
             else
             {
-                Session["CurrentWeek"] = "0";//不满足所有周次，显示为0
-
+                Session["CurrentWeek"] = "0";//不满足所有周次，显示为0；
             }
         }
     }
