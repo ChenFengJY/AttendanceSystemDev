@@ -34,6 +34,9 @@
         Session["Role"] = "";
         Session["CurrentWeek"] ="";
 
+        Session["CourseWeek"] = "";
+        Session["CourseTime"] = "";
+
     }
 
     void Session_End(object sender, EventArgs e)

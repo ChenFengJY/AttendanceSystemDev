@@ -20,27 +20,45 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         {
             if (Session["UserName"].ToString() == "")
             {
-                Response.Redirect("~\\Default.aspx");
+                //Response.Redirect("..\\Login.aspx");
             }
             else {
             }
-            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID]= " + Session["UserID"] + " and CourseAllWeek = 12";
 
-            this.rptCourse.DataSource = DAL.ConnHelper.GetDataSet(sql).Tables[0];
-            rptCourse.DataBind();
+            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = 12";
+            //调试用↓
+            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = 12";
+            this.thisRepeater.DataSource = DAL.ConnHelper.GetDataSet(sql).Tables[0];
+            thisRepeater.DataBind();
+            this.lastRepeater.DataSource = DAL.ConnHelper.GetDataSet(sql).Tables[0];
+            lastRepeater.DataBind();
+
         }
 
     }
 
 
+    protected void thisButton1_Click(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
 
-    protected void BulletedList1_Click(object sender, BulletedListEventArgs e)
+        }
+    }
+
+    protected void thisButton2_Click(object sender, EventArgs e)
     {
 
     }
 
-    protected void rptCourse_ItemCommand(object source, RepeaterCommandEventArgs e)
+    protected void thisRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
+        Label week = e.Item.FindControl("thisWeekLabel") as Label;
+        Session["CourseWeek"] = week.Text.Trim();
 
+        Label time = e.Item.FindControl("thisTimeLabel") as Label;
+        Session["CourseTime"] = time.Text.Trim();
+
+        Response.Redirect("AttendanceDetials.aspx");
     }
 }

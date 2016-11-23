@@ -45,8 +45,8 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
         else if (ddlLimit.SelectedIndex.ToString()!="所有记录"&&txtLimit.Text!="")
 
         {  
-            DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers",DropDownListTransform.DDLToString(ddlLimit.SelectedIndex.ToString()),txtLimit.Text.Trim());
-            BindToGridView(dt);
+            //DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers",DropDownListTransform.DDLToString(ddlLimit.SelectedIndex.ToString()),txtLimit.Text.Trim());
+            //BindToGridView(dt);
         }
     }
 

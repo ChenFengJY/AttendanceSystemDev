@@ -49,7 +49,7 @@
             <HeaderStyle BackColor="#4A3C8C" Font-Bold="true" ForeColor="#F7F7F7" />
             <AlternatingRowStyle BackColor="#3F7F7F7" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" ConnectionString="<%$ConnectionStrings:SDBISASConnectionString2 %>" SelectCommand="SELECT DISTINCT[StudentDepartment],[StudentID],[StudentName],[t4]FROM[TabAllCourses]WHERE(([TeacherID]=@TeacherID)AND[Course]=@Course)AND[TimeAndArea]=@TimeAndArea))">
+        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" ConnectionString="<%$ConnectionStrings:SDBISASConnectionString2 %>" SelectCommand="SELECT DISTINCT [StudentDepartment],[StudentID],[StudentName],[t4] FROM [TabAllCourses] WHERE (([TeacherID] = @TeacherID ) AND [Course] = @Course) AND [TimeAndArea] = @TimeAndArea))">
         <SelectParameters>
             <asp:sessionParameter Name="TeacherID" SessionField="UserID" Type="String" />
             <asp:SessionParameter Name="COurse" SessionField="CurrentCourse" TYpe="String" />

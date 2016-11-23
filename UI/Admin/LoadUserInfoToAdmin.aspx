@@ -25,7 +25,7 @@
             <asp:BoundField HeaderText="编辑" />
             <asp:BoundField HeaderText="删除" />--%><%--</Columns>
     </asp:GridView>--%><asp:Label ID="Label6" runat="server" Text="查询范围" Font-Size="12px"></asp:Label>
-        <asp:DropDownList ID="ddlLimit" runat="server"  Font-Size="12px" Height="55px" Width="336px" AutoPostBack="True" OnSelectedIndexChanged="ddlLimit_SelectedIndexChanged" >
+        <asp:DropDownList ID="ddlLimit" runat="server"  Font-Size="12px" Height="55px" Width="336px" AutoPostBack="True">
             <asp:ListItem>所有记录</asp:ListItem>
               <asp:ListItem>按部门查询</asp:ListItem>
               <asp:ListItem>按教师工号查询</asp:ListItem> 

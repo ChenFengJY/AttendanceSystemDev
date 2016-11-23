@@ -73,13 +73,12 @@
     
             <section>
                 <div id="left">
-                    <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" BorderStyle="None" ForeColor="Blue">
+                    <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" ForeColor="Blue" Width="150px" BorderStyle="None">
                         <Nodes>
                             <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
                         </Nodes>
                         <HoverNodeStyle CssClass="hoverHodeClass" BackColor="#2980B9" ForeColor="White" />
                     </asp:TreeView>
-
                 </div>
                 <div id="right">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
