@@ -1,19 +1,14 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="AttendanceDetials.aspx.cs" Inherits="Admin_AttendanceDetials" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="AttendanceDetials.aspx.cs" Inherits="Admin_AttendanceDetials" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    
     <style type="text/css">
         #form1 {
             height: 441px;
         }
     </style>
-</head>
-<body>
-    <form id="form1" runat="server">
+
+    <div>
         <asp:Label ID="Label1" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
         <asp:Label ID="Label2" runat="server" Text="lblLateMessage"></asp:Label><br />
         <asp:Label ID="Label3" runat="server" Text="lblEarlyMessage"></asp:Label><br />
@@ -26,13 +21,18 @@
         <select id="Select1" name="D1">
             <option>因故调课</option>
         </select><asp:Button ID="Button2" runat="server" Text="确定" />
-        <asp:GridView ID="gvAttendanceDetails" runat="server" AutoGenerateColumns="false" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" DataSourceID="SqlDataSourceAttendatnceDetails" GridLines="Horizontal" Font-Size="12px">
+
+        <asp:GridView ID="gvAttendanceDetails" runat="server" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" 
+            DataSourceID="SqlDataSourceAttendanceDetails" GridLines="Horizontal" Font-Size="12px" 
+            OnRowDataBound="gvAttendanceDetails_RowDataBound" >
+            
             <RowStyle  BackColor="#E7E7FF" ForeColor="#4A3C8C" />
             <Columns>
                 <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部"  ItemStyle-Width="100px" SortExpression="StudentDeparment"/>
                 <asp:BoundField DataField="t4" HeaderText="班级"  ItemStyle-Width="100px" SortExpression="t4"/>
-                <asp:BoundField DataField="t4" HeaderText="学号"  ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID"/>
-                <asp:BoundField DataField="t4" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName"/>
+                <asp:BoundField DataField="StudentID" HeaderText="学号"  ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID"/>
+                <asp:BoundField DataField="StudentName" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName"/>
                 <asp:TemplateField HeaderText="出勤情况">
                     <ItemTemplate>
                         <asp:RadioButton ID="rdNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="true" />
@@ -49,16 +49,21 @@
             <HeaderStyle BackColor="#4A3C8C" Font-Bold="true" ForeColor="#F7F7F7" />
             <AlternatingRowStyle BackColor="#3F7F7F7" />
         </asp:GridView>
-        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" ConnectionString="<%$ConnectionStrings:SDBISASConnectionString2 %>" SelectCommand="SELECT DISTINCT [StudentDepartment],[StudentID],[StudentName],[t4] FROM [TabAllCourses] WHERE (([TeacherID] = @TeacherID ) AND [Course] = @Course) AND [TimeAndArea] = @TimeAndArea))">
-        <SelectParameters>
-            <asp:sessionParameter Name="TeacherID" SessionField="UserID" Type="String" />
-            <asp:SessionParameter Name="COurse" SessionField="CurrentCourse" TYpe="String" />
-            <asp:SessionParameter Name="TimeAndArea" SessionField="WeekRange" Type="String" />
-        </SelectParameters>
+
+        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" 
+            ConnectionString="<%$ ConnectionStrings:SdbiAttentionSystemConnectionString %>" 
+            SelectCommand="SELECT [StudentDepartment],[StudentID],[StudentName],[t4] FROM [TabTeacherAllCourse] WHERE (([TeacherId] = @TeacherID ) AND (CourseWeek = @CourseWeek ) AND (CourseTime = @CourseTime ))">
+            <SelectParameters>
+                <asp:sessionParameter Name="TeacherID" SessionField="UserID" Type="String" />
+                <asp:SessionParameter Name="CourseWeek" SessionField="CourseWeek" TYpe="String" />
+                <asp:SessionParameter Name="CourseTime" SessionField="CourseTime" Type="String" />
+            </SelectParameters>
         </asp:SqlDataSource>
-    <div>
-    
+        <div>
+            
+        </div>
     </div>
-    </form>
-</body>
-</html>
+
+
+</asp:Content>
+

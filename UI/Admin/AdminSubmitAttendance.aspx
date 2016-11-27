@@ -76,6 +76,7 @@
         <div class="main">
             <div class="thisweek">
                 <h2>本周考勤情况</h2>
+                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 <div class="weekInfo">
                     <asp:Repeater ID="thisRepeater" runat="server" OnItemCommand="thisRepeater_ItemCommand">
 
@@ -101,7 +102,7 @@
                                 <td><asp:Label ID="thisClassLabel" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"Class") %>'></asp:Label></td>
                                 <td><asp:Label ID="thisAddressLabel" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"CourseAddress") %>'></asp:Label></td>
                                 <td><asp:Label ID="thisAttendanceLabel" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"AttendanceInfo") %>'></asp:Label></td>
-                                <td><asp:Button ID="thisButton2" runat="server" Text="编辑" CommandName="thisButton2" OnClick="thisButton2_Click" /></td>
+                                <td><asp:Button ID="thisButton1" runat="server" Text="编辑" CommandName="thisButton1" /></td>
                             </tr>
                         </ItemTemplate>
                         <FooterTemplate>
