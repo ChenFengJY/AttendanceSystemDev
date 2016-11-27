@@ -9,18 +9,18 @@
     </style>
 
     <div>
-        <asp:Label ID="Label1" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
-        <asp:Label ID="Label2" runat="server" Text="lblLateMessage"></asp:Label><br />
-        <asp:Label ID="Label3" runat="server" Text="lblEarlyMessage"></asp:Label><br />
-        <asp:Label ID="Label4" runat="server" Text="lblLeaveMessage"></asp:Label><br />
-        <asp:Label ID="Label5" runat="server" Text="lblResultMessage"></asp:Label><br />
-        <asp:Label ID="Label6" runat="server" Text="lblMessage"></asp:Label><br />
+        <asp:Label ID="lblAttendanceMessage" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
+        <asp:Label ID="lblLateMessage" runat="server" Text="lblLateMessage"></asp:Label><br />
+        <asp:Label ID="lblEarlyMessage" runat="server" Text="lblEarlyMessage"></asp:Label><br />
+        <asp:Label ID="lblLeaveMessage" runat="server" Text="lblLeaveMessage"></asp:Label><br />
+        <asp:Label ID="lblResultMessage" runat="server" Text="lblResultMessage"></asp:Label><br />
+        <asp:Label ID="lblMessage" runat="server" Text="lblMessage"></asp:Label><br />
         <asp:Button ID="btnClose" runat="server" Text="返回主页面" />
-        <asp:Button ID="btnAtten" runat="server" Text="上报考勤结果" />
-        <asp:CheckBox ID="CheckBox1" runat="server" Text="教学异动" />
+        <asp:Button ID="btnAtten" runat="server" Text="上报考勤结果" OnClick="btnAtten_Click" />
+        <asp:CheckBox ID="CheckIsRecord" runat="server" Text="教学异动" />
         <select id="Select1" name="D1">
             <option>因故调课</option>
-        </select><asp:Button ID="Button2" runat="server" Text="确定" />
+        </select><asp:Button ID="btnUnNormal" runat="server" Text="确定" />
 
         <asp:GridView ID="gvAttendanceDetails" runat="server" 
             AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" 

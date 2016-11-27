@@ -94,12 +94,12 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public static bool UpdataTabTeachers(string v1, string v2, string strUserRole, string v3, string strUserID)
+        public static bool UpdataTabTeachers(string v1, string v2,string Course, string Count, string strUserRole, string TabStudentAttendance, string strUserID,string UserName, string CurrentCourse, string CurrentWeek,string Week, string Time,string cell)
         {
             throw new NotImplementedException();
         }
 
-        public static bool InsertTabTeachers(string teacherType, object replaceSensitive)
+        public static bool InsertTabTeachers(string v1, string v2, string Course,string Count, string teacherType, object replaceSensitive, string strUserRole, string TabStudentAttendance, string strUserID, string UserName, string CurrentCourse, string CurrentWeek, string Week, string Time, string cell)
         {
             throw new NotImplementedException();
         }
@@ -227,6 +227,12 @@ namespace BLL
             return "select * from" + tableName + "where" + str1 + "=" + str1Limit + "and" + str2 + "=" + "and" + str3 + "=" + str3Limt + "order by 1";
             throw new NotImplementedException();
         }
+
+        public static bool InsertTabTeachers(string v1, string v2, string v3, string v4, string v5, string v6, string v7, string v8, string v9, string v10, string v11, string v12, string v13)
+        {
+            throw new NotImplementedException();
+        }
+
         public static List<string> GetDistinctString(string strTable, string str1)
         {
             string strSQL = BuildSQLDistinctString(strTable, str1);
@@ -238,5 +244,9 @@ namespace BLL
             return "select distinct" + str1 + "from" + strTableName;
         }
 
+        public static bool UpdataTabTeachers(string v1, string v2, string v3, string v4, string v5, string v6, string v7, string v8, string v9, string v10, string v11, string v12, string v13, string v14, string v15)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
