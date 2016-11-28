@@ -52,6 +52,11 @@ namespace BLL
 
         }
 
+        public static List<string> GetDistinctString(string v1, string v2, string v3, string v4)
+        {
+            throw new NotImplementedException();
+        }
+
         //public static DataTable GetDatatableBySQL(string v)
         //{
         //    throw new NotImplementedException();
