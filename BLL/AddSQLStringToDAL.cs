@@ -118,7 +118,7 @@ namespace BLL
             return false;
         }
 
-        public static bool InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, object t2)
+        public static bool InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, string t2)
         {
             return true;
         }
@@ -133,9 +133,9 @@ namespace BLL
             throw new NotImplementedException();
         }
 
-        public static void InsertTabTeachers()
+        public static void InsertTabTeachers(string TabTeancher,string MessageTime,string Message,string UseerID)
         {
-            throw new NotImplementedException();
+             
         }
 
         private static void FillParentNode(TreeNode node, string menuName)

@@ -31,7 +31,6 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         List<string> strID2 = new List<string>();
         List<string> strID3 = new List<string>();
         List<string> strID4 = new List<string>();
-        List<string> strID5 = new List<string>();
 
         if (CheckBox1.Checked == true)
         {
@@ -66,7 +65,7 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if ()
+                if (AddSQLStringToDAL.InsertTabTeachers("TabTeacher",System.DateTime.Now.ToString(),TextBox1.Text,strSum[i].ToString(),"false","",""))
                 {
 
                 }
@@ -87,6 +86,11 @@ public partial class Admin_SendMessage : System.Web.UI.Page
     }
 
     protected void CheckBox3_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
 
     }
