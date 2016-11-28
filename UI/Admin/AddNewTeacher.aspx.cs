@@ -32,13 +32,13 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
             }
         }
     }
-        protected void Bind()
+    protected void Bind()
     {
         List<string> str = new List<string>();
         str = AddSQLStringToDAL.GetDistinctString("TabTeachers", "Department");
-        for (int i=0;i<str.Count;i++)
+        for (int i = 0; i < str.Count; i++)
         {
-            DropDownList1.Items.Add(str[i].ToString());
+            ddlType.Items.Add(str[i].ToString());
         }
     }
     protected void btnCancel_Click(object sender, EventArgs e)
@@ -53,15 +53,11 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
         TextBox3.Text = "";
     }
 
-
-  
-
-  
     protected void btnOK_Click1(object sender, EventArgs e)
     {
         string teacherType = "";
         string teacherRole = "";
-        switch (DropDownList2.SelectedItem.ToString())
+        switch (ddlType.SelectedItem.ToString().Trim())
         {
             case "本校教师":
                 teacherType = "TabTeachers";
@@ -72,7 +68,7 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
             default:
                 break;
         }
-        switch (Convert.ToInt32(DropDownList2.SelectedIndex))
+        switch (Convert.ToInt32(ddlDepartmentName.SelectedIndex))
         {
             case 0:
                 teacherRole = "4";
@@ -90,12 +86,18 @@ public partial class Admin_AddNewTeacher : System.Web.UI.Page
                 break;
         }
         try
+
         {
-            //if (AddSQLStringToDAL.InsertTabTeachers(teacherType,DisinfectionOperation.ReplaceSensitiveStr(DropDownList1.SelectedItem.ToString()),DisinfectionOperation.ReplaceSensitiveStr(TextBox1.Text.Trim()),PWDProcess.MD5Encrypt(TextBox2.Text.Trim(),PWDProcess.CreatKey(TextBox3.Text.Trim())),DisinfectionOperation.ReplaceSensitiveStr(TextBox3.Text.Trim()),"",teacherRole))
-            //{
-            //    Clear();
-            //    Label3.Text = "添加成功!";
-            //}
+            string strSql = "insert into " + teacherType + "(Department,UserID,UserPWD,UserName) values ('" + ddlDepartmentName.SelectedItem + "','" + TextBox1.Text + "','" + TextBox3.Text + "','" + TextBox2.Text + "')";
+            if (AddSQLStringToDAL.InsertData(strSql))
+            {
+                Clear();
+                Label3.Text = "添加成功!";
+            }
+            else
+            {
+                Label3.Text = "添加失败!";
+            }
         }
         catch
         {

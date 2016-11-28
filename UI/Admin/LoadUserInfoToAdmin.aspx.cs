@@ -24,27 +24,28 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
             {
                 Response.Redirect("~//Deefault.aspx");
             }
-            else {
+            else
+            {
                 DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeacher");
                 GridView2.DataSource = dt;
                 GridView2.DataBind();
                 Lable7.Visible = false;
                 txtLimit.Visible = false;
                 BindToGridView(dt);
-                    }
+            }
         }
     }
     protected void Bind()
     {
-        if (ddlLimit.SelectedIndex.ToString()=="所有记录")
+        if (ddlLimit.SelectedIndex.ToString() == "所有记录")
         {
             DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers");
-        
+
             BindToGridView(dt);
         }
-        else if (ddlLimit.SelectedIndex.ToString()!="所有记录"&&txtLimit.Text!="")
+        else if (ddlLimit.SelectedIndex.ToString() != "所有记录" && txtLimit.Text != "")
 
-        {  
+        {
             //DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers",DropDownListTransform.DDLToString(ddlLimit.SelectedIndex.ToString()),txtLimit.Text.Trim());
             //BindToGridView(dt);
         }
@@ -59,7 +60,7 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         gvTeachers.PageIndex = e.NewPageIndex;
         Bind();
-        
+
     }
     protected void ddlLimit_SelectedIndexChanged(object sender, GridViewPageEventArgs e)
     {
@@ -85,7 +86,7 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
 
     protected void gvTeachers_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        if (AddSQLStringToDAL.DeleteTabTeachers("TabTeachers","UserID",gvTeachers.DataKeys[e.RowIndex].Value.ToString()))
+        if (AddSQLStringToDAL.DeleteTabTeachers("TabTeachers", "UserID", gvTeachers.DataKeys[e.RowIndex].Value.ToString()))
         {
             Bind();
         }
@@ -95,13 +96,13 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         string strUserRole = ((TextBox)(gvTeachers.Rows[e.RowIndex].Cells[4].Controls[0])).Text.ToString().Trim();
         string strUserID = gvTeachers.DataKeys[e.RowIndex].Value.ToString();
-        if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers","Role",strUserRole,"UserID",strUserID))
+        //if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers", "Role", strUserRole, "UserID", strUserID))
 
-        {
-            gvTeachers.EditIndex = -1;
-            Bind();
+        //{
+        //    gvTeachers.EditIndex = -1;
+        //    Bind();
 
-        }
+        //}
     }
 
     protected void btnQuery_Click(object sender, EventArgs e)
