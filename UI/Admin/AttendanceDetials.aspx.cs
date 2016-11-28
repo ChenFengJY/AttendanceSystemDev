@@ -23,153 +23,16 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         lblAttendanceMessage.Text = Session["UserID"].ToString() + "  " + Session["CourseWeek"].ToString() + "  " + Session["CourseTime"].ToString();
         if (!IsPostBack)
         {
-            if (Session["CurrentCourse"].ToString() != "")
-            {
-                InitialOperation();
-                btnClose.Visible = true;
-            }
-            else
-            {
-                //Response.Redirect("~//Default.aspx");
-            }
-            if (CheckIsRecords())
-            {
-                SetControlsVisibleFalse();
-                lblResultMessage.Text = "您已经录入本次考勤记录！";
-                btnClose.Visible = true;
-
-            }
-            else
-            {
-                string strCourse = Session["CurrentCourse"].ToString();
-                lblMessage.Text = Session["Week"].ToString() + Session["Time"].ToString()
-                    + "|" + strCourse.Substring(8, strCourse.Length - 11) + "|" + this.gvAttendanceDetails.Rows.Count.ToString() + "人";
-                c = this.gvAttendanceDetails.BackColor;
-
-            }
-        }
-
-        else
-        {
-            SetControlsVisibleFalse();
-            lblResultMessage.Text = "本门课程尚未结束，请于课程结束后录入！";
-            btnClose.Visible = true;
-        }
-    }
-    private bool CompareWeek()
-    {
-        int Week = 0; 
-        int CurrentWeek = 0; //当前周次
-        switch (DateTime.Now.DayOfWeek.ToString())
-        {
-            case "Monday":
-                CurrentWeek = 1;
-                break;
-            case "Tuesday":
-                CurrentWeek = 2;
-                break;
-            case "Wednesday":
-                CurrentWeek = 3;
-                break;
-            case "Thursday":
-                CurrentWeek = 4;
-                break;
-            case "Friday":
-                CurrentWeek = 5;
-                break;
-            case "Saturday":
-                CurrentWeek = 6;
-                break;
-            case "Sunday":
-                CurrentWeek = 7;
-                break;
-            default:
-                CurrentWeek = 0;
-                break;
-
-        }
-        switch (Session["Week"].ToString())
-        {
-            case "星期一":
-                Week = 1;
-                break;
-            case "星期二":
-                Week = 2;
-                break;
-            case "星期三":
-                Week = 3;
-                break;
-            case "星期四":
-                Week = 4;
-                break;
-            case "星期五":
-                Week = 5;
-                break;
-            case "星期六":
-                Week = 6;
-                break;
-            case "星期日":
-                Week = 7;
-                break;
-            default:
-                Week = 0;
-                break;
-        }
-        if (CurrentWeek > Week)
-        {
-            return true;
-        }
-        else if (CurrentWeek == Week)
-        {
-            int tt = 0;
-            switch (Session["Time"].ToString())
-            {
-                case "1-2节":
-                    tt = 10;
-                    break;
-                case "2-4节":
-                    tt = 12;
-                    break;
-                case "5-6节":
-                    tt = 16;
-                    break;
-                case "7-8节":
-                    tt = 18;
-                    break;
-                case "9-10节":
-                    tt = 20;
-                    break;
-                default:
-                    tt = 0;
-                    break;
-            }
-            if (DateTime.Now.Hour >= tt)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-    }
-
- 
-    private bool CheckIsRecords()
-    {
-        DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabTeacherAttendance", "TeacherID", Session["UserID"].ToString(),
-            "CurrentWeek", Session["CurrentWeek"].ToString(), "Course", Session["CurrentCourse"].ToString(), "Week", Session["Week"].ToString(),
-            "Time", Session["Time"].ToString());
-        if (dt.Rows[0]["IsAttendance"].ToString().Trim() == "未考勤")
-        {
-            return false;
+            string strCourse = Session["CourseWeek"].ToString();
+            
+            c = this.gvAttendanceDetails.BackColor;
         }
         else
         {
-            return true;
+            //Response.Redirect("../Login.aspx");
         }
     }
+
     private void SetControlsVisibleFalse()
     {
         lblMessage.Visible = false;
@@ -178,11 +41,6 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         btnUnNormal.Visible = false;
         
 
-    }
-
-    private void InitialOperation()
-    {
-        throw new NotImplementedException();
     }
 
     System.Drawing.Color c;
@@ -355,7 +213,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             strEarly.Remove(0, strEarly.Length);
             strLeave.Remove(0, strLeave.Length);
             SetControlsVisibleFalse();
-            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您" + Session["Homework"].ToString() + ",请返回主界面！";
+            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您,请返回主界面！";
             btnClose.Visible = true;
 
         }
