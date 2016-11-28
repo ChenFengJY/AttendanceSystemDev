@@ -66,7 +66,7 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabTeacher", System.DateTime.Now.ToString(), TextBox1.Text, strSum[i].ToString(), "false", "", ""))
+                if ()
                 {
 
                 }
@@ -74,5 +74,20 @@ public partial class Admin_SendMessage : System.Web.UI.Page
             Label6.Text = "信息发送成功！";
             TextBox1.Text = "";
         }
+    }
+
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void CheckBox2_CheckedChanged(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void CheckBox3_CheckedChanged(object sender, EventArgs e)
+    {
+
     }
 }
