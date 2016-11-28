@@ -15,13 +15,13 @@ public partial class Admin_SendMessage : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
-        {
-            if (Session["Role"].ToString() != "1")
-            {
-                Response.Redirect("~//Default.aspx");
-            }
-        }
+        //if (!IsPostBack)
+        //{
+        //    if (Session["Role"].ToString() != "1")
+        //    {
+        //        Response.Redirect("Default.aspx");
+        //    }
+        //}
     }
 
     protected void Button1_Click1(object sender, EventArgs e)
