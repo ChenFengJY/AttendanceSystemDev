@@ -196,8 +196,8 @@
                     </div>
                     <div class="tea_cen">
                       <asp:Button ID="Button5" runat="server" Text="处理入库数据" OnClick="Button5_Click" />
-                      <asp:Label ID="lblMessage7" runat="server" Text=""></asp:Label>
                       <asp:Button ID="btnClear" runat="server" Text="清空导入数据库" OnClick="btnClear_Click" />
+                      <asp:Label ID="lblMessage7" runat="server" Text=""></asp:Label>
                     </div>
                 </div>
             </div>
