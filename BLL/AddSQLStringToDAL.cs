@@ -118,9 +118,9 @@ namespace BLL
             return false;
         }
 
-        public static bool InsertTabTeachers(string teacherType, object replace, object sensitive, object p1, object p2, string v1, object p3, string v2, string teacherRole)
+        public static bool InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, object t2)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public static bool UpdataTabTeachers(string v1, string v2,string Course, string Count, string strUserRole, string TabStudentAttendance, string strUserID,string UserName, string CurrentCourse, string CurrentWeek,string Week, string Time,string cell)
