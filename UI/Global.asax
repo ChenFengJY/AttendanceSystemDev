@@ -34,6 +34,7 @@
         Session["Role"] = "";
         Session["CurrentWeek"] ="";
 
+        Session["CourseName"] = "";
         Session["CourseWeek"] = "";
         Session["CourseTime"] = "";
 

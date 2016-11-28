@@ -8,24 +8,84 @@
     <title></title>
     <link href="css/MasterSheet.css" rel="stylesheet" type="text/css" />
     <style>
-       
-
         /* flexslider */
-        .flexslider{position:relative;height:100px;overflow:hidden;background:url(../images/loading.gif) 50% no-repeat;}
-        .slides{position:relative;z-index:1;}
-        .slides li{height:400px;}
-        .flex-control-nav{position:absolute;bottom:10px;z-index:2;width:100%;text-align:center;}
-        .flex-control-nav li{display:inline-block;width:14px;height:14px;margin:0 5px;*display:inline;zoom:1;}
-        .flex-control-nav a{display:inline-block;width:14px;height:14px;line-height:40px;overflow:hidden;background:url(../images/dot.png) right 0 no-repeat;cursor:pointer;}
-        .flex-control-nav .flex-active{background-position:0 0;}
+        .flexslider {
+            position: relative;
+            height: 100px;
+            overflow: hidden;
+            background: url(../images/loading.gif) 50% no-repeat;
+        }
 
-        .flex-direction-nav{position:absolute;z-index:3;width:100%;top:45%;}
-        .flex-direction-nav li a{display:block;width:50px;height:50px;overflow:hidden;cursor:pointer;position:absolute;}
-        .flex-direction-nav li a.flex-prev{left:40px;background:url(../images/prev.png) center center no-repeat;display:none;}
-        .flex-direction-nav li a.flex-next{right:40px;background:url(../images/next.png) center center no-repeat;display:none;}
+        .slides {
+            position: relative;
+            z-index: 1;
+        }
 
-        .slides li{
-            background-size:cover;
+            .slides li {
+                height: 400px;
+            }
+
+        .flex-control-nav {
+            position: absolute;
+            bottom: 10px;
+            z-index: 2;
+            width: 100%;
+            text-align: center;
+        }
+
+            .flex-control-nav li {
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                margin: 0 5px;
+                *display: inline;
+                zoom: 1;
+            }
+
+            .flex-control-nav a {
+                display: inline-block;
+                width: 14px;
+                height: 14px;
+                line-height: 40px;
+                overflow: hidden;
+                background: url(../images/dot.png) right 0 no-repeat;
+                cursor: pointer;
+            }
+
+            .flex-control-nav .flex-active {
+                background-position: 0 0;
+            }
+
+        .flex-direction-nav {
+            position: absolute;
+            z-index: 3;
+            width: 100%;
+            top: 45%;
+        }
+
+            .flex-direction-nav li a {
+                display: block;
+                width: 50px;
+                height: 50px;
+                overflow: hidden;
+                cursor: pointer;
+                position: absolute;
+            }
+
+                .flex-direction-nav li a.flex-prev {
+                    left: 40px;
+                    background: url(../images/prev.png) center center no-repeat;
+                    display: none;
+                }
+
+                .flex-direction-nav li a.flex-next {
+                    right: 40px;
+                    background: url(../images/next.png) center center no-repeat;
+                    display: none;
+                }
+
+        .slides li {
+            background-size: cover;
         }
     </style>
 </head>
@@ -70,19 +130,22 @@
                 </div>
             </header>
 
-    
+
             <section>
                 <div id="left">
-                    <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" ForeColor="Blue" Width="150px" BorderStyle="None">
+                    <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" ForeColor="Blue" Width="150px" BorderStyle="None" ImageSet="Arrows">
+                        <LeafNodeStyle NodeSpacing="2px" VerticalPadding="3px" />
                         <Nodes>
                             <asp:TreeNode PopulateOnDemand="True" Text="管理员面板" Value="管理员面板"></asp:TreeNode>
                         </Nodes>
                         <HoverNodeStyle CssClass="hoverHodeClass" BackColor="#2980B9" ForeColor="White" />
+                        <NodeStyle NodeSpacing="3px" VerticalPadding="3px" />
+                        <ParentNodeStyle ChildNodesPadding="1px" NodeSpacing="2px" />
+                        <RootNodeStyle HorizontalPadding="2px" NodeSpacing="3px" VerticalPadding="3px" />
                     </asp:TreeView>
                 </div>
                 <div id="right">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                        
                     </asp:ContentPlaceHolder>
                 </div>
 

@@ -14,6 +14,38 @@ namespace BLL
     /// </summary>
     public class AddSQLStringToDAL
     {
+        /// <summary>
+        /// 执行DAL层查询语句，并返回dataTable
+        /// </summary>
+        /// <param name="strSQl">要执行的Select语句</param>
+        /// <returns>查询回来的数据</returns>
+        public static DataTable GetDtBySQL(string strSQl)
+        {
+            return ConnHelper.GetDataTable(strSQl);
+        }
+        /// <summary>
+        /// 将datat批量导入数据库，中转作用
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="table"></param>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static string InsertForSql(DataTable dt,string table,int num)
+        {
+            return ExcelToSQLServer.DataTableToSQLServer(dt, table, num);
+        }
+        /// <summary>
+        /// 执行插入命令
+        /// </summary>
+        /// <param name="strSql">insert into 语句</param>
+        /// <returns></returns>
+        public static bool InsertData(string strSql)
+        {
+            return ConnHelper.ExecuteNoneQueryOperation(strSql);
+        }
+
+
+
         public static bool UpdataTabTeachers(string TableName, string UserPWD, string UserID,string UserRole)
         {
             return true;
@@ -40,15 +72,7 @@ namespace BLL
         //    //return "update" + strTableName + "setUserPWD" = "" + UserPWD + '"where UserID="' + UserID + "'";
         //}
 
-        /// <summary>
-        /// 执行DAL层查询语句，并返回dataTable
-        /// </summary>
-        /// <param name="strSQl">要执行的Select语句</param>
-        /// <returns>查询回来的数据</returns>
-        public static DataTable GetDtBySQL(string strSQl)
-        {
-            return ConnHelper.GetDataTable(strSQl);
-        }
+        
 
         public static DataTable GetDatatableBySQL(string v1, object p, string v2)
         {
@@ -169,15 +193,7 @@ namespace BLL
             return ConnHelper.ExecuteNoneQueryOperation(strSql);
         }
 
-        /// <summary>
-        /// 执行插入命令
-        /// </summary>
-        /// <param name="strSql">insert into 语句</param>
-        /// <returns></returns>
-        public static bool InsertData(string strSql)
-        {
-            return ConnHelper.ExecuteNoneQueryOperation(strSql);
-        }
+        
         /// <summary>
         /// 根据三个条件查询指定的表
         /// </summary>

@@ -59,6 +59,8 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         Label time = e.Item.FindControl("thisTimeLabel") as Label;
         Session["CourseTime"] = time.Text.Trim();
 
+        Label courseName = e.Item.FindControl("thisClassLabel") as Label;
+        Session["CourseName"] = courseName.Text.Trim().ToString();
         Response.Redirect("AttendanceDetials.aspx");
     }
 }

@@ -30,7 +30,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             }
             else
             {
-                Response.Redirect("~//Default.aspx");
+                //Response.Redirect("~//Default.aspx");
             }
             if (CheckIsRecords())
             {
@@ -58,8 +58,8 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
     }
     private bool CompareWeek()
     {
-        int Week = 0;
-        int CurrentWeek = 0;
+        int Week = 0; 
+        int CurrentWeek = 0; //当前周次
         switch (DateTime.Now.DayOfWeek.ToString())
         {
             case "Monday":
@@ -222,7 +222,6 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                     System.Drawing.Color.SkyBlue;
             }
 
-
         }
     }
 
@@ -241,91 +240,137 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
 
     protected void btnAtten_Click(object sender, EventArgs e)
     {
-        StringBuilder strLate = new StringBuilder("迟到的名单");
-        StringBuilder strAbsence = new StringBuilder("旷课名单");
-        StringBuilder strEarly = new StringBuilder("早退名单");
-        StringBuilder strLeave = new StringBuilder("请假名单");
-
+        StringBuilder strLate = new StringBuilder("迟到名单：");
+        StringBuilder strAbsence = new StringBuilder("旷课名单：");
+        StringBuilder strEarly = new StringBuilder("早退名单：");
+        StringBuilder strLeave = new StringBuilder("请假名单：");
+        DataTable attendanceList = MakeTabStudentAttendance();
+        attendanceList.Clear();
+        DataRow attendanceRow = attendanceList.NewRow();
         int sum = 0;
-       foreach(GridViewRow row in this.gvAttendanceDetails.Rows)
-
+        foreach(GridViewRow row in this.gvAttendanceDetails.Rows)
         {
-            
 
             Control ctl2 = row.FindControl("rodLate");
             Control ctl3 = row.FindControl("rdoAbsence");
             Control ctl4 = row.FindControl("rdoEarly");
             Control ctl5 = row.FindControl("rdoLeave");
-            TableCellCollection cell = row.Cells;
-            if((ctl2 as RadioButton).Checked)
-            { 
-            if (AddSQLStringToDAL.InsertTabTeachers("TabStudentAttendance",Session["UserID"].ToString(),Session["UserName"].ToString()
-               ,Session["CurrentCourse"].ToString(),Session["CurrentWeek"].ToString(), Session["Week"].ToString(),Session["Time"].ToString(),
-               cell[0].Text.ToString(),cell[1].Text.ToString(),cell[2].Text.ToString(),cell[3].Text.ToString(),"迟到",""))
+            TableCellCollection cell = row.Cells;//获取GridView本行中的值的集合
+            if((ctl2 as RadioButton).Checked)   //ctl2被选中 迟到
             {
+                attendanceRow[0] = Session["UserID"] ;//TeacherID;
+                attendanceRow[1] = Session["UserName"];   //TeacherName
+                attendanceRow[2] = Session["CourseName"];  //CourseName 课程名
+                attendanceRow[3] = Session["CurrentWeek"];  //CourseAllWeek
+                attendanceRow[4] = Session["CourseWeek"];  //CourseWeek
+                attendanceRow[5] = Session["CourseTime"];  //CourseTime
+                attendanceRow[6] = cell[0].Text.ToString();   //StudentDepartment
+                attendanceRow[7] = cell[2].Text.ToString();    //StudentId
+                attendanceRow[8] = cell[3].Text.ToString();    //studentName
+                attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
+                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceList.Rows.Add(attendanceRow);
                 sum++;
-                    strLate.Append(cell[3].Text.ToString()+";");
-               
-            }
+                strLate.Append(cell[3].Text.ToString()+";");//学生姓名
+
             }
             if ((ctl3 as RadioButton).Checked)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabStudentAttendance", Session["UserID"].ToString(), Session["UserName"].ToString()
-              , Session["CurrentCourse"].ToString(), Session["CurrentWeek"].ToString(), Session["Week"].ToString(), Session["Time"].ToString(),
-              cell[0].Text.ToString(), cell[1].Text.ToString(), cell[2].Text.ToString(), cell[3].Text.ToString(), "旷课", ""))
-                {
-                    sum++;
-                    strAbsence.Append(cell[3].Text.ToString()+";");
+                attendanceRow[0] = Session["UserID"];//TeacherID;
+                attendanceRow[1] = Session["UserName"];   //TeacherName
+                attendanceRow[2] = Session["CourseName"];  //CourseName 课程名
+                attendanceRow[3] = Session["CurrentWeek"];  //CourseAllWeek
+                attendanceRow[4] = Session["CourseWeek"];  //CourseWeek
+                attendanceRow[5] = Session["CourseTime"];  //CourseTime
+                attendanceRow[6] = cell[0].Text.ToString();   //StudentDepartment
+                attendanceRow[7] = cell[2].Text.ToString();    //StudentId
+                attendanceRow[8] = cell[3].Text.ToString();    //studentName
+                attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
+                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceList.Rows.Add(attendanceRow);
+                sum++;
 
-                }
+                strAbsence.Append(cell[3].Text.ToString()+";");
+
             }
             if ((ctl4 as RadioButton).Checked)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabStudentAttendance", Session["UserID"].ToString(), Session["UserName"].ToString()
-              , Session["CurrentCourse"].ToString(), Session["CurrentWeek"].ToString(), Session["Week"].ToString(), Session["Time"].ToString(),
-              cell[0].Text.ToString(), cell[1].Text.ToString(), cell[2].Text.ToString(), cell[3].Text.ToString(), "早退", ""))
-                {
-                    sum++;
-                    strEarly.Append(cell[3].Text.ToString() + ";");
+                attendanceRow[0] = Session["UserID"];//TeacherID;
+                attendanceRow[1] = Session["UserName"];   //TeacherName
+                attendanceRow[2] = Session["CourseName"];  //CourseName 课程名
+                attendanceRow[3] = Session["CurrentWeek"];  //CourseAllWeek
+                attendanceRow[4] = Session["CourseWeek"];  //CourseWeek
+                attendanceRow[5] = Session["CourseTime"];  //CourseTime
+                attendanceRow[6] = cell[0].Text.ToString();   //StudentDepartment
+                attendanceRow[7] = cell[2].Text.ToString();    //StudentId
+                attendanceRow[8] = cell[3].Text.ToString();    //studentName
+                attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
+                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceList.Rows.Add(attendanceRow);
+                sum++;
 
-                }
+                strEarly.Append(cell[3].Text.ToString() + ";");
+
             }
             if ((ctl5 as RadioButton).Checked)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabStudentAttendance", Session["UserID"].ToString(), Session["UserName"].ToString()
-              , Session["CurrentCourse"].ToString(), Session["CurrentWeek"].ToString(), Session["Week"].ToString(), Session["Time"].ToString(),
-              cell[0].Text.ToString(), cell[1].Text.ToString(), cell[2].Text.ToString(), cell[3].Text.ToString(), "请假", ""))
-                {
-                    sum++;
-                    strLeave.Append(cell[3].Text.ToString() + ";");
+                attendanceRow[0] = Session["UserID"];//TeacherID;
+                attendanceRow[1] = Session["UserName"];   //TeacherName
+                attendanceRow[2] = Session["CourseName"];  //CourseName 课程名
+                attendanceRow[3] = Session["CurrentWeek"];  //CourseAllWeek
+                attendanceRow[4] = Session["CourseWeek"];  //CourseWeek
+                attendanceRow[5] = Session["CourseTime"];  //CourseTime
+                attendanceRow[6] = cell[0].Text.ToString();   //StudentDepartment
+                attendanceRow[7] = cell[2].Text.ToString();    //StudentId
+                attendanceRow[8] = cell[3].Text.ToString();    //studentName
+                attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
+                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceList.Rows.Add(attendanceRow);
+                sum++;
 
-                }
+                strLeave.Append(cell[3].Text.ToString() + ";");
+
             }
         }
-        if (strLate.ToString() == "迟到名单：")
-            strLate.Append("无");
-        if (strEarly.ToString() == "早退名单")
-            strEarly.Append("无");
-        if (strAbsence.ToString() == "旷课名单")
-            strAbsence.Append("无");
-        if (strLeave.ToString() == "请假名单")
-            strLeave.Append("无");
-        if (AddSQLStringToDAL.UpdataTabTeachers("TabTeacherAttendance", "IsAttendance", "已考勤", "Count", Session["Homework"].ToString(), "TeacherID", Session["UserID"].ToString(), "Course",Session["CurrentCourse"].ToString(),
-            "CurrentWeek", Session["CurrentWeek"].ToString(),"Week",Session["Week"].ToString(),"Time",Session["Time"].ToString()))
+        string result= AddSQLStringToDAL.InsertForSql(attendanceList, "TabStudentAttendance", 11);//异常学生导入
+        string strsql = "update TabTeacherCourseWeek SET AttendanceInfo = 1 WHERE TeacherId = " + Session["UserID"] + " and CourseAllWeek = " + Session["CurrentWeek"] + " and CourseWeek = " + Session["CourseWeek"] + " and CourseTime = " + Session["CourseTime"] + " ";
+        AddSQLStringToDAL.InsertData(strsql);
+        if (result== "导入成功")
         {
+            if (strLate.ToString() == "迟到名单：")
+                strLate.Append("无");
+            if (strEarly.ToString() == "早退名单：")
+                strEarly.Append("无");
+            if (strAbsence.ToString() == "旷课名单：")
+                strAbsence.Append("无");
+            if (strLeave.ToString() == "请假名单：")
+                strLeave.Append("无");
+
             lblAttendanceMessage.Text = strAbsence.ToString();
             lblLateMessage.Text = strLate.ToString();
             lblEarlyMessage.Text = strEarly.ToString();
             lblLeaveMessage.Text = strLeave.ToString();
-            strLate.Remove(0,strLate.Length);
-            strAbsence.Remove(0,strAbsence.Length);
+            strLate.Remove(0, strLate.Length);
+            strAbsence.Remove(0, strAbsence.Length);
             strEarly.Remove(0, strEarly.Length);
-            strLeave.Remove(0,strLeave.Length);
+            strLeave.Remove(0, strLeave.Length);
             SetControlsVisibleFalse();
-            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您"+Session["Homework"].ToString()+",请返回主界面！";
+            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您" + Session["Homework"].ToString() + ",请返回主界面！";
             btnClose.Visible = true;
+
         }
-           
-        //{ }
+
+
+    }
+
+    protected void btnClose_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("AttendanceDetials.aspx");
+    }
+
+    private DataTable MakeTabStudentAttendance()
+    {
+        string strSql = "select * from [TabStudentAttendance] where 0 = 1";
+        return AddSQLStringToDAL.GetDtBySQL(strSql);
     }
 }
