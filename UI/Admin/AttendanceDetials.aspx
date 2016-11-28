@@ -7,32 +7,46 @@
             height: 441px;
         }
     </style>
+    <script>
+        
+    </script>
 
     <div>
-        <asp:Label ID="lblAttendanceMessage" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
-        <asp:Label ID="lblLateMessage" runat="server" Text="lblLateMessage"></asp:Label><br />
-        <asp:Label ID="lblEarlyMessage" runat="server" Text="lblEarlyMessage"></asp:Label><br />
-        <asp:Label ID="lblLeaveMessage" runat="server" Text="lblLeaveMessage"></asp:Label><br />
-        <asp:Label ID="lblResultMessage" runat="server" Text="lblResultMessage"></asp:Label><br />
-        <asp:Label ID="lblMessage" runat="server" Text="lblMessage"></asp:Label><br />
-        <asp:Button ID="btnClose" runat="server" Text="返回主页面" />
-        <asp:Button ID="btnAtten" runat="server" Text="上报考勤结果" OnClick="btnAtten_Click" />
+        <div>
+            <asp:Label ID="lblAttendanceMessage" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
+            <asp:Label ID="lblLateMessage" runat="server" Text="lblLateMessage"></asp:Label><br />
+            <asp:Label ID="lblEarlyMessage" runat="server" Text="lblEarlyMessage"></asp:Label><br />
+            <asp:Label ID="lblLeaveMessage" runat="server" Text="lblLeaveMessage"></asp:Label><br />
+            <asp:Label ID="lblResultMessage" runat="server" Text="lblResultMessage"></asp:Label><br />
+            <asp:Label ID="lblMessage" runat="server" Text="lblMessage"></asp:Label><br />
+        </div>
+
+        <asp:Button ID="btnClose" runat="server" Text="返回主页面" OnClientClick="return confirm('确定取消提交并退出？')" OnClick="btnClose_Click" />
+        <asp:Button ID="btnAtten" runat="server" Text="上报考勤结果" OnClientClick="return confirm('确定提交？')" OnClick="btnAtten_Click" />
         <asp:CheckBox ID="CheckIsRecord" runat="server" Text="教学异动" />
         <select id="Select1" name="D1">
             <option>因故调课</option>
         </select><asp:Button ID="btnUnNormal" runat="server" Text="确定" />
 
         <asp:GridView ID="gvAttendanceDetails" runat="server" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#E7E7FF" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" 
-            DataSourceID="SqlDataSourceAttendanceDetails" GridLines="Horizontal" Font-Size="12px" 
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" 
+            DataSourceID="SqlDataSourceAttendanceDetails" GridLines="Vertical" Font-Size="12px" 
             OnRowDataBound="gvAttendanceDetails_RowDataBound" >
             
-            <RowStyle  BackColor="#E7E7FF" ForeColor="#4A3C8C" />
+            <RowStyle  BackColor="#EEEEEE" ForeColor="Black" />
             <Columns>
-                <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部"  ItemStyle-Width="100px" SortExpression="StudentDeparment"/>
-                <asp:BoundField DataField="t4" HeaderText="班级"  ItemStyle-Width="100px" SortExpression="t4"/>
-                <asp:BoundField DataField="StudentID" HeaderText="学号"  ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID"/>
-                <asp:BoundField DataField="StudentName" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName"/>
+                <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部"  ItemStyle-Width="100px" SortExpression="StudentDeparment">
+<ItemStyle Width="100px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField DataField="t4" HeaderText="班级"  ItemStyle-Width="100px" SortExpression="t4">
+<ItemStyle Width="100px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField DataField="StudentID" HeaderText="学号"  ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID">
+<ItemStyle Width="100px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField DataField="StudentName" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName">
+<ItemStyle Width="100px"></ItemStyle>
+                </asp:BoundField>
                 <asp:TemplateField HeaderText="出勤情况">
                     <ItemTemplate>
                         <asp:RadioButton ID="rdNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="true" />
@@ -43,11 +57,15 @@
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
-            <FooterStyle BackColor="#B5C7DE" ForeColor="#4A3C8C" />
-            <PagerStyle BackColor="#E7E7FF" ForeColor="#4A3C8C" HorizontalAlign="Right" />
-            <SelectedRowStyle BackColor="#738A9C" Font-Bold="true" ForeColor="#F7F7F7" />
-            <HeaderStyle BackColor="#4A3C8C" Font-Bold="true" ForeColor="#F7F7F7" />
-            <AlternatingRowStyle BackColor="#3F7F7F7" />
+            <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+            <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+            <SelectedRowStyle BackColor="#008A8C" Font-Bold="true" ForeColor="White" />
+            <HeaderStyle BackColor="#000084" Font-Bold="true" ForeColor="White" />
+            <AlternatingRowStyle BackColor="#DCDCDC" />
+            <SortedAscendingCellStyle BackColor="#F1F1F1" />
+            <SortedAscendingHeaderStyle BackColor="#0000A9" />
+            <SortedDescendingCellStyle BackColor="#CAC9C9" />
+            <SortedDescendingHeaderStyle BackColor="#000065" />
         </asp:GridView>
 
         <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" 
