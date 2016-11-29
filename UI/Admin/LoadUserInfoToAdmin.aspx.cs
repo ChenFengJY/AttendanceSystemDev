@@ -95,13 +95,13 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         string strUserRole = ((TextBox)(gvTeachers.Rows[e.RowIndex].Cells[4].Controls[0])).Text.ToString().Trim();
         string strUserID = gvTeachers.DataKeys[e.RowIndex].Value.ToString();
-        if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers","Role",strUserRole,"UserID",strUserID))
+        //if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers","Role",strUserRole,"UserID",strUserID))
 
-        {
-            gvTeachers.EditIndex = -1;
-            Bind();
+        //{
+        //    gvTeachers.EditIndex = -1;
+        //    Bind();
 
-        }
+        //}
     }
 
     protected void btnQuery_Click(object sender, EventArgs e)

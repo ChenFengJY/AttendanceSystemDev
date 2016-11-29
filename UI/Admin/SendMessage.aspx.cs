@@ -65,7 +65,7 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if (AddSQLStringToDAL.InsertTabTeachers("TabTeacher",System.DateTime.Now.ToString(),TextBox1.Text,strSum[i].ToString(),"false","",""))
+                if (AddSQLStringToDAL.InsertData("insert into TabMessage values('" + System.DateTime.Now.ToString() + ",'" + TextBox1.Text + "','" + strSum[i] + "','" + false + "'')"))
                 {
 
                 }

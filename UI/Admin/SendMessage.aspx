@@ -23,18 +23,20 @@
     </style>
     <div style="height: 296px" class="container">
         <div class="top">
-            <asp:Label ID="Label2" runat="server" Text="发布通知"></asp:Label>
+            <asp:Label ID="Label2" runat="server" Text="&nbsp;&nbsp;发布通知"></asp:Label>
         </div>
         <div class="content">
             <br />
             <asp:CheckBox ID="CheckBox1" runat="server" Text="院系领导" OnCheckedChanged="CheckBox1_CheckedChanged" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:CheckBox ID="CheckBox2" runat="server" Text="各系辅导员" OnCheckedChanged="CheckBox2_CheckedChanged" />
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <asp:CheckBox ID="CheckBox3" runat="server" Text="本学期有课所有教师" OnCheckedChanged="CheckBox3_CheckedChanged" />
             <br />
             <asp:Panel ID="Panel1" runat="server" Height="200px"  Width="70%">
-                    <asp:TextBox ID="TextBox1" runat="server" Height="200px"  Width="70%" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+                    <asp:TextBox ID="TextBox1" runat="server" Height="200px"  Width="70%" OnTextChanged="TextBox1_TextChanged" TextMode="MultiLine"></asp:TextBox>
             </asp:Panel><br />
-             <asp:Button ID="Button1" runat="server" Text="发送成功" BackColor="Aqua" BorderColor="#FF0066" OnClick="Button1_Click1" />
+             <asp:Button ID="Button1" runat="server" Text="发送" BackColor="Aqua" BorderColor="#FF0066" OnClick="Button1_Click1" />
             <asp:Label ID="Label6" runat="server" Text="lalMessage"></asp:Label>
          </div>
     </div>

@@ -52,8 +52,10 @@ namespace BLL
 
         }
 
-        public static List<string> GetDistinctString(string v1, string v2, string v3, string v4)
+        public static List<string> GetDistinctString(string v1,string v2, string v3,string v4)
         {
+            //string strSQl = "select Distinct [UserId] from TabTeacher";
+            //return ConnHelper.GetDataTable(strSQl);
             throw new NotImplementedException();
         }
 
@@ -117,10 +119,11 @@ namespace BLL
         {
             return false;
         }
-
-        public static bool InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, string t2)
+        
+        public static void InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, string t2)
         {
-            return true;
+            
+
         }
 
         public static bool UpdataTabTeachers(string v1, string v2,string Course, string Count, string strUserRole, string TabStudentAttendance, string strUserID,string UserName, string CurrentCourse, string CurrentWeek,string Week, string Time,string cell)
