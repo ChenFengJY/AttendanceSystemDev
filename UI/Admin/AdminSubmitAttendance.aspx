@@ -6,7 +6,7 @@
     <style>
         .backToContent{
             width:auto;
-            height:100%;
+            height:auto;
             /*background:url(https://img1.doubanio.com/view/photo/large/public/p2178029027.jpg) left bottom;*/
             background-size:cover;
             /*background:#00ffff;*/

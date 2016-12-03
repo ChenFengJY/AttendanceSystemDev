@@ -13,12 +13,12 @@
 
     <div>
         <div>
-            <asp:Label ID="lblAttendanceMessage" runat="server" Text="lblAttendanceMessage"></asp:Label><br />
-            <asp:Label ID="lblLateMessage" runat="server" Text="lblLateMessage"></asp:Label><br />
-            <asp:Label ID="lblEarlyMessage" runat="server" Text="lblEarlyMessage"></asp:Label><br />
-            <asp:Label ID="lblLeaveMessage" runat="server" Text="lblLeaveMessage"></asp:Label><br />
-            <asp:Label ID="lblResultMessage" runat="server" Text="lblResultMessage"></asp:Label><br />
-            <asp:Label ID="lblMessage" runat="server" Text="lblMessage"></asp:Label><br />
+            <asp:Label ID="lblAttendanceMessage" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblLateMessage" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblEarlyMessage" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblLeaveMessage" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblResultMessage" runat="server" Text=""></asp:Label><br />
+            <asp:Label ID="lblMessage" runat="server" Text=""></asp:Label><br />
         </div>
 
         <asp:Button ID="btnClose" runat="server" Text="返回主页面" OnClientClick="return confirm('确定取消提交并退出？')" OnClick="btnClose_Click" />

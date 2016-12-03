@@ -16,8 +16,8 @@ using BLL;
 
 public partial class Admin_AttendanceDetials : System.Web.UI.Page
 {
-   
 
+    System.Drawing.Color c;
     protected void Page_Load(object sender, EventArgs e)
     {
         lblAttendanceMessage.Text = Session["UserID"].ToString() + "  " + Session["CourseWeek"].ToString() + "  " + Session["CourseTime"].ToString();
@@ -37,13 +37,13 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
     {
         lblMessage.Visible = false;
         btnAtten.Visible = false;
-        gvAttendanceDetails.Visible = false;
+        //gvAttendanceDetails.Visible = false;
         btnUnNormal.Visible = false;
         
 
     }
 
-    System.Drawing.Color c;
+
     protected void rdo_CheckChange(object sender,EventArgs e)
     {
         foreach(GridViewRow row in this.gvAttendanceDetails.Rows)

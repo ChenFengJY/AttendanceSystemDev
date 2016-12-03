@@ -144,7 +144,7 @@
                         <RootNodeStyle HorizontalPadding="2px" NodeSpacing="3px" VerticalPadding="3px" />
                     </asp:TreeView>
                 </div>
-                <div id="right">
+                <div id="right" style="position:initial;">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

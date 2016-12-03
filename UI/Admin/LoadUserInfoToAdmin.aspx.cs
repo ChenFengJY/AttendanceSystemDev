@@ -10,8 +10,6 @@ using System.Web.Security;
 using System.Data;
 using System.Configuration;
 using System.Collections;
-
-
 using BLL;
 
 public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
@@ -20,34 +18,30 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session["UserID"].ToString() == "")
+            //if (Session["UserID"].ToString() == "")
+            //{
+            //    //Response.Redirect("~//Login.aspx");
+            //}
+            //else
             {
-                Response.Redirect("~//Deefault.aspx");
-            }
-            else
-            {
-                DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeacher");
-                GridView2.DataSource = dt;
-                GridView2.DataBind();
+                string strSql = "select * from TabTeachers";
+                BindToGridView(strSql);
                 Lable7.Visible = false;
                 txtLimit.Visible = false;
-                BindToGridView(dt);
             }
         }
     }
     protected void Bind()
     {
-        if (ddlLimit.SelectedIndex.ToString() == "所有记录")
+        if (ddlLimit.SelectedIndex.ToString() != "所有记录" && txtLimit.Text != "")
         {
-            DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers");
-
-            BindToGridView(dt);
+            string strSql2 = "select * from TabTeachers where " + DropDownListOption() + " = " + txtLimit.Text.Trim() + " ";
+            BindToGridView(strSql2);
         }
-        else if (ddlLimit.SelectedIndex.ToString() != "所有记录" && txtLimit.Text != "")
-
+        else
         {
-            //DataTable dt = BLL.AddSQLStringToDAL.GetDatatableBySQL("TabTeachers",DropDownListTransform.DDLToString(ddlLimit.SelectedIndex.ToString()),txtLimit.Text.Trim());
-            //BindToGridView(dt);
+            string strSql1 = "select * from TabTeachers";
+            BindToGridView(strSql1);
         }
     }
 
@@ -62,20 +56,7 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
         Bind();
 
     }
-    protected void ddlLimit_SelectedIndexChanged(object sender, GridViewPageEventArgs e)
-    {
-        if (ddlLimit.SelectedIndex.ToString() == "所有记录")
-        {
-            Lable7.Visible = false;
-            txtLimit.Visible = false;
 
-        }
-        else
-        {
-            Lable7.Visible = true;
-            txtLimit.Visible = true;
-        }
-    }
 
     protected void gvTeachers_RowEditing(object sender, GridViewEditEventArgs e)
     {
@@ -109,10 +90,75 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         Bind();
     }
-    protected void BindToGridView(DataTable dt)
+    protected void BindToGridView(string strSql)
     {
+        
+        DataTable dt = AddSQLStringToDAL.GetDtBySQL(strSql);
         gvTeachers.DataSource = dt;
         gvTeachers.DataKeyNames = new string[] { "UserID" };
         gvTeachers.DataBind();
+    }
+
+
+    /// <summary>
+    /// ddlLimit选项更改后执行事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void ddlLimit_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlLimit.SelectedIndex.ToString() == "所有记录")
+        {
+            Lable7.Visible = false;
+            txtLimit.Visible = false;
+        }
+        else
+        {
+            Lable7.Visible = true;
+            txtLimit.Visible = true;
+        }
+    }
+
+    private string DropDownListOption()
+    {
+        string ddlswitch = "";
+        switch (ddlLimit.SelectedIndex.ToString().Trim())
+        {
+            case "按部门查询":
+                {
+                    ddlswitch = "Department";
+                    break;
+                }
+            case "按教师工号查询":
+                {
+                    ddlswitch = "UserID";
+                    break;
+                }
+            case "按教师姓名查询":
+                {
+                    ddlswitch = "UserName";
+                    break;
+                }
+            case "按权限查询":
+                {
+                    ddlswitch = "Role";
+                    break;
+                }
+            default:
+                {
+                    ddlswitch = "1=1 or 1";
+                    break;
+                }
+        }
+        return ddlswitch;
+    }
+    /// <summary>
+    /// 点击编辑时，取消后触发事件
+    /// </summary>
+    /// <param name="sender"></param>
+    /// <param name="e"></param>
+    protected void gvTeachers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+    {
+
     }
 }

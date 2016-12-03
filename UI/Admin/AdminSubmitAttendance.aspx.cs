@@ -181,7 +181,8 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         }
         else
         {
-            return false;
+            //return false;
+            return true;
         }
     }
 
