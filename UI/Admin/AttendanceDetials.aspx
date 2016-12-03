@@ -1,8 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="AttendanceDetials.aspx.cs" Inherits="Admin_AttendanceDetials" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+
     <style type="text/css">
+        *{
+            margin:0 auto;
+            text-align:center;
+        }
         #form1 {
             height: 441px;
         }
@@ -28,32 +32,32 @@
             <option>因故调课</option>
         </select><asp:Button ID="btnUnNormal" runat="server" Text="确定" />
 
-        <asp:GridView ID="gvAttendanceDetails" runat="server" 
-            AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID" 
-            DataSourceID="SqlDataSourceAttendanceDetails" GridLines="Vertical" Font-Size="12px" 
-            OnRowDataBound="gvAttendanceDetails_RowDataBound" >
-            
-            <RowStyle  BackColor="#EEEEEE" ForeColor="Black" />
+        <asp:GridView ID="gvAttendanceDetails" runat="server"
+            AutoGenerateColumns="False" BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" CellPadding="3" DataKeyNames="StudentID"
+            DataSourceID="SqlDataSourceAttendanceDetails" GridLines="Vertical" Font-Size="12px"
+            OnRowDataBound="gvAttendanceDetails_RowDataBound" Width="1000px">
+
+            <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
             <Columns>
-                <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部"  ItemStyle-Width="100px" SortExpression="StudentDeparment">
-<ItemStyle Width="100px"></ItemStyle>
+                <asp:BoundField DataField="StudentDepartment" HeaderText="所属系部" ItemStyle-Width="100px" SortExpression="StudentDeparment">
+                    <ItemStyle Width="100px"></ItemStyle>
                 </asp:BoundField>
-                <asp:BoundField DataField="t4" HeaderText="班级"  ItemStyle-Width="100px" SortExpression="t4">
-<ItemStyle Width="100px"></ItemStyle>
+                <asp:BoundField DataField="t4" HeaderText="班级" ItemStyle-Width="100px" SortExpression="t4">
+                    <ItemStyle Width="100px"></ItemStyle>
                 </asp:BoundField>
-                <asp:BoundField DataField="StudentID" HeaderText="学号"  ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID">
-<ItemStyle Width="100px"></ItemStyle>
+                <asp:BoundField DataField="StudentID" HeaderText="学号" ItemStyle-Width="100px" ReadOnly="true" SortExpression="StudentID">
+                    <ItemStyle Width="100px"></ItemStyle>
                 </asp:BoundField>
-                <asp:BoundField DataField="StudentName" HeaderText="姓名"  ItemStyle-Width="100px" SortExpression="StudentName">
-<ItemStyle Width="100px"></ItemStyle>
+                <asp:BoundField DataField="StudentName" HeaderText="姓名" ItemStyle-Width="100px" SortExpression="StudentName">
+                    <ItemStyle Width="100px"></ItemStyle>
                 </asp:BoundField>
                 <asp:TemplateField HeaderText="出勤情况">
                     <ItemTemplate>
-                        <asp:RadioButton ID="rdNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="true" />
-                        <asp:RadioButton ID="rdoLate" runat="server" GroupName="g1" Text="迟到"  AutoPostBack="true" />
-                        <asp:RadioButton ID="rodAbsence" runat="server" GroupName="g1" Text="旷课"  AutoPostBack="true" />
-                         <asp:RadioButton ID="rdoEarly" runat="server" GroupName="g1" Text="早退"  AutoPostBack="true"/>
-                         <asp:RadioButton ID="rdoLeave" runat="server" GroupName="g1" Text="请假"  AutoPostBack="true"/>
+                        <asp:RadioButton ID="rdoNormal" runat="server" GroupName="g1" Text="正常" Checked="true" AutoPostBack="false" OnCheckedChanged="rdo_CheckChange" />
+                        <asp:RadioButton ID="rdoLate" runat="server" GroupName="g1" Text="迟到" AutoPostBack="true" OnCheckedChanged="rdo_CheckChange" />
+                        <asp:RadioButton ID="rdoAbsence" runat="server" GroupName="g1" Text="旷课" AutoPostBack="true" OnCheckedChanged="rdo_CheckChange" />
+                        <asp:RadioButton ID="rdoEarly" runat="server" GroupName="g1" Text="早退" AutoPostBack="true" OnCheckedChanged="rdo_CheckChange" />
+                        <asp:RadioButton ID="rdoLeave" runat="server" GroupName="g1" Text="请假" AutoPostBack="true" OnCheckedChanged="rdo_CheckChange" />
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
@@ -68,17 +72,16 @@
             <SortedDescendingHeaderStyle BackColor="#000065" />
         </asp:GridView>
 
-        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server" 
-            ConnectionString="<%$ ConnectionStrings:SdbiAttentionSystemConnectionString %>" 
+        <asp:SqlDataSource ID="SqlDataSourceAttendanceDetails" runat="server"
+            ConnectionString="<%$ ConnectionStrings:SdbiAttentionSystemConnectionString %>"
             SelectCommand="SELECT [StudentDepartment],[StudentID],[StudentName],[t4] FROM [TabTeacherAllCourse] WHERE (([TeacherId] = @TeacherID ) AND (CourseWeek = @CourseWeek ) AND (CourseTime = @CourseTime ))">
             <SelectParameters>
-                <asp:sessionParameter Name="TeacherID" SessionField="UserID" Type="String" />
-                <asp:SessionParameter Name="CourseWeek" SessionField="CourseWeek" TYpe="String" />
+                <asp:SessionParameter Name="TeacherID" SessionField="UserID" Type="String" />
+                <asp:SessionParameter Name="CourseWeek" SessionField="CourseWeek" Type="String" />
                 <asp:SessionParameter Name="CourseTime" SessionField="CourseTime" Type="String" />
             </SelectParameters>
         </asp:SqlDataSource>
         <div>
-            
         </div>
     </div>
 

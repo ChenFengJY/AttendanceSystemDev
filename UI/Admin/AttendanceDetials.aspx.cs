@@ -17,15 +17,14 @@ using BLL;
 public partial class Admin_AttendanceDetials : System.Web.UI.Page
 {
 
-    System.Drawing.Color c;
+    System.Drawing.Color currentColor;
     protected void Page_Load(object sender, EventArgs e)
     {
         lblAttendanceMessage.Text = Session["UserID"].ToString() + "  " + Session["CourseWeek"].ToString() + "  " + Session["CourseTime"].ToString();
         if (!IsPostBack)
         {
             string strCourse = Session["CourseWeek"].ToString();
-            
-            c = this.gvAttendanceDetails.BackColor;
+            currentColor = this.gvAttendanceDetails.BackColor;
         }
         else
         {
@@ -39,14 +38,14 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         btnAtten.Visible = false;
         //gvAttendanceDetails.Visible = false;
         btnUnNormal.Visible = false;
-        
+
 
     }
 
 
-    protected void rdo_CheckChange(object sender,EventArgs e)
+    protected void rdo_CheckChange(object sender, EventArgs e)
     {
-        foreach(GridViewRow row in this.gvAttendanceDetails.Rows)
+        foreach (GridViewRow row in this.gvAttendanceDetails.Rows)
         {
             Control ctl1 = row.FindControl("rdoNormal");
             Control ctl2 = row.FindControl("rdoLate");
@@ -55,16 +54,16 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             Control ctl5 = row.FindControl("rdoLeave");
 
             TableCellCollection cell = row.Cells;
-            if((ctl1 as RadioButton).Checked)
+            if ((ctl1 as RadioButton).Checked)
             {
-                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = c;
+                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = currentColor;
             }
-            if((ctl2 as RadioButton).Checked)
+            if ((ctl2 as RadioButton).Checked)
             {
                 this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
                     System.Drawing.Color.Yellow;
             }
-            if((ctl3 as RadioButton).Checked)
+            if ((ctl3 as RadioButton).Checked)
             {
                 this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
                     System.Drawing.Color.Red;
@@ -79,7 +78,6 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
                     System.Drawing.Color.SkyBlue;
             }
-
         }
     }
 
@@ -90,9 +88,9 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         if (e.Row.RowType == DataControlRowType.DataRow)
         {
             //鼠标经过时，行背景色变
-            e.Row.Attributes.Add("onmouseover", "this.style.backgroundColor='#E6F5FA'");
+            e.Row.Attributes.Add("onmouseover", "currentColor=this.style.backgroundColor;this.style.backgroundColor='#E6F5FA'");
             //鼠标移出时，行背景色变
-            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor='#FFFFFF'");
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=currentColor;");
         }
     }
 
@@ -104,19 +102,18 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         StringBuilder strLeave = new StringBuilder("请假名单：");
         DataTable attendanceList = MakeTabStudentAttendance();
         attendanceList.Clear();
-        DataRow attendanceRow = attendanceList.NewRow();
         int sum = 0;
-        foreach(GridViewRow row in this.gvAttendanceDetails.Rows)
-        {
-
-            Control ctl2 = row.FindControl("rodLate");
+        foreach (GridViewRow row in this.gvAttendanceDetails.Rows)
+        {        DataRow attendanceRow = attendanceList.NewRow();
+    
+            Control ctl2 = row.FindControl("rdoLate");
             Control ctl3 = row.FindControl("rdoAbsence");
             Control ctl4 = row.FindControl("rdoEarly");
             Control ctl5 = row.FindControl("rdoLeave");
             TableCellCollection cell = row.Cells;//获取GridView本行中的值的集合
-            if((ctl2 as RadioButton).Checked)   //ctl2被选中 迟到
+            if ((ctl2 as RadioButton).Checked)   //ctl2被选中 迟到
             {
-                attendanceRow[0] = Session["UserID"] ;//TeacherID;
+                attendanceRow[0] = Session["UserID"];//TeacherID;
                 attendanceRow[1] = Session["UserName"];   //TeacherName
                 attendanceRow[2] = Session["CourseName"];  //CourseName 课程名
                 attendanceRow[3] = Session["CurrentWeek"];  //CourseAllWeek
@@ -129,7 +126,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[10] = "迟到";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
-                strLate.Append(cell[3].Text.ToString()+";");//学生姓名
+                strLate.Append(cell[3].Text.ToString() + ";");//学生姓名
 
             }
             if ((ctl3 as RadioButton).Checked)
@@ -148,7 +145,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
 
-                strAbsence.Append(cell[3].Text.ToString()+";");
+                strAbsence.Append(cell[3].Text.ToString() + ";");
 
             }
             if ((ctl4 as RadioButton).Checked)
@@ -166,7 +163,6 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[10] = "迟到";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
-
                 strEarly.Append(cell[3].Text.ToString() + ";");
 
             }
@@ -185,15 +181,14 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[10] = "迟到";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
-
                 strLeave.Append(cell[3].Text.ToString() + ";");
 
             }
         }
-        string result= AddSQLStringToDAL.InsertForSql(attendanceList, "TabStudentAttendance", 11);//异常学生导入
-        string strsql = "update TabTeacherCourseWeek SET AttendanceInfo = 1 WHERE TeacherId = " + Session["UserID"] + " and CourseAllWeek = " + Session["CurrentWeek"] + " and CourseWeek = " + Session["CourseWeek"] + " and CourseTime = " + Session["CourseTime"] + " ";
+        string result = AddSQLStringToDAL.InsertForSql(attendanceList, "TabStudentAttendance", 11);//异常学生导入
+        string strsql = "update TabTeacherCourseWeek SET AttendanceInfo = '已考勤' WHERE TeacherId = '" + Session["UserID"] + "' and CourseAllWeek = '" + Session["CurrentWeek"] + "' and CourseWeek = '" + Session["CourseWeek"] + "' and CourseTime = '" + Session["CourseTime"] + "'";
         AddSQLStringToDAL.InsertData(strsql);
-        if (result== "导入成功")
+        if (result == "导入成功")
         {
             if (strLate.ToString() == "迟到名单：")
                 strLate.Append("无");
@@ -228,7 +223,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
 
     private DataTable MakeTabStudentAttendance()
     {
-        string strSql = "select * from [TabStudentAttendance] where 0 = 1";
+        string strSql = "select * from [TabStudentAttendance] where 0 = 1";   //只获取表的结构
         return AddSQLStringToDAL.GetDtBySQL(strSql);
     }
 }
