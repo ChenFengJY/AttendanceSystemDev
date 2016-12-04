@@ -4,7 +4,7 @@
     <style type="text/css">
         #main{
             width:100%;
-            height:auto;
+            height:100%;
             min-height:400px; 
             text-align:center;
             Font-Size:12px;
@@ -49,7 +49,12 @@
         </div>
 
         <div class="toCen">
-            <asp:GridView ID="gvTeachers" runat="server" AutoGenerateColumns="False" CellPadding="3" AllowSorting="True" PageSize="16" 
+            <!-- 说明：
+                AllowPaging="True"自动分页 PageSize="16"每页16行
+                ItemStyle-Width 固定表的列宽
+
+                -->
+            <asp:GridView ID="gvTeachers" runat="server" AutoGenerateColumns="False" CellPadding="3" AllowSorting="True" PageSize="16" AllowPaging="True" 
                 OnRowDataBound="gvTeachers_RowDataBound"
                 OnPageIndexChanging="gvTeachers_PageIndexChanging" 
                 OnRowEditing="gvTeachers_RowEditing"
@@ -58,13 +63,40 @@
                 BackColor="White" BorderColor="#CCCCCC" BorderWidth="1px" Height="155px" Width="682px" BorderStyle="None" OnRowCancelingEdit="gvTeachers_RowCancelingEdit">
 
                 <Columns>
-                    <asp:BoundField DataField="Department" HeaderText="所属部门" ReadOnly="true" />
-                    <asp:BoundField DataField="UserID" HeaderText="教师工号"  ReadOnly="true"/>
-                    <asp:BoundField DataField="UserName" HeaderText="教师姓名" ReadOnly="true" />
-                    <asp:BoundField DataField="UserPWD" HeaderText="用户密码"  Visible="false"/>
-                    <asp:BoundField DataField="Role" HeaderText="教师权限" />
-                    <asp:CommandField ShowEditButton="True" />
-                    <asp:CommandField ShowDeleteButton="True" />
+                    <asp:BoundField DataField="Department" HeaderText="所属部门" ReadOnly="true" ItemStyle-Wrap="false" ItemStyle-Width="100px" >
+<ItemStyle Wrap="False" Width="100px"></ItemStyle>
+                    </asp:BoundField>
+                    <asp:BoundField DataField="UserID" HeaderText="教师工号"  ReadOnly="true" ItemStyle-Width="100px">
+<ItemStyle Width="100px"></ItemStyle>
+                    </asp:BoundField>
+                    <asp:BoundField DataField="UserName" HeaderText="教师姓名" ReadOnly="true" ItemStyle-Width="100px" >
+<ItemStyle Width="100px"></ItemStyle>
+                    </asp:BoundField>
+                    <asp:BoundField DataField="UserPWD" HeaderText="用户密码"  Visible="false" ItemStyle-Width="100px">
+<ItemStyle Width="100px"></ItemStyle>
+                    </asp:BoundField>
+                    <asp:TemplateField HeaderText="教师权限">
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="ddlTeacherRole" runat="server">
+                                <asp:ListItem>1</asp:ListItem>
+                                <asp:ListItem>2</asp:ListItem>
+                                <asp:ListItem>3</asp:ListItem>
+                                <asp:ListItem>4</asp:ListItem>
+                            </asp:DropDownList>
+                            
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="LabTeacherRole" runat="server" Text='<%# Bind("Role") %>'></asp:Label>
+                        </ItemTemplate>
+                        <ControlStyle Width="60px" />
+                        <ItemStyle Width="100px" />
+                    </asp:TemplateField>
+                    <asp:CommandField ShowEditButton="True" ItemStyle-Width="100px" >
+<ItemStyle Width="100px"></ItemStyle>
+                    </asp:CommandField>
+                    <asp:CommandField ShowDeleteButton="True" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                    </asp:CommandField>
                 </Columns>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
                 <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
@@ -76,7 +108,8 @@
                 <SortedAscendingHeaderStyle BackColor="#007DBB" />
                 <SortedDescendingCellStyle BackColor="#CAC9C9" />
                 <SortedDescendingHeaderStyle BackColor="#00547E" />
-       
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" /> 
+                <RowStyle ForeColor="#333333" BackColor="#F7F6F3" />
             </asp:GridView>
         </div>
         <!--
