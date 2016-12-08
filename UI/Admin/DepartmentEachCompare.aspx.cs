@@ -7,11 +7,11 @@ using System.Web.UI.WebControls;
 using BLL;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Office.Interop.Owc11;
+//using Microsoft.Office.Interop.Owc11;
 
 public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+  /*  protected void Page_Load(object sender, EventArgs e)
     { }
     private void GetDataAndCreateChartBySum()
     {
@@ -133,5 +133,5 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
         string strImageTag = "<  IMG SRC=" + strRelativePath + "?id=" + rd.Next(65500) + "/>";
         string url = "DepartmentEachCompare.aspx?ImageUrl=" + strImageTag;
         return strImageTag;
-    }
+    }*/
 } 

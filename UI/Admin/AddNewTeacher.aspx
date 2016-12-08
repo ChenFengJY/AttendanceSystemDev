@@ -86,11 +86,12 @@
                 <div>
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="textBox"></asp:TextBox>
                 </div>
-                <lable>教师姓名<asp:Label ID="Label3" runat="server" BorderStyle="None" Text="Label"></asp:Label>
-                </lable>
+                <lable>教师姓名</lable>
                 &nbsp;<div><asp:TextBox ID="TextBox2" runat="server" CssClass="textBox"></asp:TextBox></div>
                 <lable>密码</lable>
                 <div><asp:TextBox ID="TextBox3" runat="server" CssClass="textBox"></asp:TextBox></div>
+                <lable>性别</lable>
+                <div><asp:DropDownList ID="ddlSex" runat="server" ></asp:DropDownList></div>
                 <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click1" Text="确定" />
                 <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="取消" />
             </div>
