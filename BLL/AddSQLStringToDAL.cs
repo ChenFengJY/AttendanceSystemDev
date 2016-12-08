@@ -34,6 +34,12 @@ namespace BLL
         {
             return ExcelToSQLServer.DataTableToSQLServer(dt, table, num);
         }
+
+        public static DataTable GetDatatableBySQL(string v1, string v2, object p1, string v3, object p2)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 执行插入命令 更改，删除
         /// </summary>
@@ -59,6 +65,11 @@ namespace BLL
             throw new NotImplementedException();
         }
 
+        public static int GetRecordCount(string v1, string v2, string v3)
+        {
+            throw new NotImplementedException();
+        }
+
         //public static DataTable GetDatatableBySQL(string v)
         //{
         //    throw new NotImplementedException();
@@ -74,7 +85,7 @@ namespace BLL
         //    //return "update" + strTableName + "setUserPWD" = "" + UserPWD + '"where UserID="' + UserID + "'";
         //}
 
-        
+
 
         public static DataTable GetDatatableBySQL(string v1, object p, string v2)
         {
