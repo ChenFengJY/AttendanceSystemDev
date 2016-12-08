@@ -91,7 +91,11 @@
                 <lable>密码</lable>
                 <div><asp:TextBox ID="TextBox3" runat="server" CssClass="textBox"></asp:TextBox></div>
                 <lable>性别</lable>
-                <div><asp:DropDownList ID="ddlSex" runat="server" ></asp:DropDownList></div>
+                <div><asp:DropDownList ID="ddlSex" runat="server" >
+                        <asp:ListItem value="1">男</asp:ListItem>
+                        <asp:ListItem value="2">女</asp:ListItem>
+                     </asp:DropDownList>   
+                </div>
                 <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click1" Text="确定" />
                 <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="取消" />
             </div>
