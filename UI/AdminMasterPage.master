@@ -88,6 +88,25 @@
             background-size: cover;
         }
     </style>
+    <script>
+        window.onload = function () {
+            var nowTime = document.getElementById('nowTime')
+            NowTime();
+            setInterval(NowTime(), 5000);
+        }
+        function NowTime(){
+            nowTime.innerHTML = getNowFormatDate();
+        }
+
+        function getNowFormatDate() {
+            var date = new Date();
+            var str = "星期" + "日一二三四五六".charAt(date.getDay());
+
+            var currentdate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+                    + " " + date.getHours() + ":" + date.getMinutes() + " " + str;
+            return currentdate;
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -122,11 +141,12 @@
                 </script>
                 -->
                 <div class="sysInfo">
-                    <asp:Label ID="Label1" runat="server" Text="用户名"></asp:Label>
+                    <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
                     <br />
-                    <asp:Label ID="Label2" runat="server" Text="在线人数"></asp:Label>
+                    <asp:Label ID="Label2" runat="server" Text=""></asp:Label>
                     <br />
-                    <asp:Label ID="Label5" runat="server" Text="系统时间当前周次"></asp:Label>
+                    <span id="nowTime"></span>
+                    <asp:Label ID="Label5" runat="server" Text=""></asp:Label>
                 </div>
             </header>
 
@@ -144,7 +164,7 @@
                         <RootNodeStyle HorizontalPadding="2px" NodeSpacing="2px" VerticalPadding="1px" />
                     </asp:TreeView>
                 </div>
-                <div id="right" style="position:initial;">
+                <div id="right">
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>

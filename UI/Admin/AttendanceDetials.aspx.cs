@@ -205,8 +205,9 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             strAbsence.Remove(0, strAbsence.Length);
             strEarly.Remove(0, strEarly.Length);
             strLeave.Remove(0, strLeave.Length);
+
             SetControlsVisibleFalse();
-            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您,请返回主界面！";
+            lblResultMessage.Text = "本次考勤记录已经上报成功！请返回主界面！";
             btnClose.Visible = true;
 
         }
@@ -216,7 +217,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
 
     protected void btnClose_Click(object sender, EventArgs e)
     {
-        Response.Redirect("AttendanceDetials.aspx");
+        Response.Redirect("AdminSubmitAttendance.aspx");
     }
 
     private DataTable MakeTabStudentAttendance()

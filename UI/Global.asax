@@ -32,10 +32,10 @@
         Session["UserName"] = "";
         Session["UserID"] = "";
         Session["Role"] = "";
-        Session["CurrentWeek"] ="";
+        Session["CurrentWeek"] ="";//当前周次
 
         Session["CourseName"] = "";
-        Session["CourseWeek"] = "";
+        Session["CourseWeek"] = "";//课程所在星期
         Session["CourseTime"] = "";
 
     }

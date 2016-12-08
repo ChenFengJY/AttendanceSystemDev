@@ -18,22 +18,19 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            if (Session["UserName"].ToString() == "")
-            {
-                //Response.Redirect("..\\Login.aspx");
-            }
-            else {
-            }
-
-            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = 12";
+            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = "+Session["CourseWeek"] +" ";
             //调试用↓
-            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = 12";
+            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + Session["CurrentWeek"] + " ";
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sql);
             this.thisRepeater.DataSource = dt;
             thisRepeater.DataBind();
             this.lastRepeater.DataSource = dt;
             lastRepeater.DataBind();
 
+        }
+        else
+        {
+            //Response.Redirect("..\\Login.aspx");
         }
 
     }
@@ -181,8 +178,8 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         }
         else
         {
-            //return false;
-            return true;
+            return false;
+            //return true;
         }
     }
 

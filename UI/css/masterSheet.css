@@ -3,14 +3,21 @@
     margin: 0 0 0 0px;
     font-family: "微软雅黑","Verdana","宋体","Lucida Grande","Lucida Sans Unicode",Tahoma,sans-serif;
 }
+html,body{
+    height:100%;
+}
 
 body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";
+     
    }
 
 #main {
     width: auto;
-    height: auto;
+    height: 100%;
     background-color: #aaa;
+}
+#form1{
+    height:100%;
 }
 header{
     width: 100%;
@@ -75,6 +82,7 @@ section{
     margin-left: 150px;
     height: 100%;
     background-color: #F2F9FC;
+    background-color: #F00;
     position:initial;
 }
 

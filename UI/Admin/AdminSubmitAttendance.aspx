@@ -76,7 +76,6 @@
         <div class="main">
             <div class="thisweek">
                 <h2>本周考勤情况</h2>
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 <div class="weekInfo">
                     <asp:Repeater ID="thisRepeater" runat="server" OnItemCommand="thisRepeater_ItemCommand">
 
