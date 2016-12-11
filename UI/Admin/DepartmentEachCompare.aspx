@@ -1,6 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LeaderMasterPage.master" AutoEventWireup="true" CodeFile="DepartmentEachCompare.aspx.cs" Inherits="Admin_DepartmentEachCompare" %>
 
+<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+     <asp:Chart ID="Chart2" runat="server">
+         <series>
+             <asp:Series Name="Series1">
+             </asp:Series>
+         </series>
+         <chartareas>
+             <asp:ChartArea Name="ChartArea1">
+             </asp:ChartArea>
+         </chartareas>
+     </asp:Chart>
      <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Font-Size="12px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
         <Columns>
             <asp:BoundField HeaderText="系部" DataField="系部" ItemStyle-Width="90px" />
@@ -27,27 +39,27 @@
      <asp:PlaceHolder ID="phLate" runat="server"></asp:PlaceHolder>
      <asp:PlaceHolder ID="phEarly" runat="server"></asp:PlaceHolder>
        <tr>
-        <td style="width:100%;height:350" align="center">
+        <td style="width:100%;height:350px" align="center">
     <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
             </td>
         </tr>
      <tr>
-        <td style="width:100%;height:350" align="center">
+        <td style="width:100%;height:350px" align="center">
     <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
             </td>
          </tr>
      <tr>
-        <td style="width:100%;height:350" align="center">
+        <td style="width:100%;height:350px" align="center">
     <asp:PlaceHolder ID="PlaceHolder3" runat="server"></asp:PlaceHolder>
             </td>
          </tr>
      <tr>
-        <td style="width:100%;height:350" align="center">
+        <td style="width:100%;height:350px" align="center">
     <asp:PlaceHolder ID="phLeate" runat="server"></asp:PlaceHolder>
             </td>
          </tr>
      <tr>
-        <td style="width:100%;height:350" align="center">
+        <td style="width:100%;height:350px" align="center">
     <asp:PlaceHolder ID="PlaceHolder4" runat="server"></asp:PlaceHolder>
             </td>
          </tr>
