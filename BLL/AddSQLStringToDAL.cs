@@ -35,7 +35,7 @@ namespace BLL
             return ExcelToSQLServer.DataTableToSQLServer(dt, table, num);
         }
         /// <summary>
-        /// 执行插入命令
+        /// 执行插入命令 更改，删除
         /// </summary>
         /// <param name="strSql">insert into 语句</param>
         /// <returns></returns>

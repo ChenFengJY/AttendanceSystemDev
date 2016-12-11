@@ -47,9 +47,25 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
 
     protected void gvTeachers_RowDataBound(object sender, GridViewRowEventArgs e)
     {
-
+        //首先判断是否是数据行
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //当鼠标停留时更改背景色
+            e.Row.Attributes.Add("onmouseover", "c=this.style.backgroundColor;this.style.backgroundColor='#00A9FF'");
+            //当鼠标移开时还原背景色
+            e.Row.Attributes.Add("onmouseout", "this.style.backgroundColor=c");
+        }
+        //删除时弹出确认对话框
+        //如果是绑定数据行
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            if (e.Row.RowState == DataControlRowState.Normal || e.Row.RowState == DataControlRowState.Alternate)
+            {
+                ((LinkButton)e.Row.Cells[6].Controls[0]).Attributes.Add("onclick", "javascript:return confirm('你确认要删除：" + e.Row.Cells[2].Text + "吗?')");
+            }
+        }
     }
-
+    //控制分页
     protected void gvTeachers_PageIndexChanging(object sender, GridViewPageEventArgs e)
     {
         gvTeachers.PageIndex = e.NewPageIndex;
@@ -57,33 +73,38 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
 
     }
 
-
+    //编辑时发生
     protected void gvTeachers_RowEditing(object sender, GridViewEditEventArgs e)
     {
+        //获取编辑前权限的值
+        string lab = ((Label)gvTeachers.Rows[e.NewEditIndex].Cells[4].FindControl("LabTeacherRole")).Text;
         gvTeachers.EditIndex = e.NewEditIndex;
+        
         Bind();
-
+        //下拉列表的默认值更改为编辑前的值
+        DropDownList ddlSex = (DropDownList)gvTeachers.Rows[e.NewEditIndex].Cells[4].FindControl("ddlTeacherRole");
+        ddlSex.SelectedIndex = ddlSex.Items.IndexOf(ddlSex.Items.FindByValue(lab));
     }
-
+    //删除
     protected void gvTeachers_RowDeleting(object sender, GridViewDeleteEventArgs e)
     {
-        if (AddSQLStringToDAL.DeleteTabTeachers("TabTeachers", "UserID", gvTeachers.DataKeys[e.RowIndex].Value.ToString()))
-        {
-            Bind();
-        }
-    }
+        string strSql = "delete from TabTeachers where UserID='" + gvTeachers.DataKeys[e.RowIndex].Value.ToString() + "'";
 
+        AddSQLStringToDAL.InsertData(strSql);
+        Bind();
+    }
+    //更改后提交发生
     protected void gvTeachers_RowUpdating(object sender, GridViewUpdateEventArgs e)
     {
-        string strUserRole = ((TextBox)(gvTeachers.Rows[e.RowIndex].Cells[4].Controls[0])).Text.ToString().Trim();
+        DropDownList ddlSex = (DropDownList)gvTeachers.Rows[e.RowIndex].Cells[4].FindControl("ddlTeacherRole");
+        int strUserRole = Convert.ToInt32(ddlSex.SelectedValue);
+        //string strUserRole = ((DropDownList)(gvTeachers.Rows[e.RowIndex].Cells[4].Controls[0])).SelectedItem.Text.ToString().Trim();//用户权限
         string strUserID = gvTeachers.DataKeys[e.RowIndex].Value.ToString();
-        //if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers", "Role", strUserRole, "UserID", strUserID))
+        string strSql = "update TabTeachers set Role = " + strUserRole + " where UserID = '" + strUserID + "' ";
 
-        //{
-        //    gvTeachers.EditIndex = -1;
-        //    Bind();
-
-        //}
+        AddSQLStringToDAL.InsertData(strSql);
+        gvTeachers.EditIndex = -1;
+        Bind();
     }
 
     protected void btnQuery_Click(object sender, EventArgs e)
@@ -94,6 +115,7 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     {
         
         DataTable dt = AddSQLStringToDAL.GetDtBySQL(strSql);
+        //dt.DefaultView.Sort = 
         gvTeachers.DataSource = dt;
         gvTeachers.DataKeyNames = new string[] { "UserID" };
         gvTeachers.DataBind();
@@ -159,6 +181,7 @@ public partial class Admin_LoadUserInfoToAdmin : System.Web.UI.Page
     /// <param name="e"></param>
     protected void gvTeachers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
     {
-
+        gvTeachers.EditIndex = -1;
+        Bind();
     }
 }
