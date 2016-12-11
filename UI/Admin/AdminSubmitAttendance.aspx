@@ -25,6 +25,7 @@
             width:1100px;
             height:auto;
             margin:0 auto;
+            margin-bottom:60px;
             padding:20px;
             box-shadow:0 0 4px 2px #f0f0f0;
             background-color:rgba(232,232,232,0.5);

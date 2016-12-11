@@ -24,7 +24,9 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sql);
             this.thisRepeater.DataSource = dt;
             thisRepeater.DataBind();
-            this.lastRepeater.DataSource = dt;
+            string sql2 = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + (Convert.ToInt32(Session["CurrentWeek"])-1) + " ";
+            DataTable dt2 = AddSQLStringToDAL.GetDtBySQL(sql2);
+            this.lastRepeater.DataSource = dt2;
             lastRepeater.DataBind();
 
         }
