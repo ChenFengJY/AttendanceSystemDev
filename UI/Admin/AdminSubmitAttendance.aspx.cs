@@ -16,8 +16,10 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //IsPostBack 在第一次打开时是false
         if (!IsPostBack)
         {
+            //第一次打开时执行
             //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = "+Session["CourseWeek"] +" ";
             //调试用↓
             string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + Session["CurrentWeek"] + " ";

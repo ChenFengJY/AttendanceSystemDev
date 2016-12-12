@@ -16,18 +16,18 @@ public partial class Admin_AttendanceStudentDetails : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (!IsPostBack)
-        //{
-        //    if (Session["UserID"].ToString() == "")
-        //    {
-        //        Response.Redirect ("~//Default.aspx");
-        //    }
-        //    else
-        //    {
-        //        Label1.Text = Server.UrlDecode(Request.QueryString["queryDepartment"]).ToString() + "第" + Request.QueryString["queryWeek"].ToString() + "周旷课名单:";
-        //        GetDataTable();
-        //    }
-        //}
+        if (!IsPostBack)
+        {
+            if (Session["UserID"].ToString() == "")
+            {
+                Response.Redirect("~//Default.aspx");
+            }
+            else
+            {
+                Label1.Text = Server.UrlDecode(Request.QueryString["queryDepartment"]).ToString() + "第" + Request.QueryString["queryWeek"].ToString() + "周旷课名单:";
+                GetDataTable();
+            }
+        }
     }
 
     private void GetDataTable()
