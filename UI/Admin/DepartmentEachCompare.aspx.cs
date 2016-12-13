@@ -16,19 +16,15 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
         if (!IsPostBack)
         {
 
-            DataTable dt = AddSQLStringToDAL.GetDtBySQL(strSql);
-            GridView1.DataSource = dt;
-            GridView1.DataKeyNames = new string[] { "UserID" };
-            GridView1.DataBind();
-
             GetDataAndCreateChartBySum();
         }
     }
     private void GetDataAndCreateChartBySum()
     {
-        string strSql = "select * from TabDepartment";
+        string strSql = "select * from TabDepartment";//每个系部总人数
         DataTable dtCount = AddSQLStringToDAL.GetDtBySQL(strSql);
-        string[] AllCount = new string[dtCount.Rows.Count];
+        string[] AllCount = new string[dtCount.Rows.Count];//保存每个系部总人数
+
         for (int i = 0; i < dtCount.Rows.Count; i++)
         {
             AllCount[i] = dtCount.Rows[i]["sum"].ToString();
@@ -39,86 +35,69 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
         string[] AllAttendance = new string[AllDepartment.Length];
         string[] AllEarly = new string[AllDepartment.Length];
         string[] AllLeave = new string[AllDepartment.Length];
+        //储存每个系合计后的考勤情况
         for (int i = 0; i < AllDepartment.Length; i++)
         {
-            DataTable dt = InitialDataTable(AllDepartment[i]);
-            AllData[i] = dt.Rows[dt.Rows.Count - 1]["合计"].ToString();
-            AllLeave[i] = dt.Rows[dt.Rows.Count - 1]["请假人数"].ToString();
-            AllAttendance[i] = dt.Rows[dt.Rows.Count - 1]["旷课人数"].ToString();
-            AllEarly[i] = dt.Rows[dt.Rows.Count - 1]["早退人数"].ToString();
-            AllLate[i] = dt.Rows[dt.Rows.Count - 1]["迟到人数"].ToString();
+            DataTable dt = DataAnalysis.SumData(AllDepartment[i],Convert.ToInt32(Session["CurrentWeek"]));
+            AllData[i] = dt.Rows[dt.Rows.Count - 1][6].ToString();//合计
+            AllLeave[i] = dt.Rows[dt.Rows.Count - 1][5].ToString();//请假
+            AllAttendance[i] = dt.Rows[dt.Rows.Count - 1][4].ToString();//旷课
+            AllEarly[i] = dt.Rows[dt.Rows.Count - 1][3].ToString();//早退
+            AllLate[i] = dt.Rows[dt.Rows.Count - 1][2].ToString();//迟到
         }
-        DataTable dt111 = DataAnalysis.CreateDataTableReplaceChart(AllDepartment, AllCount, AllAttendance, AllLate, AllEarly, AllLeave, AllData);
-
+        //储存所有系
+        DataTable gridViewDt = DataAnalysis.CreateDataTableReplaceChart(AllDepartment, AllCount, AllLate, AllEarly,AllAttendance, AllLeave, AllData);
+        //需要：GridView中的数据
         string[] AllDataRate = new string[AllDepartment.Length];
         string[] AllAttendanceRate = new string[AllDepartment.Length];
         string[] AllLeaveRate = new string[AllDepartment.Length];
-        string[] AllLateRange = new string[AllDepartment.Length];
+        string[] AllLateRate = new string[AllDepartment.Length];
         string[] AllEarlyRate = new string[AllDepartment.Length];
-        for (int i = 0; i < dt111.Rows.Count; i++)
+        for (int i = 0; i < gridViewDt.Rows.Count; i++)
         {
-            AllDataRate[i] = dt111.Rows[i]["总缺勤率"].ToString();
-            AllAttendanceRate[i] = dt111.Rows[i]["旷课率"].ToString();
-            AllLeaveRate[i] = dt111.Rows[i]["迟到率"].ToString();
-            AllEarly[i] = dt111.Rows[i]["早退率"].ToString();
+            AllDataRate[i] = gridViewDt.Rows[i]["SumRate"].ToString();
+            AllLateRate[i]= gridViewDt.Rows[i]["LeaveRate"].ToString();//请假率
+            AllAttendanceRate[i] = gridViewDt.Rows[i]["AttendanceRate"].ToString();//旷课率
+            AllLeaveRate[i] = gridViewDt.Rows[i]["LateRate"].ToString();//迟到率
+            AllEarlyRate[i] = gridViewDt.Rows[i]["EarlyRate"].ToString();//早退率
         }
-        GridView1.DataSource = dt111;
+
+        //
+        GridView1.DataSource = gridViewDt;
         GridView1.DataBind();
-        if (Session["CurrentWeek"].ToString() == "01")
+        //插入图片（表）吧
+        if (Session["CurrentWeek"].ToString() == "1")
         {
             //s1,2... html标签<img>
             string s1 = DrawChart("总缺勤率", AllDepartment, AllDataRate, Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s1));
             string s2 = DrawChart("旷课率", AllDepartment, AllAttendanceRate, Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s2));
-            string s3 = DrawChart("请假率", AllDepartment, AllLeaveRate, Session["CurrentWeek"].ToString());
+            string s3 = DrawChart("请假率", AllDepartment, AllLateRate, Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s3));
             string s4 = DrawChart("迟到率", AllDepartment, AllLeaveRate, Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s4));
-            string s5 = DrawChart("早退率", AllDepartment, AllLeaveRate, Session["CurrentWeek"].ToString());
+            string s5 = DrawChart("早退率", AllDepartment, AllEarlyRate, Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s5));
         }
         else
         {
             string s1 = DrawChart("总缺勤率", AllDepartment, AllDataRate, "01-" + Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s1));
-            string s2 = DrawChart("旷课率", AllDepartment, AllDataRate, "01-" + Session["CurrentWeek"].ToString());
+            string s2 = DrawChart("旷课率", AllDepartment, AllAttendanceRate, "01-" + Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s2));
-            string s3 = DrawChart("请假率", AllDepartment, AllDataRate, "01-" + Session["CurrentWeek"].ToString());
+            string s3 = DrawChart("请假率", AllDepartment, AllLateRate, "01-" + Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s3));
-            string s4 = DrawChart("迟到率", AllDepartment, AllDataRate, "01-" + Session["CurrentWeek"].ToString());
+            string s4 = DrawChart("迟到率", AllDepartment, AllLeaveRate, "01-" + Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s4));
-            string s5 = DrawChart("早退率", AllDepartment, AllDataRate, "01-" + Session["CurrentWeek"].ToString());
+            string s5 = DrawChart("早退率", AllDepartment, AllEarlyRate, "01-" + Session["CurrentWeek"].ToString());
             this.phDepartmentEachCompare.Controls.Add(new LiteralControl(s5));
 
         }
 
     }
-    private DataTable InitialDataTable(string Department)
-    {
-        DataTable dt = DataAnalysis.CreateDateTable();
-        //当前周次
-        for (int i = Convert.ToInt32(Session["CurrentWeek"]); i > 0; i--)
-        {
-            string strLate = "SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '迟到' ";
-            int Late = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strLate).Rows[0][0]);//获取此系此周迟到的人数
-            string strEarly = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '早退' ";
-            int Early = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strEarly).Rows[0][0]);//获取此系此周早退的人数
-            string strAttendance = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '旷课' ";
-            int Attendance = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strAttendance).Rows[0][0]);//获取此系此周早退的人数
 
-            string strLeave = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '请假' ";
-            int Leave = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strLeave).Rows[0][0]);//获取此系此周早退的人数
-
-            
-            DataRow dr = DataAnalysis.CreateDataRow(dt, i, Department, Late, Early, Attendance, Leave);
-            dt.Rows.Add(dr);
-        }
-        DataRow drLast = DataAnalysis.InsertLatRow(dt);
-        //添加总数
-        dt.Rows.Add(drLast);
-        return dt;
-    }
+    
     private void CreateDataRow()
     {
 
