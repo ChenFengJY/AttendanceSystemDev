@@ -60,7 +60,7 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         Label time = e.Item.FindControl("thisTimeLabel") as Label;
         Session["CourseTime"] = time.Text.Trim();
 
-        Label courseName = e.Item.FindControl("thisClassLabel") as Label;
+        Label courseName = e.Item.FindControl("thisNameLabel") as Label;
         Session["CourseName"] = courseName.Text.Trim().ToString();
         
         if (CompareWeek())
@@ -71,12 +71,14 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
             }
             else
             {
-                Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
+                Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('您已经录入本次考勤记录,无法再次考勤！');</script>");
+                //Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
             }
         }
         else
         {
-            Response.Write("<script>alert('本门课程尚未结束，请于课程结束后录入！')</script>");
+            Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('本门课程尚未结束，请于课程结束后录入!');</script>");
+            //Response.Write("<script>alert('本门课程尚未结束，请于课程结束后录入！')</script>");
         }
        
     }
@@ -183,8 +185,30 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         else
         {
             return false;
-            //return true;
+            
         }
     }
 
+
+    protected void lastRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        Label week = e.Item.FindControl("lastWeekLabel") as Label;
+        Session["CourseWeek"] = week.Text.Trim();
+
+        Label time = e.Item.FindControl("lastTimeLabel") as Label;
+        Session["CourseTime"] = time.Text.Trim();
+
+        Label courseName = e.Item.FindControl("lastNameLabel") as Label;
+        Session["CourseName"] = courseName.Text.Trim().ToString();
+
+        if ((e.Item.FindControl("lastAttendanceLabel") as Label).Text.Trim() == "未考勤")
+        {
+            Response.Redirect("AttendanceDetials.aspx");
+        }
+        else
+        {
+            Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('您已经录入本次考勤记录,无法再次考勤！');</script>");
+            //Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
+        }
+    }
 }

@@ -114,7 +114,7 @@
             <div class="thisweek">
                 <h2>上周考勤情况</h2>
                 <div class="weekInfo">
-                    <asp:Repeater ID="lastRepeater" runat="server">
+                    <asp:Repeater ID="lastRepeater" runat="server" OnItemCommand="lastRepeater_ItemCommand">
 
                         <HeaderTemplate>
                              <table>
