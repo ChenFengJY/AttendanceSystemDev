@@ -16,7 +16,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         Label1.Text = "当前在线" + Application["online"].ToString() + "人";
         Label2.Text = Session["UserName"].ToString()
             + "你好,你的权限为" + Session["Role"].ToString();
-        Label5.Text = "当前周次为：" + Session["CurrentWeek"].ToString() ;
+        Label5.Text ="校历第" + Session["CurrentWeek"].ToString() +"周" ;
 
     }
 

@@ -17,14 +17,14 @@ using BLL;
 public partial class Admin_AttendanceDetials : System.Web.UI.Page
 {
 
-    System.Drawing.Color currentColor;
+    Color c;
     protected void Page_Load(object sender, EventArgs e)
     {
         lblAttendanceMessage.Text = Session["UserID"].ToString() + "  " + Session["CourseWeek"].ToString() + "  " + Session["CourseTime"].ToString();
         if (!IsPostBack)
         {
             string strCourse = Session["CourseWeek"].ToString();
-            currentColor = this.gvAttendanceDetails.BackColor;
+            c = this.gvAttendanceDetails.BackColor;
         }
         else
         {
@@ -56,22 +56,19 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             TableCellCollection cell = row.Cells;
             if ((ctl1 as RadioButton).Checked)
             {
-                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = currentColor;
+                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = Color.White;
             }
             if ((ctl2 as RadioButton).Checked)
             {
-                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
-                    System.Drawing.Color.Yellow;
+                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = Color.Yellow;
             }
             if ((ctl3 as RadioButton).Checked)
             {
-                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
-                    System.Drawing.Color.Red;
+                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = Color.Red;
             }
             if ((ctl4 as RadioButton).Checked)
             {
-                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor =
-                    System.Drawing.Color.Yellow;
+                this.gvAttendanceDetails.Rows[row.DataItemIndex].BackColor = Color.Yellow;
             }
             if ((ctl5 as RadioButton).Checked)
             {
@@ -104,8 +101,9 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
         attendanceList.Clear();
         int sum = 0;
         foreach (GridViewRow row in this.gvAttendanceDetails.Rows)
-        {        DataRow attendanceRow = attendanceList.NewRow();
-    
+        {
+            DataRow attendanceRow = attendanceList.NewRow();
+
             Control ctl2 = row.FindControl("rdoLate");
             Control ctl3 = row.FindControl("rdoAbsence");
             Control ctl4 = row.FindControl("rdoEarly");
@@ -141,7 +139,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[7] = cell[2].Text.ToString();    //StudentId
                 attendanceRow[8] = cell[3].Text.ToString();    //studentName
                 attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
-                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceRow[10] = "旷课";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
 
@@ -160,7 +158,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[7] = cell[2].Text.ToString();    //StudentId
                 attendanceRow[8] = cell[3].Text.ToString();    //studentName
                 attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
-                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceRow[10] = "早退";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
                 strEarly.Append(cell[3].Text.ToString() + ";");
@@ -178,7 +176,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
                 attendanceRow[7] = cell[2].Text.ToString();    //StudentId
                 attendanceRow[8] = cell[3].Text.ToString();    //studentName
                 attendanceRow[9] = cell[1].Text.ToString();    //t4 班级名称
-                attendanceRow[10] = "迟到";   //AttendanceType
+                attendanceRow[10] = "请假";   //AttendanceType
                 attendanceList.Rows.Add(attendanceRow);
                 sum++;
                 strLeave.Append(cell[3].Text.ToString() + ";");
@@ -207,8 +205,9 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
             strAbsence.Remove(0, strAbsence.Length);
             strEarly.Remove(0, strEarly.Length);
             strLeave.Remove(0, strLeave.Length);
+
             SetControlsVisibleFalse();
-            lblResultMessage.Text = "本次考勤记录已经上报成功！本次课您,请返回主界面！";
+            lblResultMessage.Text = "本次考勤记录已经上报成功！请返回主界面！";
             btnClose.Visible = true;
 
         }
@@ -218,7 +217,7 @@ public partial class Admin_AttendanceDetials : System.Web.UI.Page
 
     protected void btnClose_Click(object sender, EventArgs e)
     {
-        Response.Redirect("AttendanceDetials.aspx");
+        Response.Redirect("AdminSubmitAttendance.aspx");
     }
 
     private DataTable MakeTabStudentAttendance()

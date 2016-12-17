@@ -23,17 +23,20 @@ public partial class LoginSystem_Login : System.Web.UI.Page
         Session["Time"]= "";
         Session["WeekRange"]= "";
         Session["Role"]= "";
-        Session["CurrentWeek"]="0";
+        Session["CurrentWeek"]="";
+        CurrentWeek();
     }
+    //判断当前周次
     private void CurrentWeek()
     {
         DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabCalendar");
         foreach (DataRow row in dt.Rows)
         {
-            if (Convert.ToDateTime(row["StartWeek"]) < DateTime.Now && Convert.ToDateTime(row["EndWeeek"]) > DateTime.Now)
+            if (Convert.ToDateTime(row["StartWeek"]) < DateTime.Now && Convert.ToDateTime(row["EndWeek"]).AddDays(1) > DateTime.Now)
             {
                 string strWeekNumber = row["WeekNumber"].ToString();
                 Session["CurrentWeek"] = strWeekNumber;
+                break;
             }
             else
             {
@@ -46,28 +49,28 @@ public partial class LoginSystem_Login : System.Web.UI.Page
     {
         // Button1.Attributes.Add("onclick", "validate()");
         string strSQL = "select * from TabTeachers where UserID =" + userName.Text.Trim() + " and UserPWD=" + password.Text.ToString() + "";
-        DataTable dt;
+        DataTable dt = null;
         if (userName.Text != "" && password.Text != "")
         {
             dt = AddSQLStringToDAL.GetDtBySQL(strSQL);
             if (dt.Rows.Count == 1)
             {
-                string Role = dt.Rows[0]["Role"].ToString();
+                int Role = Convert.ToInt32(dt.Rows[0]["Role"]);
                 Session["UserID"] = dt.Rows[0]["UserID"].ToString();
                 Session["UserName"] = dt.Rows[0]["UserName"].ToString();
-                Session["Role"] = dt.Rows[0]["Role"].ToString();
+                Session["Role"] = RoleString(Role);
                 switch (Role)
                 {
-                    case "1":
+                    case 1:
                         Response.Redirect("Admin\\AdminSubmitAttendance.aspx");
                         break;
-                    case "2":
+                    case 2:
                         Response.Redirect("Leader\\DepartmentEachCompare.aspx");
                         break;
-                    case "3":
+                    case 3:
                         Response.Redirect("Secretary\\TeacherSubmitAttendance.aspx");
                         break;
-                    case "4":
+                    case 4:
                         Response.Redirect("Teacher\\GetMessage.aspx");
                         break;
                     default:
@@ -81,6 +84,40 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             }
         }
         else Response.Write("<script type='text/javascript'>alert('请完善用户信息')</script>");
+    }
+
+    private static string RoleString(int role)
+    {
+        string rolestr = null;
+        switch (role)
+        {
+            case 1:
+                {
+                    rolestr = "管理员";
+                    break;
+                }
+            case 2 :
+                {
+                    rolestr = "校领导";
+                    break;
+                }
+            case 3 :
+                {
+                    rolestr = "系领导";
+                    break;
+                }
+            case 4:
+                {
+                    rolestr = "本校教师";
+                    break;
+                }
+            default:
+                {
+                    rolestr = "游客";
+                    break;
+                }
+        }
+        return rolestr;
     }
 
 }

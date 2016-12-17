@@ -35,11 +35,6 @@ namespace BLL
             return ExcelToSQLServer.DataTableToSQLServer(dt, table, num);
         }
 
-        public static DataTable GetDatatableBySQL(string v1, string v2, object p1, string v3, object p2)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// 执行插入命令 更改，删除
         /// </summary>

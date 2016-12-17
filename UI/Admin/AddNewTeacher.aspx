@@ -9,7 +9,7 @@
             background-size:cover;
         }
         .height{
-            height:50px;
+            height:30px;
         }
         .table{
             width:300px;
@@ -86,11 +86,17 @@
                 <div>
                     <asp:TextBox ID="TextBox1" runat="server" CssClass="textBox"></asp:TextBox>
                 </div>
-                <lable>教师姓名<asp:Label ID="Label3" runat="server" BorderStyle="None" Text="Label"></asp:Label>
-                </lable>
-                &nbsp;<div><asp:TextBox ID="TextBox2" runat="server" CssClass="textBox"></asp:TextBox></div>
+                <lable>教师姓名</lable>
+                <div><asp:TextBox ID="TextBox2" runat="server" CssClass="textBox"></asp:TextBox></div>
+                <lable>性别</lable>
+                <div><asp:DropDownList ID="ddlSex" runat="server" >
+                        <asp:ListItem value="1">男</asp:ListItem>
+                        <asp:ListItem value="2">女</asp:ListItem>
+                     </asp:DropDownList>   
+                </div>
                 <lable>密码</lable>
                 <div><asp:TextBox ID="TextBox3" runat="server" CssClass="textBox"></asp:TextBox></div>
+                
                 <asp:Button ID="btnOK" runat="server" OnClick="btnOK_Click1" Text="确定" />
                 <asp:Button ID="btnCancel" runat="server" OnClick="btnCancel_Click" Text="取消" />
             </div>

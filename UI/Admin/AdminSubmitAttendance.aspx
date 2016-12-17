@@ -25,6 +25,7 @@
             width:1100px;
             height:auto;
             margin:0 auto;
+            margin-bottom:60px;
             padding:20px;
             box-shadow:0 0 4px 2px #f0f0f0;
             background-color:rgba(232,232,232,0.5);
@@ -76,7 +77,6 @@
         <div class="main">
             <div class="thisweek">
                 <h2>本周考勤情况</h2>
-                <asp:Label ID="Label1" runat="server" Text="Label"></asp:Label>
                 <div class="weekInfo">
                     <asp:Repeater ID="thisRepeater" runat="server" OnItemCommand="thisRepeater_ItemCommand">
 
@@ -114,7 +114,7 @@
             <div class="thisweek">
                 <h2>上周考勤情况</h2>
                 <div class="weekInfo">
-                    <asp:Repeater ID="lastRepeater" runat="server">
+                    <asp:Repeater ID="lastRepeater" runat="server" OnItemCommand="lastRepeater_ItemCommand">
 
                         <HeaderTemplate>
                              <table>

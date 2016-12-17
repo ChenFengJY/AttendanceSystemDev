@@ -1,68 +1,73 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/LeaderMasterPage.master" AutoEventWireup="true" CodeFile="DepartmentEachCompare.aspx.cs" Inherits="Admin_DepartmentEachCompare" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminMasterPage.master" AutoEventWireup="true" CodeFile="DepartmentEachCompare.aspx.cs" Inherits="Admin_DepartmentEachCompare" %>
 
-<%@ Register assembly="System.Web.DataVisualization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.DataVisualization.Charting" tagprefix="asp" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-     <asp:Chart ID="Chart2" runat="server">
-         <series>
-             <asp:Series Name="Series1">
-             </asp:Series>
-         </series>
-         <chartareas>
-             <asp:ChartArea Name="ChartArea1">
-             </asp:ChartArea>
-         </chartareas>
-     </asp:Chart>
-     <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false" Font-Size="12px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3">
-        <Columns>
-            <asp:BoundField HeaderText="系部" DataField="系部" ItemStyle-Width="90px" />
-            <asp:BoundField HeaderText="在校生人数" DataField="在校生人数" ItemStyle-Width="70px" />
-            <asp:BoundField HeaderText="旷课人数" DataField="旷课人数" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="旷课人数" DataField="旷课率" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="迟到人数" DataField="迟到人数" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="迟到率" DataField="迟到率" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="早退人数" DataField="早退人数" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="早退率" DataField="早退率" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="请假人数" DataField="请假人数" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="请假率" DataField="请假率" ItemStyle-Width="60px" />
-            <asp:BoundField HeaderText="缺勤总数" DataField="缺勤总数" ItemStyle-Width="60px" />
-             <asp:BoundField HeaderText="总缺勤率" DataField="总缺勤率" ItemStyle-Width="60px" />
-        </Columns>
-        <RowStyle ForeColor="#000066" />
-        <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
-        <PagerStyle BackColor="#669999" Font-Bold="true" ForeColor="White" />
-        <HeaderStyle BackColor="#006699" Font-Bold="true" ForeColor="White" />
-    </asp:GridView>
-     <asp:PlaceHolder ID="phDepartmentEachCompare" runat="server"></asp:PlaceHolder>
-     <asp:PlaceHolder ID="phAttendance" runat="server"></asp:PlaceHolder>
-     <asp:PlaceHolder ID="phLeave" runat="server"></asp:PlaceHolder>
-     <asp:PlaceHolder ID="phLate" runat="server"></asp:PlaceHolder>
-     <asp:PlaceHolder ID="phEarly" runat="server"></asp:PlaceHolder>
-       <tr>
-        <td style="width:100%;height:350px" align="center">
-    <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
-            </td>
-        </tr>
-     <tr>
-        <td style="width:100%;height:350px" align="center">
-    <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
-            </td>
-         </tr>
-     <tr>
-        <td style="width:100%;height:350px" align="center">
-    <asp:PlaceHolder ID="PlaceHolder3" runat="server"></asp:PlaceHolder>
-            </td>
-         </tr>
-     <tr>
-        <td style="width:100%;height:350px" align="center">
-    <asp:PlaceHolder ID="phLeate" runat="server"></asp:PlaceHolder>
-            </td>
-         </tr>
-     <tr>
-        <td style="width:100%;height:350px" align="center">
-    <asp:PlaceHolder ID="PlaceHolder4" runat="server"></asp:PlaceHolder>
-            </td>
-         </tr>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <style>
+        #main{
+            width:100%;
+            height:auto;
+        }
+        #chart{
+            margin:0 auto;
+        }
+        #chart td{
+            width:100%;
+            height:350px;
+            text-align:center;
+        }
+    </style>
+    <div id="main">
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false"
+             Font-Size="12px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="3"
+             OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+            <Columns>
+                <asp:BoundField HeaderText="系部" DataField="Department" ItemStyle-Width="90px" />
+                <asp:BoundField HeaderText="在校生人数" DataField="Number" ItemStyle-Width="70px" />
+                <asp:BoundField HeaderText="旷课人数" DataField="Attendance" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="旷课率" DataField="AttendanceRate" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="迟到人数" DataField="Late" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="迟到率" DataField="LateRate" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="早退人数" DataField="Early" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="早退率" DataField="EarlyRate" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="请假人数" DataField="Leave" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="请假率" DataField="LeaveRate" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="缺勤总数" DataField="Sum" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="总缺勤率" DataField="SumRate" ItemStyle-Width="60px" />
+            </Columns>
+            <RowStyle ForeColor="#000066" />
+            <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+            <PagerStyle BackColor="#669999" Font-Bold="true" ForeColor="White" />
+            <HeaderStyle BackColor="#006699" Font-Bold="true" ForeColor="White" />
+        </asp:GridView>
+
+        <table id="chart">
+            <tr>
+                <td style="width: 100%; height: 350px">
+                   <asp:PlaceHolder ID="phDepartmentEachCompare" runat="server"></asp:PlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; height: 350px">
+                     <asp:PlaceHolder ID="phAttendance" runat="server"></asp:PlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; height: 350px">
+                    <asp:PlaceHolder ID="phLeave" runat="server"></asp:PlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; height: 350px">
+                    <asp:PlaceHolder ID="phLate" runat="server"></asp:PlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 100%; height: 350px">
+                    <asp:PlaceHolder ID="phEarly" runat="server"></asp:PlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </div>
 </asp:Content>
 
 

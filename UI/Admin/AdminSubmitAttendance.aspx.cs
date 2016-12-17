@@ -16,24 +16,25 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        //IsPostBack 在第一次打开时是false
         if (!IsPostBack)
         {
-            if (Session["UserName"].ToString() == "")
-            {
-                //Response.Redirect("..\\Login.aspx");
-            }
-            else {
-            }
-
-            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = 12";
+            //第一次打开时执行
+            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = "+Session["CourseWeek"] +" ";
             //调试用↓
-            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = 12";
+            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + Session["CurrentWeek"] + " ";
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sql);
             this.thisRepeater.DataSource = dt;
             thisRepeater.DataBind();
-            this.lastRepeater.DataSource = dt;
+            string sql2 = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + (Convert.ToInt32(Session["CurrentWeek"])-1) + " ";
+            DataTable dt2 = AddSQLStringToDAL.GetDtBySQL(sql2);
+            this.lastRepeater.DataSource = dt2;
             lastRepeater.DataBind();
 
+        }
+        else
+        {
+            //Response.Redirect("..\\Login.aspx");
         }
 
     }
@@ -59,7 +60,7 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         Label time = e.Item.FindControl("thisTimeLabel") as Label;
         Session["CourseTime"] = time.Text.Trim();
 
-        Label courseName = e.Item.FindControl("thisClassLabel") as Label;
+        Label courseName = e.Item.FindControl("thisNameLabel") as Label;
         Session["CourseName"] = courseName.Text.Trim().ToString();
         
         if (CompareWeek())
@@ -70,12 +71,14 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
             }
             else
             {
-                Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
+                Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('您已经录入本次考勤记录,无法再次考勤！');</script>");
+                //Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
             }
         }
         else
         {
-            Response.Write("<script>alert('本门课程尚未结束，请于课程结束后录入！')</script>");
+            Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('本门课程尚未结束，请于课程结束后录入!');</script>");
+            //Response.Write("<script>alert('本门课程尚未结束，请于课程结束后录入！')</script>");
         }
        
     }
@@ -181,9 +184,31 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         }
         else
         {
-            //return false;
-            return true;
+            return false;
+            
         }
     }
 
+
+    protected void lastRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+        Label week = e.Item.FindControl("lastWeekLabel") as Label;
+        Session["CourseWeek"] = week.Text.Trim();
+
+        Label time = e.Item.FindControl("lastTimeLabel") as Label;
+        Session["CourseTime"] = time.Text.Trim();
+
+        Label courseName = e.Item.FindControl("lastNameLabel") as Label;
+        Session["CourseName"] = courseName.Text.Trim().ToString();
+
+        if ((e.Item.FindControl("lastAttendanceLabel") as Label).Text.Trim() == "未考勤")
+        {
+            Response.Redirect("AttendanceDetials.aspx");
+        }
+        else
+        {
+            Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>alert('您已经录入本次考勤记录,无法再次考勤！');</script>");
+            //Response.Write("<script>alert('您已经录入本次考勤记录,无法再次考勤！')</script>");
+        }
+    }
 }

@@ -5,12 +5,16 @@
 }
 
 body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";
+     
    }
 
 #main {
     width: auto;
-    height: auto;
+    height: 100%;
     background-color: #aaa;
+}
+#form1{
+    height:100%;
 }
 header{
     width: 100%;
@@ -55,10 +59,9 @@ header{
 
 section{
     width: 100%;
-    height: auto;
+    height: 100%;
     margin:0 auto;
     margin-top:80px;
-    margin-bottom:60px;
 }
 
 #left {

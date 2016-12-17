@@ -295,7 +295,7 @@
     </div>
     <div class="login-box">
 
-        <h1>山东商务职业学院考勤系统</h1>
+        <h1 style="user-select:none;">山东商务职业学院考勤系统</h1>
 
         <form id="form1" runat="server">
             <div class="name">
@@ -312,7 +312,7 @@
                     <span id="label"></span><span id="labelTip">拖动滑块验证</span>
                 </div>
             </div>
-            <div class="login">
+            <div class="login" style="user-select:none;">
                 <asp:Button ID="Button1" OnClientClick="return checking()" runat="server" Text="登录" CssClass="button" OnClick="Button1_Click" ClientIDMode="Inherit" />
             </div>
         </form>
