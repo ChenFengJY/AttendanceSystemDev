@@ -4,20 +4,18 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
-using System.Web.Security;
-using System.Collections;
-using System.Configuration;
-using System.Data;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Microsoft.Office.Interop.Owc11;
+
 using System.Data.SqlClient;
-
-using BLL;
-
+using System.Data;
 
 public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
 {
-    
+ 
+
+    public object ChartDimensionsEnum { get; private set; }
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -66,7 +64,12 @@ public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
         }
         }
 
-    private string DrawChart(DataTable dt)
+    private void PreOperation(string v)
+    {
+        throw new NotImplementedException();
+    }
+
+    private string DrawChart(DataTable dtTemp)
     {
         int zz = dtTemp.Rows.Count - 1;
         if (zz>0)
@@ -76,6 +79,7 @@ public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
             for (int i=0;i< dtTemp.Rows.Count - 1;i++)
             {
                 zz--;
+               
                 AllWeek[i] = dtTemp.Rows[zz]["周次"].ToString();
                 AllAttendanceNum[i] = dtTemp.Rows[zz]["合计"].ToString();
             }
@@ -92,8 +96,8 @@ public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
             }
            
       
-        ChChartSpace laySpace = new ChartSpaceClass();
-        ChChartSpace InsertChart = laySpace.Charts.Add(0);
+        ChartSpace laySpace = new ChartSpaceClass();
+        ChChart InsertChart = laySpace.Charts.Add(0);
         InsertChart.Type = ChartChartTypeEnum.chChartTypeLineStacked;
         InsertChart.HasLegend = false;
         InsertChart.HasTitle = true;
@@ -110,18 +114,45 @@ public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
         laySpace.ExportPicture(strAbsolutePath,"GIF",500,250);
         string strRelativePath = "./ShowData.gif";
         Random rd = new Random();
-        string strImageTag = "<IMG SRC='"+strRelativePath+"?id="+rd.Next(65500)+"'/>";
+        string strImageTag = "<img src='"+strRelativePath+"?id="+rd.Next(65500)+"'/>";
         return strImageTag;
     }
     else
     return "";
+    }
+    protected void gvKJ_RowDataBound(object sender,GridViewRowEventArgs e)
+    {
+        if (e.Row.Cells[6].Text=="0")
+        {
+            Control ct1 = e.Row.FindControl("btnDetail");
+            (ct1 as Button).Enabled=false;
+        }
+        if (e.Row.Cells[1].Text=="缺勤人数")
+        {
+            Control ct1= e.Row.FindControl("btnDetail");
+            (ct1 as Button).Visible = false;
+
+
+        }
     }
 
     protected void btnXX_Click(object sender, EventArgs e)
     {
 
     }
+
+    protected void btnDetail_Click(object sender, EventArgs e)
+    {
+        Button btn = sender as Button;
+        GridViewRow dvr = btn.Parent.Parent as GridViewRow;
+        string queryWeek = dvr.Cells[0].Text.ToString();
+        string queryDepartment = dvr.Cells[1].Text.ToString();
+        string url = "AttendanceStudentDetails.aspx?queryWeek=" + queryWeek + "&queryDepartment=" + Server.UrlEncode(queryDepartment);
+        Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>window.open('" + url + "','_blank')</script>");
+    }
 }
+
+
 
 public class DataAnalysis
 {
@@ -139,31 +170,17 @@ public class DataAnalysis
     {
         throw new NotImplementedException();
     }
-    protected void gvKJ_RowDataBound(object sender,GridViewRowEventArge e)
-    {
-        if (e.Row.Cells[6].Text=="0") {
-            Control ct1 = e.Row.FindControl("btnDetail");
-            (ct1 as Button).Enabled=false;
-        }
-        if (e.Row.Cells[1].Text == "缺勤人数总计") {
-            Control ct1 = e.Row.FindControl("btnDetail");
-            (ct1 as Button).Visible = false;
-        }
+    
 
     }
-    protected void btnDetailsClick(object sender,EventArgs e)
-    {
-        Button btn = sender as Button;
-        GridViewRow dvr = btn.Parent.Parent as GridViewRow;
-        string queryWeek = dvr.Cells[0].Text.ToString();
-        string queryDepartment = dvr.Cells[1].Text.ToString();
-        string url = "AttendanceStudentDetails.aspx?queryWeek="+queryWeek+"&queryDepartment="+Server.UrlEncode(queryDepartment);
-        Page.RegisterStartupScript("ServiceManHistoryButtonClick","<script>window.open('"+url+"','_blank')</script>");
-
-    }
+  
 
     internal static DataRow CreateDataRow(DataTable dt, string str1, string department, int late, int early, int attendance, int leave)
     {
         throw new NotImplementedException();
     }
+
+
+public class GridViewRowEventArge
+{
 }

@@ -1,22 +1,37 @@
-﻿using System;
+﻿////using System;
+//using System.Collections.Generic;
+////using System.Linq;
+//using System.Web;
+////using System.Web.UI;
+//using System.Web.UI.WebControls;
+//using System.Configuration;
+//using System.Collections;
+//using System.Web.UI.WebControls.WebParts;
+//using System.Web.Security;
+//using System.Web.UI.HtmlControls;
+
+//using System.Text;
+
+//using Microsoft.Office.Interop;
+//using BLL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Configuration;
-using System.Collections;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.Security;
-using System.Web.UI.HtmlControls;
+using Microsoft.Office.Interop.Owc11;
+using System.Data.SqlClient;
 using System.Data;
-using BLL;
+
 
 
 public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
 {
     private readonly object DataAnalysis;
+    private object chartDimensionsEnum;
 
+    
     protected void Page_Load(object sender, EventArgs e)
     {
 
@@ -121,7 +136,7 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
             strYdata += strValue + "\t";
         }
         ChartSpace laySpace = new ChartSpaceClass();
-        ChChar InsertChart = laySpace.Charts.Add(0);
+        ChartSpace InsertChart = laySpace.Charts.Add(0);
         InsertChart.Type = ChartChartTypeEnum.chChartTypeColumnClustered;
         InsertChart.HasLengend = false;
         InsertChart.HasTitle = true;

@@ -11,7 +11,6 @@ using System.Collections;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-
 using BLL;
 public partial class Admin_AttendanceStudentDetail : System.Web.UI.Page
 {
