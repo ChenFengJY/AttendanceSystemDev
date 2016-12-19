@@ -34,20 +34,20 @@ public partial class Admin_AttendanceStudentDetail : System.Web.UI.Page
     }
     private void GetDataTable()
     {
-        string queryDepartment = Server.UrlDecode(Request.QueryString["queryDepartment"]).ToString();
-        string queryWeek = Request.QueryString["queryWeek"].ToString();
-        DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabStudentAttendance", "StudentDepartment", DisinfectionOperation.ReplaceSensitiveStr(queryDepartment),"CurrentWeek", DisinfectionOperation.ReplaceSensitiveStr(queryWeek));
-        dt.Columns.Add(new DataColumn("SumAttendance",typeof(int)));
-        for (int i=0;i<dt.Rows.Count;i++)
-        {
-            int zz = dt.Rows[i]["Course"].ToString().Length;
-            dt.Rows[i]["Course"] = dt.Rows[i]["Course"].ToString().Substring(8, zz - 11);
-            int zzCount = AddSQLStringToDAL.GetRecordCount("TabStudentAttendance", "StudentID", dt.Rows[i]["StudentID"].ToString());
-            dt.Rows[i]["SumAttendance"] = zzCount;
+        //string queryDepartment = Server.UrlDecode(Request.QueryString["queryDepartment"]).ToString();
+        //string queryWeek = Request.QueryString["queryWeek"].ToString();
+        //DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabStudentAttendance", "StudentDepartment", DisinfectionOperation.ReplaceSensitiveStr(queryDepartment),"CurrentWeek", DisinfectionOperation.ReplaceSensitiveStr(queryWeek));
+        //dt.Columns.Add(new DataColumn("SumAttendance",typeof(int)));
+        //for (int i=0;i<dt.Rows.Count;i++)
+        //{
+        //    int zz = dt.Rows[i]["Course"].ToString().Length;
+        //    dt.Rows[i]["Course"] = dt.Rows[i]["Course"].ToString().Substring(8, zz - 11);
+        //    int zzCount = AddSQLStringToDAL.GetRecordCount("TabStudentAttendance", "StudentID", dt.Rows[i]["StudentID"].ToString());
+        //    dt.Rows[i]["SumAttendance"] = zzCount;
 
-        }
-        gvStudentAttendance.DataSource = dt;
-        gvStudentAttendance.DataBind();
+        //}
+        //gvStudentAttendance.DataSource = dt;
+        //gvStudentAttendance.DataBind();
     }
 
     protected void btnBackDetail_Click(object sender, EventArgs e)

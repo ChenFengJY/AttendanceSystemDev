@@ -16,7 +16,7 @@
         
        
        
-       
+<%--       
        
        
         <asp:GridView ID="gvXX" runat="server" Height="133px" OnSelectedIndexChanged="gvXX_SelectedIndexChanged" AutoGenerateColumns="False">
@@ -228,7 +228,7 @@
                <asp:Button ID="btnJZ" runat="server" Text="建筑系分析表" />
                 </td>
               </asp:Label>
-      
+      --%>
        
     </form>
 </body>

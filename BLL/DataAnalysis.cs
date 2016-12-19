@@ -35,16 +35,17 @@ namespace BLL
         /// </summary>
         /// <param name="Department">当前系名</param>
         /// <param name="week">当前周次</param>
+        /// <param name="weekEnd">从几周开始</param>
         /// <returns>返回一个系所有考勤统计</returns>
-        public static DataTable InitialDataTable(string Department,int week)
+        private static DataTable InitialDataTable(string Department,int week,int weekEnd)
         {
             DataTable dt = CreateDateTable();//储存每周人数情况
             
             //当前周次
-            for (int i = week; i > 0; i--)
+            for (int i = week; i > weekEnd-1; i--)
             {
                 DataRow drs = dt.NewRow();
-                drs[0] = i;
+                drs[0] = i;//周次
                 drs[1] = Department;
 
                 string strLate = "SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '迟到' ";
@@ -62,7 +63,6 @@ namespace BLL
                 drs[6] = Late + Early + Attendance + Leave;//缺勤的总人数
                 dt.Rows.Add(drs);
             }
-            
             return dt;
         }
 
@@ -75,7 +75,7 @@ namespace BLL
         /// <param name="allLate">迟到</param>
         /// <param name="allEarly">早退</param>
         /// <param name="allLeave"></param>
-        /// <param name="allData"></param>
+        /// <param name="allData">缺勤总数</param>
         /// <returns></returns>
         public static DataTable CreateDataTableReplaceChart(string[] allDepartment, string[] allCount, string[] allLate, string[] allEarly, string[] allAttendance, string[] allLeave, string[] allData)
         {
@@ -90,7 +90,7 @@ namespace BLL
                 dr["LateRate"] = PercentNum(allLate[i], allCount[i]);//换算百分比
                 dr["Early"] = allEarly[i];
                 dr["EarlyRate"] = PercentNum(allEarly[i], allCount[i]);
-                dr["Attendance"] = allAttendance[i];
+                dr["Attendance"] = allAttendance[i];//旷课
                 dr["AttendanceRate"] = PercentNum(allAttendance[i], allCount[i]);
                 dr["Leave"] = allLeave[i];
                 dr["LeaveRate"]= PercentNum(allAttendance[i], allCount[i]);
@@ -101,13 +101,15 @@ namespace BLL
             }
             return ChartData;
         }
+
+
         //换算为百分比
         private static string PercentNum(string one,string two)
         {
             if(Convert.ToInt32(two) != 0)
             {
-                string percent = (Convert.ToInt32(one) / Convert.ToInt32(two)) * 100 + "%";
-                return percent;
+                string percent = ((Convert.ToDouble(one) / Convert.ToDouble(two)) * 100).ToString("0.00") + "%";
+                return percent; 
             }
             else
             {
@@ -156,10 +158,10 @@ namespace BLL
         /// </summary>
         /// <param name="Department"></param>
         /// <param name="week"></param>
-        /// <returns></returns>
-        public static DataTable SumData(string Department,int week)
+        /// <returns>包含总值的dt</returns>
+        public static DataTable SumData(string Department,int week,int weekEnd)
         {
-            DataTable dt = InitialDataTable(Department,week);
+            DataTable dt = InitialDataTable(Department,week,weekEnd);
             DataRow dr = dt.NewRow();//计算总值
             dr[0] = "周次";
             dr[1] = Department;
@@ -174,6 +176,56 @@ namespace BLL
             }
             dt.Rows.Add(dr);
             return dt;
+        }
+        //按周查
+        public static DataTable GetDataAndCreateChartBySum(int CurrentWeek,int weekEnd)
+        {
+            string strSql = "select * from TabDepartment";//每个系部总人数
+            DataTable dtCount = AddSQLStringToDAL.GetDtBySQL(strSql);
+            string[] AllCount = new string[dtCount.Rows.Count];//保存每个系部总人数
+            for (int i = 0; i < dtCount.Rows.Count; i++)
+            {
+                AllCount[i] = dtCount.Rows[i]["sum"].ToString();
+            }
+
+            string[] AllDepartment = { "会计系", "信息工程系", "经济管理系", "食品工程系", "机械工程系", "商务外语系", "建筑工程系" };
+            string[] AllData = new string[AllDepartment.Length];
+            string[] AllLate = new string[AllDepartment.Length];
+            string[] AllAttendance = new string[AllDepartment.Length];
+            string[] AllEarly = new string[AllDepartment.Length];
+            string[] AllLeave = new string[AllDepartment.Length];
+            //储存每个系合计后的考勤情况
+            for (int i = 0; i < AllDepartment.Length; i++)
+            {
+                DataTable dt = SumData(AllDepartment[i], CurrentWeek, weekEnd);
+                AllData[i] = dt.Rows[dt.Rows.Count - 1][6].ToString();//各种缺勤合计
+                AllLeave[i] = dt.Rows[dt.Rows.Count - 1][5].ToString();//请假合计
+                AllAttendance[i] = dt.Rows[dt.Rows.Count - 1][4].ToString();//旷课
+                AllEarly[i] = dt.Rows[dt.Rows.Count - 1][3].ToString();//早退
+                AllLate[i] = dt.Rows[dt.Rows.Count - 1][2].ToString();//迟到
+            }
+            //储存所有系考勤合计和缺勤率
+            DataTable gridViewDt = CreateDataTableReplaceChart(AllDepartment, AllCount, AllLate, AllEarly, AllAttendance, AllLeave, AllData);
+            return gridViewDt;
+
+
+
+            //需要：GridView中的数据
+            //string[] AllDataRate = new string[AllDepartment.Length];
+            //string[] AllAttendanceRate = new string[AllDepartment.Length];
+            //string[] AllLeaveRate = new string[AllDepartment.Length];
+            //string[] AllLateRate = new string[AllDepartment.Length];
+            //string[] AllEarlyRate = new string[AllDepartment.Length];
+            //for (int i = 0; i < gridViewDt.Rows.Count; i++)
+            //{
+            //    AllDataRate[i] = gridViewDt.Rows[i]["SumRate"].ToString();
+            //    AllLateRate[i] = gridViewDt.Rows[i]["LeaveRate"].ToString();//请假率
+            //    AllAttendanceRate[i] = gridViewDt.Rows[i]["AttendanceRate"].ToString();//旷课率
+            //    AllLeaveRate[i] = gridViewDt.Rows[i]["LateRate"].ToString();//迟到率
+            //    AllEarlyRate[i] = gridViewDt.Rows[i]["EarlyRate"].ToString();//早退率
+            //}
+
+            
         }
     }
 }

@@ -88,25 +88,7 @@
             background-size: cover;
         }
     </style>
-    <script>
-        window.onload = function () {
-            var nowTime = document.getElementById('nowTime')
-            NowTime();
-            setInterval(NowTime(), 5000);
-        }
-        function NowTime(){
-            nowTime.innerHTML = getNowFormatDate();
-        }
-
-        function getNowFormatDate() {
-            var date = new Date();
-            var str = "星期" + "日一二三四五六".charAt(date.getDay());
-
-            var currentdate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
-                    + " " + date.getHours() + ":" + date.getMinutes() + " " + str;
-            return currentdate;
-        }
-    </script>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -148,6 +130,24 @@
                     <span id="nowTime"></span>
                     <asp:Label ID="Label5" runat="server" Text=""></asp:Label>
                 </div>
+                <script>
+                    function NowTime() {
+                        var nowTime = document.getElementById('nowTime');
+                        var date = new Date();
+                        var str = "星期" + "日一二三四五六".charAt(date.getDay());
+
+                        var currentdate = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate()
+                                + " " + date.getHours() + ":" + date.getMinutes() + " " + str;
+                        nowTime.innerHTML = currentdate;
+                    }
+                    function GetTimes() {
+                        setInterval(function () {
+                            NowTime();
+                        }, 1000);
+                    }
+                    NowTime();
+                    GetTimes();
+                </script>
             </header>
 
 
