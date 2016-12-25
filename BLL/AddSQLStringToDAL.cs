@@ -49,8 +49,13 @@ namespace BLL
 
         public static bool UpdataTabTeachers(string TableName, string UserPWD, string UserID,string UserRole)
         {
-            return true;
+            string strSQL = BuildSQLUpdateString(TableName,UserPWD,UserID);
+            return ConnHelper.ExecuteNoneQueryOperation(strSQL);
+        }
+        private static string BuildSQLUpdateString(string strTableName,string UserPWD,string UserID)
 
+        {
+            return "update" + "strTableName" + "strUserPWD='" + UserPWD + "'where UserID='" + UserID + "'";
         }
 
         public static List<string> GetDistinctString(string v1,string v2, string v3,string v4)
@@ -163,6 +168,11 @@ namespace BLL
                     node.ChildNodes.Add(NewNode);
                 }
             }
+        }
+
+        public static bool UpdataTabTeachers(string v1, string v2, string v3)
+        {
+            throw new NotImplementedException();
         }
 
         public static DataTable SetData(string strSql)
