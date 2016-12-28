@@ -13,6 +13,7 @@
             width:800px;
             height:50px;
             margin:10px auto;
+            padding-top:20px;
             text-align:center;
             line-height:50px;
             -webkit-box-shadow:0 0 10px #0CC;  
@@ -86,22 +87,47 @@
             <asp:RadioButton ID="RadioButton3" runat="server" Text="本周详情" GroupName="time" AutoPostBack="true" OnCheckedChanged="RadioButton3_CheckedChanged" />
         </div>
         <div id="gredtable">
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="false"
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
              Font-Size="12px" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" RowStyle-Height="15px" CellPadding="3"
-             OnSelectedIndexChanged="GridView1_SelectedIndexChanged">
+             OnSelectedIndexChanged="GridView1_SelectedIndexChanged" OnRowCommand="GridView1_RowCommand">
             <Columns>
-                <asp:BoundField HeaderText="系部" DataField="Department" ItemStyle-Width="90px" />
-                <asp:BoundField HeaderText="在校生人数" DataField="Number" ItemStyle-Width="70px" />
-                <asp:BoundField HeaderText="旷课人数" DataField="Attendance" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="旷课率" DataField="AttendanceRate" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="迟到人数" DataField="Late" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="迟到率" DataField="LateRate" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="早退人数" DataField="Early" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="早退率" DataField="EarlyRate" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="请假人数" DataField="Leave" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="请假率" DataField="LeaveRate" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="缺勤总数" DataField="Sum" ItemStyle-Width="60px" />
-                <asp:BoundField HeaderText="总缺勤率" DataField="SumRate" ItemStyle-Width="60px" />
+                <asp:BoundField HeaderText="系部" DataField="Department" ItemStyle-Width="90px" >
+<ItemStyle Width="90px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="在校生人数" DataField="Number" ItemStyle-Width="70px" >
+<ItemStyle Width="70px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="旷课人数" DataField="Attendance" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="旷课率" DataField="AttendanceRate" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="迟到人数" DataField="Late" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="迟到率" DataField="LateRate" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="早退人数" DataField="Early" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="早退率" DataField="EarlyRate" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="请假人数" DataField="Leave" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="请假率" DataField="LeaveRate" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="缺勤总数" DataField="Sum" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:BoundField HeaderText="总缺勤率" DataField="SumRate" ItemStyle-Width="60px" >
+<ItemStyle Width="60px"></ItemStyle>
+                </asp:BoundField>
+                <asp:ButtonField CommandName="look" HeaderText="查看详情" Text="查看详情" ItemStyle-Width="60px" />
             </Columns>
             <RowStyle ForeColor="#000066" />
             <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />

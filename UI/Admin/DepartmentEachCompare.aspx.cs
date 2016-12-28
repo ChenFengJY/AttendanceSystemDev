@@ -14,7 +14,7 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
     public string getButtomTag = "new Array()";//返回""中的语句
     public string getClassName = "new Array()";
     public string getDataName1 = "new Array()";
-    public string getDataName2 = "new Array('23','34','6','33','87','54','71')";
+    public string getDataName2 = "new Array()";
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -118,6 +118,22 @@ public partial class Admin_DepartmentEachCompare : System.Web.UI.Page
             //getDataName2 = "new Array(" + dt.Rows[0]["SumRate"] + "," + dt.Rows[1]["SumRate"] + "," + dt.Rows[2]["SumRate"] + "," + dt.Rows[3]["SumRate"] + "," + dt.Rows[4]["SumRate"] + "," + dt.Rows[5]["SumRate"] + "," + dt.Rows[6]["SumRate"] + ")";
             GridView1.DataSource = dt;
             GridView1.DataBind();
+        }
+    }
+    
+    protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+    {
+        string[] AllDepartment = { "会计系", "信息工程系", "经济管理系", "食品工程系", "机械工程系", "商务外语系", "建筑工程系" };
+
+        if (e.CommandName == "look")
+        {
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = GridView1.Rows[index];
+            string item = row.Cells[0].Text;
+            if (AllDepartment.Contains<string>(item.Trim()))
+            {
+                //Response.Redirect("");
+            }
         }
     }
 }

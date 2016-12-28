@@ -40,25 +40,27 @@ namespace BLL
         private static DataTable InitialDataTable(string Department,int week,int weekEnd)
         {
             DataTable dt = CreateDateTable();//储存每周人数情况
-            
+            StringBuilder sbl = new StringBuilder();
             //当前周次
             for (int i = week; i > weekEnd-1; i--)
             {
+                sbl.Remove(0, sbl.Length);
                 DataRow drs = dt.NewRow();
                 drs[0] = i;//周次
                 drs[1] = Department;
+                sbl.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '迟到' ");
+                sbl.Append("SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '早退' ");
+                sbl.Append("SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '旷课' ");
+                sbl.Append("SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '请假' ");
+                DataSet ds = AddSQLStringToDAL.GetDsBySql(sbl.ToString());
 
-                string strLate = "SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '迟到' ";
-                int Late = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strLate).Rows[0][0]);//获取此系此周迟到的人数
+                int Late = Convert.ToInt32(ds.Tables[0].Rows[0][0]);//获取此系此周迟到的人数
                 drs[2] = Late;
-                string strEarly = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '早退' ";
-                int Early = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strEarly).Rows[0][0]);//获取此系此周早退的人数
+                int Early = Convert.ToInt32(ds.Tables[1].Rows[0][0]);//获取此系此周早退的人数
                 drs[3] = Early;
-                string strAttendance = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '旷课' ";
-                int Attendance = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strAttendance).Rows[0][0]);//获取此系此周旷课的人数
+                int Attendance = Convert.ToInt32(ds.Tables[2].Rows[0][0]);//获取此系此周旷课的人数
                 drs[4] = Attendance;
-                string strLeave = "SELECT COUNT(*) AS EarlyMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek = " + i + " and AttendanceType = '请假' ";
-                int Leave = Convert.ToInt32(AddSQLStringToDAL.GetDtBySQL(strLeave).Rows[0][0]);//获取此系此周请假的人数
+                int Leave = Convert.ToInt32(ds.Tables[3].Rows[0][0]);//获取此系此周请假的人数
                 drs[5] = Leave;
                 drs[6] = Late + Early + Attendance + Leave;//缺勤的总人数
                 dt.Rows.Add(drs);

@@ -16,7 +16,7 @@
         
        
        
-<%--       
+     
        
        
         <asp:GridView ID="gvXX" runat="server" Height="133px" OnSelectedIndexChanged="gvXX_SelectedIndexChanged" AutoGenerateColumns="False">
@@ -49,7 +49,7 @@
             </asp:Label>
         
         
-
+<%--  
         <asp:GridView ID="gvKJ" runat="server" AutoGenerateColumns="False" BackColor="LightGoldenrodYellow" BorderColor="Tan"
              BorderWidth="1px" CellPadding="2" ForeColor="Black" GridLines="None" OnRowDataBound="gvKJ_RowDataBound" Font-Size="12px"  >
             <Columns>

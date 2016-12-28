@@ -24,6 +24,15 @@ namespace BLL
             return ConnHelper.GetDataTable(strSQl);
         }
         /// <summary>
+        /// 执行DAL层查询语句，返回DataSet
+        /// </summary>
+        /// <param name="strSql">sql语句</param>
+        /// <returns></returns>
+        public static DataSet GetDsBySql(string strSql)
+        {
+            return ConnHelper.GetDataSet(strSql);
+        }
+        /// <summary>
         /// 将datat批量导入数据库，中转作用
         /// </summary>
         /// <param name="dt"></param>
