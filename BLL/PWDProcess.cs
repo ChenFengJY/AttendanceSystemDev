@@ -10,6 +10,7 @@ namespace BLL
 {
     public class PWDProcess
     {
+       
         public static string MD5Encrypt(string pToEncrypt, string Key)
         {
             DESCryptoServiceProvider des = new DESCryptoServiceProvider();

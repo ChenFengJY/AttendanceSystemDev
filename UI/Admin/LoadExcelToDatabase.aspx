@@ -192,11 +192,14 @@
 
                 <div class="school_Day">
                     <div class="tea_top">
-                        <h3>数据预处理</h3>
+                        <h3>数据预处理<asp:Label ID="Label17" runat="server" Text="Label"></asp:Label>
+                        </h3>
                     </div>
                     <div class="tea_cen">
                       <asp:Button ID="Button5" runat="server" Text="处理入库数据" OnClick="Button5_Click" />
+                        <asp:Button ID="btnPrOperation" runat="server" Text="分析入库数据" OnClick="btnPrOperation_Click" />
                       <asp:Button ID="btnClear" runat="server" Text="清空导入数据库" OnClick="btnClear_Click" />
+                         <asp:Label ID="lblMessage3" runat="server" Text=""></asp:Label>
                       <asp:Label ID="lblMessage7" runat="server" Text=""></asp:Label>
                     </div>
                 </div>

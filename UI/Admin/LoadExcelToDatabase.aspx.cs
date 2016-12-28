@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.OleDb;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 using BLL;
 
@@ -166,5 +162,39 @@ public partial class Admin_LoadExcelToDatabase : System.Web.UI.Page
         lblMessage7.Text = DatabaseToDatabase.TabTeacherAllCourse();
 
 
+    }
+    protected void btnPrOperation_Click(object sender,EventArgs e)
+    {
+        DataTable dt = AddSQLStringToDAL.GetDatatableBySQL("TabTeachers");
+        if(dt.Rows.Count>0)
+        {
+            if (dt.Rows[0]["UserID"].ToString()==dt.Rows[0]["UserPWD"].ToString())
+            {
+                initalPWD();
+            }
+        }
+    }
+
+    private void initalPWD()
+    {
+        List<string> str = new List<string>();
+        str = AddSQLStringToDAL.GetDistinctString("TabTeachers", "UserID");
+        for(int i=0;i<str.Count;i++)
+        {
+            if (AddSQLStringToDAL.UpdataTabTeachers("TabTeachers", PWDProcess.MD5Encrypt(str[i].ToString(), PWDProcess.CreatKey(str[i].ToString())), str[i].ToString())) ;
+
+            {
+
+            }
+        }
+        List<string> str2 = new List<string>();
+        str2 = AddSQLStringToDAL.GetDistinctString("TabOtherTeachers", "UserID");
+        for (int i=0;i<str2.Count;i++) {
+            if (AddSQLStringToDAL.UpdataTabTeachers("TabOtherTeachers", PWDProcess.MD5Encrypt(str2[i].ToString(), PWDProcess.CreatKey(str2[i].ToString())), str2[i].ToString())) 
+
+            {
+               
+            }
+        }
     }
 }
