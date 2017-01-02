@@ -37,7 +37,7 @@
                     <asp:TextBox ID="TextBox1" runat="server" Height="200px"  Width="70%" OnTextChanged="TextBox1_TextChanged" TextMode="MultiLine"></asp:TextBox>
             </asp:Panel><br />
              <asp:Button ID="Button1" runat="server" Text="发送" BackColor="Aqua" BorderColor="#FF0066" OnClick="Button1_Click1" />
-            <asp:Label ID="Label6" runat="server" Text="lalMessage"></asp:Label>
+            <asp:Label ID="Label6" runat="server" Text=""></asp:Label>
          </div>
     </div>
     

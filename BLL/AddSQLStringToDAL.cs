@@ -39,7 +39,7 @@ namespace BLL
         /// <param name="table"></param>
         /// <param name="num"></param>
         /// <returns></returns>
-        public static string InsertForSql(DataTable dt,string table,int num)
+        public static string InsertForSql(DataTable dt, string table, int num)
         {
             return ExcelToSQLServer.DataTableToSQLServer(dt, table, num);
         }
@@ -56,22 +56,28 @@ namespace BLL
 
 
 
-        public static bool UpdataTabTeachers(string TableName, string UserPWD, string UserID,string UserRole)
+        public static bool UpdataTabTeachers(string TableName, string UserPWD, string UserID, string UserRole)
         {
-            string strSQL = BuildSQLUpdateString(TableName,UserPWD,UserID);
+            string strSQL = BuildSQLUpdateString(TableName, UserPWD, UserID);
             return ConnHelper.ExecuteNoneQueryOperation(strSQL);
         }
-        private static string BuildSQLUpdateString(string strTableName,string UserPWD,string UserID)
+        private static string BuildSQLUpdateString(string strTableName, string UserPWD, string UserID)
 
         {
             return "update" + "strTableName" + "strUserPWD='" + UserPWD + "'where UserID='" + UserID + "'";
         }
 
-        public static List<string> GetDistinctString(string v1,string v2, string v3,string v4)
+        public static List<string> GetDistinctString(string v1, string v2, string v3, string v4)
         {
-            //string strSQl = "select Distinct [UserId] from TabTeacher";
-            //return ConnHelper.GetDataTable(strSQl);
-            throw new NotImplementedException();
+            string strSQL = "select distinct " + v2 + " from " + v1 + " where " + v3 + " = '" + v4 + "'";
+            DataTable dt = GetDtBySQL(strSQL);
+            List<string> strList = new List<string>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                string str = dr[v2].ToString();
+                strList.Add(str);
+            }
+            return strList;
         }
 
         public static int GetRecordCount(string v1, string v2, string v3)
@@ -139,26 +145,26 @@ namespace BLL
         {
             return false;
         }
-        
+
         public static void InsertTabTeachers(string TabTeacher, string MessageTime, string Message, string UserID, string MessageStatus, string t1, string t2)
         {
-            
+
 
         }
 
-        public static bool UpdataTabTeachers(string v1, string v2,string Course, string Count, string strUserRole, string TabStudentAttendance, string strUserID,string UserName, string CurrentCourse, string CurrentWeek,string Week, string Time,string cell)
+        public static bool UpdataTabTeachers(string v1, string v2, string Course, string Count, string strUserRole, string TabStudentAttendance, string strUserID, string UserName, string CurrentCourse, string CurrentWeek, string Week, string Time, string cell)
         {
             throw new NotImplementedException();
         }
 
-        public static bool InsertTabTeachers(string v1, string v2, string Course,string Count, string teacherType, object replaceSensitive, string strUserRole, string TabStudentAttendance, string strUserID, string UserName, string CurrentCourse, string CurrentWeek, string Week, string Time, string cell)
+        public static bool InsertTabTeachers(string v1, string v2, string Course, string Count, string teacherType, object replaceSensitive, string strUserRole, string TabStudentAttendance, string strUserID, string UserName, string CurrentCourse, string CurrentWeek, string Week, string Time, string cell)
         {
             throw new NotImplementedException();
         }
 
-        public static void InsertTabTeachers(string TabTeancher,string MessageTime,string Message,string UseerID)
+        public static void InsertTabTeachers(string TabTeancher, string MessageTime, string Message, string UseerID)
         {
-             
+
         }
 
         private static void FillParentNode(TreeNode node, string menuName)
@@ -221,7 +227,7 @@ namespace BLL
             return ConnHelper.ExecuteNoneQueryOperation(strSql);
         }
 
-        
+
         /// <summary>
         /// 根据三个条件查询指定的表
         /// </summary>
@@ -245,7 +251,7 @@ namespace BLL
         }
         private static string BuidSQLSelectString(string strTableName)
         {
-            return "select * from  " + strTableName+"";
+            return "select * from  " + strTableName + "";
         }
         private static string BuidSQLSelectString(string strTableName, string strddl, string strtxt)
         {

@@ -14,7 +14,10 @@ public partial class LeaderMasterPage : System.Web.UI.MasterPage
         Label2.Text = Session["UserName"].ToString()
             + "你好,你的权限为" + Session["Role"].ToString();
         Label5.Text = "校历第" + Session["CurrentWeek"].ToString() + "周";
-
+        string sql = "SELECT [Message] FROM [TabMessage] WHERE UserID = '" + Session["UserID"] + "' and MessageStatus = 'False'";
+        DataRowCollection drc = AddSQLStringToDAL.GetDtBySQL(sql).Rows;
+        if (drc.Count != 0)
+            Label6.Text = drc[0][0].ToString();
     }
 
     protected void TreeView1_TreeNodePopulate1(object sender, TreeNodeEventArgs e)

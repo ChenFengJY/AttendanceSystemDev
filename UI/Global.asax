@@ -29,9 +29,6 @@
         Application.Lock();
         Application["online"] = (int)Application["online"] + 1;
         Application.UnLock();
-        Session["UserName"] = "";
-        Session["UserID"] = "";
-        Session["Role"] = "";
         Session["CurrentWeek"] ="";//当前周次
 
         Session["CourseName"] = "";

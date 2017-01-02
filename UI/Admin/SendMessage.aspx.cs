@@ -26,6 +26,8 @@ public partial class Admin_SendMessage : System.Web.UI.Page
 
     protected void Button1_Click1(object sender, EventArgs e)
     {
+        if (TextBox1.Text.Equals(""))
+            return;
         List<string> strSum = new List<string>();
         List<string> strID1 = new List<string>();
         List<string> strID2 = new List<string>();
@@ -34,15 +36,15 @@ public partial class Admin_SendMessage : System.Web.UI.Page
 
         if (CheckBox1.Checked == true)
         {
-            strID1 = AddSQLStringToDAL.GetDistinctString("TabTeacher", "UserID", "Role", "2");
+            strID1 = AddSQLStringToDAL.GetDistinctString("TabTeachers", "UserID", "Role", "2");
         }
         if (CheckBox2.Checked == true)
         {
-            strID2 = AddSQLStringToDAL.GetDistinctString("TabTeacher", "UserID", "Role", "3");
+            strID2 = AddSQLStringToDAL.GetDistinctString("TabTeachers", "UserID", "Role", "3");
         }
         if (CheckBox3.Checked == true)
         {
-            strID3 = AddSQLStringToDAL.GetDistinctString("TabTeacher", "UserID", "Role", "4");
+            strID3 = AddSQLStringToDAL.GetDistinctString("TabTeachers", "UserID", "Role", "4");
         }
         strSum.AddRange(strID1);
         strSum.AddRange(strID2);
@@ -65,13 +67,20 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if (AddSQLStringToDAL.InsertData("insert into TabMessage values('" + System.DateTime.Now.ToString() + ",'" + TextBox1.Text + "','" + strSum[i] + "','" + false + "'')"))
+                if (AddSQLStringToDAL.InsertData("insert into TabMessage([Message],[UserID],[MessageStatus]) values('" + TextBox1.Text + "','" + strSum[i] + "','" + false + "')"))
                 {
-
+                    Label6.Text = "信息发送成功！";
+                }
+                else
+                {
+                    Label6.Text = "信息发送失败！";
                 }
             }
-            Label6.Text = "信息发送成功！";
             TextBox1.Text = "";
+        }
+        else
+        {
+            Label6.Text = "没有选择发送单位";
         }
     }
 
