@@ -10,15 +10,17 @@
             background:white;
         }
         #each_Header{
-            width:800px;
+            width:600px;
             height:50px;
             margin:10px auto;
             padding-top:20px;
             text-align:center;
-            line-height:50px;
-            -webkit-box-shadow:0 0 10px #0CC;  
-            -moz-box-shadow:0 0 10px #0CC;  
-            box-shadow:0 0 10px #0CC;  
+            font-size:14px;
+            line-height:100%;
+        }
+        .drop_list1{
+            width:250px;
+            font-size:14px;
         }
         #gredtable{
             margin:0 auto;
@@ -33,6 +35,7 @@
             height:350px;
             text-align:center;
         }
+        
     </style>
     <script src="../js/lib/Chart-1.0.1-beta.4.js"></script>
     <script>
@@ -82,9 +85,10 @@
     <div id="main">
         <div id="each_Header">
             <!--从开学至今各系汇总的考勤信息-->
-            <asp:RadioButton ID="RadioButton1" runat="server" Text="开学至今" GroupName="time" AutoPostBack="true" Checked="true" OnCheckedChanged="RadioButton1_CheckedChanged" />
-            <asp:RadioButton ID="RadioButton2" runat="server" Text="本月详情" GroupName="time" AutoPostBack="true" OnCheckedChanged="RadioButton2_CheckedChanged" />
-            <asp:RadioButton ID="RadioButton3" runat="server" Text="本周详情" GroupName="time" AutoPostBack="true" OnCheckedChanged="RadioButton3_CheckedChanged" />
+            查询条件：
+            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="drop_list1" AutoPostBack="true" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                <asp:ListItem>开学至今</asp:ListItem>
+            </asp:DropDownList>
         </div>
         <div id="gredtable">
         <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False"
@@ -127,7 +131,6 @@
                 <asp:BoundField HeaderText="总缺勤率" DataField="SumRate" ItemStyle-Width="60px" >
 <ItemStyle Width="60px"></ItemStyle>
                 </asp:BoundField>
-                <asp:ButtonField CommandName="look" HeaderText="查看详情" Text="查看详情" ItemStyle-Width="60px" />
             </Columns>
             <RowStyle ForeColor="#000066" />
             <FooterStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />

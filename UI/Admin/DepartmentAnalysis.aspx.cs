@@ -131,6 +131,11 @@ public partial class Admin_DepartmentAnalysis : System.Web.UI.Page
         string url = "AttendanceStudentDetails.aspx?queryWeek=" + queryWeek + "&queryDepartment=" + Server.UrlEncode(queryDepartment);
         Page.RegisterStartupScript("ServiceManHistoryButtonClick", "<script>window.open('" + url + "','_blank')</script>");
     }
+
+    protected void gvXX_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
 
 

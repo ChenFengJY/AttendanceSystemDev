@@ -20,13 +20,11 @@ public partial class Admin_AdminSubmitAttendance : System.Web.UI.Page
         if (!IsPostBack)
         {
             //第一次打开时执行
-            //string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = "+Session["CourseWeek"] +" ";
-            //调试用↓
-            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + Session["CurrentWeek"] + " ";
+            string sql = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = "+Session["CurrentWeek"] +" ";
             DataTable dt = AddSQLStringToDAL.GetDtBySQL(sql);
             this.thisRepeater.DataSource = dt;
             thisRepeater.DataBind();
-            string sql2 = "select * from [TabTeacherCourseWeek] where [TeacherID] = 2003013609 and CourseAllWeek = " + (Convert.ToInt32(Session["CurrentWeek"])-1) + " ";
+            string sql2 = "select * from [TabTeacherCourseWeek] where [TeacherID] = " + Session["UserID"] + " and CourseAllWeek = " + (Convert.ToInt32(Session["CurrentWeek"])-1) + " ";
             DataTable dt2 = AddSQLStringToDAL.GetDtBySQL(sql2);
             this.lastRepeater.DataSource = dt2;
             lastRepeater.DataBind();

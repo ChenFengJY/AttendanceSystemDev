@@ -56,7 +56,7 @@ public partial class LoginSystem_Login : System.Web.UI.Page
             if (dt.Rows.Count == 1)
             {
                 int Role = Convert.ToInt32(dt.Rows[0]["Role"]);
-                Session["UserID"] = dt.Rows[0]["UserID"].ToString();
+                Session["UserID"] = userName.Text.Trim();
                 Session["UserName"] = dt.Rows[0]["UserName"].ToString();
                 Session["Role"] = RoleString(Role);
                 switch (Role)

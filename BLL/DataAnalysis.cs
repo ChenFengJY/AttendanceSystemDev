@@ -71,6 +71,28 @@ namespace BLL
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="Department"></param>
+        /// <param name="startWeek"></param>
+        /// <param name="EndWeek"></param>
+        private static string[] AllWeekInitial(string Department,int startWeek,int EndWeek)
+        {
+            StringBuilder sbder = new StringBuilder();
+            sbder.Remove(0, sbder.Length);
+            sbder.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek in" + SqlList(startWeek, EndWeek) + " and AttendanceType = '迟到' ");
+            sbder.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek in" + SqlList(startWeek, EndWeek) + " and AttendanceType = '早退' ");
+            sbder.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek in" + SqlList(startWeek, EndWeek) + " and AttendanceType = '旷课' ");
+            sbder.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek in" + SqlList(startWeek, EndWeek) + " and AttendanceType = '请假' ");
+            sbder.Append("SELECT COUNT(*) AS LateMount FROM TabStudentAttendance where StudentDepartment = '" + Department + "' and CourseAllWeek in" + SqlList(startWeek, EndWeek) + " ");//所有
+
+            DataSet ds = AddSQLStringToDAL.GetDsBySql(sbder.ToString());
+            //所有周缺勤人数
+            string[] departmentInfo = { ds.Tables[0].Rows[0][0].ToString(), ds.Tables[1].Rows[0][0].ToString(), ds.Tables[2].Rows[0][0].ToString(), ds.Tables[3].Rows[0][0].ToString(), ds.Tables[4].Rows[0][0].ToString() };
+            return departmentInfo;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="allDepartment">系部</param>
         /// <param name="allCount">每个系部总人数</param>
         /// <param name="allAttendance">旷课</param>
@@ -179,8 +201,14 @@ namespace BLL
             dt.Rows.Add(dr);
             return dt;
         }
-        //按周查
-        public static DataTable GetDataAndCreateChartBySum(int CurrentWeek,int weekEnd)
+
+        /// <summary>
+        /// 只查找从某周到某周
+        /// </summary>
+        /// <param name="startWeek"></param>
+        /// <param name="WeekEnd"></param>
+        /// <returns></returns>
+        public static DataTable GetDataAndCreateChartBySum(int startWeek,int WeekEnd)
         {
             string strSql = "select * from TabDepartment";//每个系部总人数
             DataTable dtCount = AddSQLStringToDAL.GetDtBySQL(strSql);
@@ -199,35 +227,30 @@ namespace BLL
             //储存每个系合计后的考勤情况
             for (int i = 0; i < AllDepartment.Length; i++)
             {
-                DataTable dt = SumData(AllDepartment[i], CurrentWeek, weekEnd);
-                AllData[i] = dt.Rows[dt.Rows.Count - 1][6].ToString();//各种缺勤合计
-                AllLeave[i] = dt.Rows[dt.Rows.Count - 1][5].ToString();//请假合计
-                AllAttendance[i] = dt.Rows[dt.Rows.Count - 1][4].ToString();//旷课
-                AllEarly[i] = dt.Rows[dt.Rows.Count - 1][3].ToString();//早退
-                AllLate[i] = dt.Rows[dt.Rows.Count - 1][2].ToString();//迟到
+                string[] allWeek =  AllWeekInitial(AllDepartment[i], startWeek, WeekEnd);
+                AllData[i] = allWeek[4]; //各种缺勤合计
+                AllLeave[i] = allWeek[3];//请假合计
+                AllAttendance[i] = allWeek[2];//旷课
+                AllEarly[i] = allWeek[1];//早退
+                AllLate[i] = allWeek[0];//迟到
+                
             }
             //储存所有系考勤合计和缺勤率
             DataTable gridViewDt = CreateDataTableReplaceChart(AllDepartment, AllCount, AllLate, AllEarly, AllAttendance, AllLeave, AllData);
             return gridViewDt;
-
-
-
-            //需要：GridView中的数据
-            //string[] AllDataRate = new string[AllDepartment.Length];
-            //string[] AllAttendanceRate = new string[AllDepartment.Length];
-            //string[] AllLeaveRate = new string[AllDepartment.Length];
-            //string[] AllLateRate = new string[AllDepartment.Length];
-            //string[] AllEarlyRate = new string[AllDepartment.Length];
-            //for (int i = 0; i < gridViewDt.Rows.Count; i++)
-            //{
-            //    AllDataRate[i] = gridViewDt.Rows[i]["SumRate"].ToString();
-            //    AllLateRate[i] = gridViewDt.Rows[i]["LeaveRate"].ToString();//请假率
-            //    AllAttendanceRate[i] = gridViewDt.Rows[i]["AttendanceRate"].ToString();//旷课率
-            //    AllLeaveRate[i] = gridViewDt.Rows[i]["LateRate"].ToString();//迟到率
-            //    AllEarlyRate[i] = gridViewDt.Rows[i]["EarlyRate"].ToString();//早退率
-            //}
-
             
         }
+
+        private static string SqlList( int startweek, int weekEnd)
+        {
+            string sql = "(";
+            for(int i = startweek; i < weekEnd; i++)
+            {
+                sql += i + ",";
+            }
+            sql += weekEnd + ")";
+            return sql;
+        }
+
     }
 }
