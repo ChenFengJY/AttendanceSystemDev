@@ -58,7 +58,7 @@ header{
     position:relative;
 }
 
-#tongzhi{
+.sysInfo #tongzhi{
     float:left;
     width:60px;
     height:30px;

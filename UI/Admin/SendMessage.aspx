@@ -9,7 +9,7 @@
         .top {
             width:100%;
             height:20px;
-            font-size：15px;
+            font-size:15px;
             background:#424242;
             color:white;
         }
