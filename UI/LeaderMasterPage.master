@@ -47,9 +47,12 @@
                     <br />
                     <span id="nowTime"></span>
                     <asp:Label ID="Label5" runat="server" Text=""></asp:Label>
-                    <asp:Label ID="Label6" Text="" runat="server" />
-                    <a href="../Login.aspx" style="color: black; text-align: right; font-weight: 600">注销</a>
-
+                    <div style="position:relative;">
+                        <div id="tongzhi">
+                            <asp:Label ID="Label6" Text="" runat="server" />
+                        </div>
+                        <a href="../Login.aspx" style="color:black;text-align:right;font-weight:600">注销</a>
+                    </div>
                 </div>
                 <script>
                     function NowTime() {

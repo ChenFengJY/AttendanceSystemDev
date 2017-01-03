@@ -57,16 +57,26 @@ header{
     float:right;
     position:relative;
 }
+
+#tongzhi{
+    float:left;
+    width:60px;
+    height:30px;
+    font-weight:600;
+    font-size:14px;
+    margin-top:10px;
+    margin-left:80px;
+}
+
 .sysInfo a{
-    position:relative;
+    float:right;
     display:block;
     width:60px;
     height:30px;
     font-weight:600;
     font-size:14px;
-    color:#f1f1f1;
-    top:5px;
-    left:150px;
+    margin-top:10px;
+    margin-right:40px;
 }
 
 section{
@@ -125,3 +135,4 @@ footer{
     color:red;
     line-height:10px;
 }
+
