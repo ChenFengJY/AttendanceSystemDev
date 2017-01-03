@@ -67,7 +67,7 @@ public partial class Admin_SendMessage : System.Web.UI.Page
         {
             for (int i = 0; i < strSum.Count; i++)
             {
-                if (AddSQLStringToDAL.InsertData("insert into TabMessage([Message],[UserID],[MessageStatus]) values('" + TextBox1.Text + "','" + strSum[i] + "','" + false + "')"))
+                if (AddSQLStringToDAL.InsertData("insert into TabMessage([Message],[UserID],[MessageStatus]) values('" + TextBox1.Text + "','" + strSum[i] + "','未读')"))
                 {
                     Label6.Text = "信息发送成功！";
                 }

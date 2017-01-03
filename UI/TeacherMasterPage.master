@@ -52,7 +52,7 @@
                     GetTimes();
                 </script>
             </header>
-            <div id="content">
+            <section>
                 <div id="left">
                     <asp:TreeView ID="TreeView1" CssClass="treeview1" runat="server" OnTreeNodePopulate="TreeView1_TreeNodePopulate1" ForeColor="Blue" Width="150px" BorderStyle="None" ImageSet="Arrows">
                         <LeafNodeStyle NodeSpacing="2px" VerticalPadding="3px" />
@@ -69,10 +69,13 @@
                     <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                     </asp:ContentPlaceHolder>
                 </div>
-
-            </div>
-            <div id="foot">
-            </div>
+            </section>
+            <footer>
+                <div class="bottom">
+                    ©2016 Leting 关于IC
+                    P软一03组ChenFengJY<img width="13" height="16" src="../images/copy_rignt_24.png" />
+                </div>
+            </footer>
         </div>
     </form>
 </body>
